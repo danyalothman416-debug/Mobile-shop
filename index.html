@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📱 دوکانی مۆبایل</title>
+    <title>📱 دوکانی مۆبایل - موبایل ستۆر</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rabar_014:wght@400;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,231 +15,370 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            color: #fff;
+            min-height: 100vh;
         }
         
-        /* هێدەر */
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            position: sticky;
+        /* پەردەی پشتەوە */
+        .bg-particles {
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #6366f1, transparent);
+            border-radius: 50%;
+            animation: float 6s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 0.6; }
+        }
+        
+        /* هێدەری سەرەکی */
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.1);
         }
         
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            color: #c7d2fe;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         .header .cart-icon {
             position: absolute;
-            left: 20px;
-            top: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            background: white;
-            color: #667eea;
-            width: 50px;
-            height: 50px;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-size: 1.8rem;
+        }
+        
+        .header .cart-icon:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 30px rgba(255,255,255,0.5);
         }
         
         .cart-count {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #dc3545;
+            background: #ef4444;
             color: white;
             border-radius: 50%;
-            padding: 3px 8px;
-            font-size: 0.8rem;
+            padding: 5px 10px;
+            font-size: 0.85rem;
             font-weight: bold;
+            box-shadow: 0 4px 10px rgba(239,68,68,0.5);
+            animation: pulse 2s infinite;
         }
         
-        /* گەڕان */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        /* سێکشنی گەڕان */
         .search-box {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            margin: 20px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
         }
         
         .search-box input {
-            width: 80%;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            width: 100%;
+            padding: 18px 30px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            color: white;
             text-align: right;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255,255,255,0.6);
         }
         
         .search-box input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #a78bfa;
+            box-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
+            background: rgba(255,255,255,0.15);
         }
         
-        /* کەتێگۆری */
+        /* کەتێگۆرییەکان */
         .categories {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            padding: 0 20px;
-            margin-bottom: 20px;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto 30px;
         }
         
         .cat-btn {
             padding: 12px 25px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 30px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: #e0e7ff;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1rem;
+            font-weight: 600;
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .cat-btn:hover, .cat-btn.active {
-            background: #667eea;
+        .cat-btn:hover {
+            background: rgba(99, 102, 241, 0.3);
+            border-color: #6366f1;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99,102,241,0.3);
+        }
+        
+        .cat-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-color: transparent;
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(139,92,246,0.5);
         }
         
-        /* بەرهەمەکان */
+        /* گریدی بەرهەمەکان */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
             padding: 20px;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
         
         .product-card {
-            background: white;
-            border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .product-card:hover::before {
+            left: 100%;
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(99,102,241,0.4);
+            border-color: rgba(167,139,250,0.5);
+        }
+        
+        .product-image-container {
+            position: relative;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
+            padding: 30px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .product-image {
-            width: 100%;
-            height: 300px;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            background: #f8f9fa;
-            padding: 20px;
+            transition: transform 0.5s;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.1) rotate(-3deg);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(245,158,11,0.3);
         }
         
         .product-info {
-            padding: 20px;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
         }
         
         .product-brand {
-            color: #666;
+            color: #a78bfa;
             font-size: 0.9rem;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .product-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+            line-height: 1.3;
         }
         
         .product-description {
-            color: #777;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            line-height: 1.6;
+            color: #c7d2fe;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            line-height: 1.7;
+            opacity: 0.9;
         }
         
         .product-specs {
-            background: #f8f9fa;
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
         }
         
         .product-specs span {
-            display: inline-block;
-            background: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            margin: 3px;
+            background: rgba(99,102,241,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 0.85rem;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(139,92,246,0.3);
+            color: #e0e7ff;
+            transition: all 0.3s;
+        }
+        
+        .product-specs span:hover {
+            background: rgba(139,92,246,0.4);
+            border-color: #a78bfa;
         }
         
         .price-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
         }
         
         .price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #28a745;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .old-price {
             text-decoration: line-through;
-            color: #dc3545;
-            font-size: 1.1rem;
-            margin-right: 10px;
+            color: #ef4444;
+            font-size: 1.2rem;
+            opacity: 0.8;
         }
         
         .discount {
-            background: #dc3545;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
-            padding: 5px 12px;
+            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.9rem;
             font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(239,68,68,0.3);
         }
         
         .add-to-cart {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 16px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
             border: none;
             border-radius: 15px;
             font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 15px;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(99,102,241,0.3);
         }
         
         .add-to-cart:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(139,92,246,0.5);
+            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
         }
         
-        .out-of-stock {
-            background: #ddd;
+        .add-to-cart.out-of-stock {
+            background: linear-gradient(135deg, #4b5563, #6b7280);
             cursor: not-allowed;
+            box-shadow: none;
         }
         
-        /* سەبەتە */
+        /* مۆداڵی سەبەتە */
         .cart-modal {
             display: none;
             position: fixed;
@@ -245,7 +386,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -256,140 +398,174 @@
         }
         
         .cart-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(30,27,75,0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            padding: 40px;
             width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
+            max-width: 650px;
+            max-height: 85vh;
             overflow-y: auto;
-            animation: slideUp 0.3s ease;
+            border: 1px solid rgba(167,139,250,0.3);
+            box-shadow: 0 30px 80px rgba(99,102,241,0.4);
+            animation: modalSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        @keyframes slideUp {
+        @keyframes modalSlide {
             from {
-                transform: translateY(100px);
+                transform: translateY(100px) scale(0.9);
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
                 opacity: 1;
             }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn:hover {
+            background: rgba(239,68,68,0.3);
+            border-color: #ef4444;
         }
         
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .cart-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(167,139,250,0.3);
         }
         
         .remove-btn {
-            background: #dc3545;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
         }
         
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .remove-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(239,68,68,0.4);
         }
         
         .total {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 2rem;
+            font-weight: 800;
             text-align: left;
-            margin-top: 20px;
+            color: #fbbf24;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
         }
         
         .checkout-btn {
             width: 100%;
-            padding: 15px;
-            background: #28a745;
+            padding: 18px;
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border: none;
             border-radius: 15px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(16,185,129,0.3);
+            letter-spacing: 1px;
         }
         
-        /* فۆرم */
-        .form-modal {
-            display: none;
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16,185,129,0.5);
+        }
+        
+        /* دوگمەی واتساپ */
+        .whatsapp-btn {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .form-modal.active {
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(37,211,102,0.5);
+            z-index: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            animation: floatBtn 3s infinite;
         }
         
-        .form-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
-        .form-content input,
-        .form-content textarea,
-        .form-content select {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            text-align: right;
+        .whatsapp-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 50px rgba(37,211,102,0.7);
         }
         
-        .form-content label {
-            font-weight: bold;
-            color: #333;
-            display: block;
-            margin-top: 10px;
-            text-align: right;
-        }
-        
+        /* نۆتیفیکەیشن */
         .notification {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #28a745;
+            bottom: 40px;
+            left: 40px;
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-weight: bold;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
             display: none;
             z-index: 3000;
-            animation: slideIn 0.3s ease;
+            box-shadow: 0 15px 40px rgba(16,185,129,0.4);
+            animation: slideInLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        @keyframes slideIn {
+        @keyframes slideInLeft {
             from {
                 transform: translateX(-300px);
+                opacity: 0;
             }
             to {
                 transform: translateX(0);
+                opacity: 1;
             }
         }
         
@@ -399,45 +575,34 @@
         
         /* فووەتەر */
         .footer {
-            background: #333;
-            color: white;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+            padding: 30px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
         
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
-            z-index: 500;
-            text-decoration: none;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .footer p {
+            color: #c7d2fe;
+            margin: 8px 0;
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
 
+<!-- پەردەی پشتەوە -->
+<div class="bg-particles">
+    <div class="particle" style="width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="particle" style="width: 200px; height: 200px; top: 60%; right: 10%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 250px; height: 250px; bottom: 20%; left: 20%; animation-delay: 4s;"></div>
+</div>
+
 <!-- هێدەر -->
 <div class="header">
-    <h1>📱 دوکانی مۆبایل</h1>
-    <p>نوێترین مۆبایلەکان بە باشترین نرخ</p>
+    <h1>📱 موبایل ستۆر</h1>
+    <p>نوێترین مۆبایلەکان بە باشترین نرخ لە کوردستان</p>
     <div class="cart-icon" onclick="toggleCart()">
         🛒
         <span class="cart-count" id="cartCount">0</span>
@@ -446,18 +611,18 @@
 
 <!-- گەڕان -->
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 گەڕان بەدوای مۆبایل..." onkeyup="filterProducts()">
+    <input type="text" id="searchInput" placeholder="🔍 گەڕان بەدوای مۆبایلی خەونەکانت..." onkeyup="filterProducts()">
 </div>
 
 <!-- کەتێگۆرییەکان -->
 <div class="categories">
-    <button class="cat-btn active" onclick="filterByCategory('all', this)">هەموو</button>
-    <button class="cat-btn" onclick="filterByCategory('iphone', this)">📱 ئایفۆن</button>
-    <button class="cat-btn" onclick="filterByCategory('samsung', this)">📱 سامسونگ</button>
-    <button class="cat-btn" onclick="filterByCategory('xiaomi', this)">📱 شیاومی</button>
-    <button class="cat-btn" onclick="filterByCategory('google', this)">📱 گوگڵ</button>
-    <button class="cat-btn" onclick="filterByCategory('oneplus', this)">📱 وەن پڵەس</button>
-    <button class="cat-btn" onclick="filterByCategory('huawei', this)">📱 هواوی</button>
+    <button class="cat-btn active" onclick="filterByCategory('all', this)">🎯 هەموو</button>
+    <button class="cat-btn" onclick="filterByCategory('iphone', this)">🍎 ئایفۆن</button>
+    <button class="cat-btn" onclick="filterByCategory('samsung', this)">⭐ سامسونگ</button>
+    <button class="cat-btn" onclick="filterByCategory('xiaomi', this)">🚀 شیاومی</button>
+    <button class="cat-btn" onclick="filterByCategory('google', this)">🤖 گوگڵ</button>
+    <button class="cat-btn" onclick="filterByCategory('oneplus', this)">⚡ وەن پڵەس</button>
+    <button class="cat-btn" onclick="filterByCategory('huawei', this)">🌺 هواوی</button>
 </div>
 
 <!-- بەرهەمەکان -->
@@ -465,9 +630,9 @@
 
 <!-- مۆدالی سەبەتە -->
 <div class="cart-modal" id="cartModal">
-    <div class="cart-content">
+    <div class="cart-content" style="position: relative;">
         <button class="close-btn" onclick="toggleCart()">✕</button>
-        <h2 style="text-align: center; margin-bottom: 20px;">🛒 سەبەتەی کڕین</h2>
+        <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🛒 سەبەتەی کڕین</h2>
         <div id="cartItems"></div>
         <div class="total" id="cartTotal">کۆی گشتی: 0 د.ع</div>
         <button class="checkout-btn" onclick="openCheckout()">📦 تەواوکردنی داواکاری</button>
@@ -477,7 +642,7 @@
 <!-- فۆرمی داواکاری -->
 <div class="form-modal" id="checkoutModal">
     <div class="form-content">
-        <h2 style="text-align: center; margin-bottom: 20px;">📝 زانیاری داواکاری</h2>
+        <h2 style="text-align: center; margin-bottom: 20px; color: #333;">📝 زانیاری داواکاری</h2>
         <form onsubmit="submitOrder(event)">
             <label>👤 ناوی تەواو</label>
             <input type="text" id="customerName" required placeholder="ناوی خۆت بنووسە">
@@ -514,13 +679,13 @@
 
 <!-- فووەتەر -->
 <div class="footer">
-    <p>© 2024 دوکانی مۆبایل. هەموو مافەکان پارێزراون.</p>
-    <p>📞 0770-123-4567 | 📧 info@mobileshop.com</p>
+    <p style="font-size: 1.2rem; font-weight: bold;">© 2024 موبایل ستۆر - هەموو مافەکان پارێزراون</p>
+    <p>📞 0770-123-4567 | 📧 info@mobilestore.com</p>
     <p>دروستکراوە بە ❤️ لە کوردستان</p>
 </div>
 
 <script>
-// داتای بەرهەمەکان
+// داتای بەرهەمەکان - وەک خۆی دەمێنێتەوە
 const products = [
     {
         id: 1,
@@ -610,10 +775,13 @@ function displayProducts(productsToShow) {
         
         grid.innerHTML += `
             <div class="product-card">
-                <img src="${product.image}" alt="${product.name}" class="product-image" 
-                     onerror="this.src='https://via.placeholder.com/300x300?text=No+Image'">
+                <div class="product-image-container">
+                    ${discount > 0 ? `<div class="product-badge">🔥 -${discount}%</div>` : ''}
+                    <img src="${product.image}" alt="${product.name}" class="product-image" 
+                         onerror="this.src='https://via.placeholder.com/300x300?text=No+Image'">
+                </div>
                 <div class="product-info">
-                    <div class="product-brand">${product.brand}</div>
+                    <div class="product-brand">⭐ ${product.brand}</div>
                     <div class="product-name">${product.name}</div>
                     <div class="product-description">${product.description}</div>
                     <div class="product-specs">
@@ -702,7 +870,7 @@ function displayCartItems() {
     const cartItems = document.getElementById('cartItems');
     
     if (cart.length === 0) {
-        cartItems.innerHTML = '<p style="text-align: center; padding: 30px;">🛒 سەبەتەکەت بەتاڵە</p>';
+        cartItems.innerHTML = '<p style="text-align: center; padding: 40px; color: #c7d2fe; font-size: 1.2rem;">🛒 سەبەتەکەت بەتاڵە</p>';
         document.getElementById('cartTotal').textContent = 'کۆی گشتی: 0 د.ع';
         return;
     }
@@ -717,12 +885,12 @@ function displayCartItems() {
         html += `
             <div class="cart-item">
                 <div>
-                    <strong>${item.name}</strong><br>
-                    <small>${item.quantity} x ${item.price.toLocaleString()} د.ع</small>
+                    <strong style="color: #fff; font-size: 1.1rem;">${item.name}</strong><br>
+                    <small style="color: #a78bfa;">${item.quantity} x ${item.price.toLocaleString()} د.ع</small>
                 </div>
-                <div>
-                    <strong>${itemTotal.toLocaleString()} د.ع</strong>
-                    <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️</button>
+                <div style="text-align: left;">
+                    <strong style="color: #fbbf24; font-size: 1.2rem;">${itemTotal.toLocaleString()} د.ع</strong>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ سڕینەوە</button>
                 </div>
             </div>
         `;
@@ -778,7 +946,7 @@ function submitOrder(event) {
     message += `%0A💰 کۆی گشتی: ${total.toLocaleString()} د.ع`;
     
     // کردنەوەی واتساپ
-    const whatsappNumber = '9647701234567'; // ژمارەی واتساپی دوکان
+    const whatsappNumber = '9647701234567';
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
     
     // سڕینەوەی سەبەتە
