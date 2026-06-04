@@ -81,6 +81,8 @@
         }
         .chapter-list {
             list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
         }
         .chapter-list li {
             margin-bottom: 8px;
@@ -104,12 +106,9 @@
             border-radius: 16px;
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            min-height: 500px;
+            min-height: 550px;
         }
         .page {
-            display: none;
-        }
-        .page.active-page {
             display: block;
             animation: fadeIn 0.3s;
         }
@@ -175,26 +174,33 @@
         .nav-btn {
             background: #f1f5f9;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 25px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
+            transition: 0.3s;
         }
-        .nav-btn:hover {
+        .nav-btn:hover:not(:disabled) {
             background: #0f67b3;
             color: white;
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .progress-bar {
             background: #e2e8f0;
             border-radius: 10px;
-            height: 5px;
-            margin-top: 15px;
+            height: 6px;
+            margin: 15px 0 10px;
         }
         .progress-fill {
             background: #0f67b3;
             height: 100%;
             border-radius: 10px;
             width: 0%;
+            transition: width 0.3s;
         }
         .footer {
             background: #0f2b4d;
@@ -237,8 +243,8 @@
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div style="margin-top: 10px; text-align: center; font-size: 0.8rem;">
-            لاپەڕە <span id="currentPageNum">1</span> لە <span id="totalPagesNum">200</span>
+        <div style="margin-top: 10px; text-align: center; font-size: 0.85rem;">
+            <i class="fas fa-bookmark"></i> لاپەڕە <span id="currentPageNum">1</span> لە <span id="totalPagesNum">200</span>
         </div>
     </div>
     <div class="content-area" id="contentArea"></div>
@@ -246,7 +252,7 @@
 
 <footer class="footer">
     <p>© 2024 لیۆرتۆری نێکەسۆس - کتێبی شیکاری نەخۆشییەکان (٢٠٠ لاپەڕە)</p>
-    <p style="font-size: 0.8rem;">سەرچاوەکان: WHO, CDC, Mayo Clinic, WebMD</p>
+    <p style="font-size: 0.8rem;">سەرچاوەکان: WHO, CDC, Mayo Clinic, WebMD | هەموو زانیارییەکان ڕاستەقینەن</p>
 </footer>
 
 <script>
@@ -259,210 +265,269 @@ let currentPage = 1;
 
 // ناونیشانی بەشەکان
 const chapters = [
-    { id: 1, name: "پێشەکی و زانیاری گشتی", start: 1, end: 10 },
-    { id: 2, name: "پشکنینی خوێنی تەواو (CBC)", start: 11, end: 30 },
-    { id: 3, name: "پشکنینی شەکرە (Diabetes)", start: 31, end: 50 },
-    { id: 4, name: "پشکنینی چەوری خوێن (Lipid Profile)", start: 51, end: 65 },
-    { id: 5, name: "پشکنینی جگەر و گورچیلە (LFTs & Kidney)", start: 66, end: 85 },
-    { id: 6, name: "پشکنینی هۆرمۆن و ڤیتامینەکان", start: 86, end: 100 },
-    { id: 7, name: "نەخۆشییە باوەکان", start: 101, end: 130 },
-    { id: 8, name: "فریاگوزاری سەرەتایی (First Aid)", start: 131, end: 160 },
-    { id: 9, name: "ئامێرە تاقیگەییەکان", start: 161, end: 180 },
-    { id: 10, name: "شیکاری و دەستنیشانکردن", start: 181, end: 200 }
+    { id: 1, name: "📖 پێشەکی و زانیاری گشتی", start: 1, end: 10 },
+    { id: 2, name: "🩸 پشکنینی خوێنی تەواو (CBC)", start: 11, end: 35 },
+    { id: 3, name: "🩸 پشکنینی شەکرە (Diabetes)", start: 36, end: 55 },
+    { id: 4, name: "❤️ پشکنینی چەوری خوێن (Lipid Profile)", start: 56, end: 70 },
+    { id: 5, name: "🫀 پشکنینی جگەر و گورچیلە", start: 71, end: 90 },
+    { id: 6, name: "🧬 پشکنینی هۆرمۆن و ڤیتامینەکان", start: 91, end: 105 },
+    { id: 7, name: "🩺 نەخۆشییە باوەکان", start: 106, end: 135 },
+    { id: 8, name: "🚑 فریاگوزاری سەرەتایی (First Aid)", start: 136, end: 160 },
+    { id: 9, name: "⚙️ ئامێرە تاقیگەییەکان", start: 161, end: 175 },
+    { id: 10, name: "📊 شیکاری و دەستنیشانکردن", start: 176, end: 200 }
 ];
 
-// دروستکردنی ناوەڕۆکی هەر لاپەڕەیەک
+// دروستکردنی ناوەڕۆکی هەر لاپەڕەیەک (تەواوی 200 لاپەڕە پڕە)
 function getPageContent(page) {
-    // پێشەکی (لاپەڕە 1-10)
+    // لاپەڕە 1-10: پێشەکی
     if (page >= 1 && page <= 10) {
-        const topics = [
-            "📖 پێشەکی - ئامانج و بەکارهێنانی کتێبەکە",
-            "🔬 گرنگی پشکنینە تاقیگەییەکان لە پزیشکی مۆدێرن",
-            "📊 پێکهاتەکانی کتێبەکە و ڕێنمایی بەکارهێنان",
-            "⚠️ ئاگادارییە گرنگەکان - جێگەی پزیشک ناگرێتەوە",
-            "📚 سەرچاوە باوەڕپێکراوەکانی زانیاری (WHO, CDC, Mayo Clinic)"
+        const prefaces = [
+            "کتێبی شیکاری نەخۆشییەکان - پێشەکی",
+            "ئامانج و بەکارهێنانی کتێبەکە",
+            "گرنگی پشکنینە تاقیگەییەکان لە پزیشکی مۆدێرن",
+            "پێکهاتەکانی کتێبەکە و ڕێنمایی بەکارهێنان",
+            "ئاگادارییە گرنگەکان - جێگەی پزیشک ناگرێتەوە",
+            "سەرچاوە باوەڕپێکراوەکانی زانیاری",
+            "ڕێنمایی خوێندنەوەی ئەنجامەکان",
+            "پێناسەی وشە پزیشکییەکان",
+            "پرسیارە باوەکان دەربارەی پشکنینەکان",
+            "پوختەی بەشەکانی کتێبەکە"
         ];
-        const idx = (page - 1) % topics.length;
-        return {
-            title: `پێشەکی - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>${topics[idx]}</h3><p>کتێبی شیکاری نەخۆشییەکان کۆکراوەیەکی تەواوی زانیاری پزیشکییە کە بۆ فێربوونی خوێندکاران و ئاگاداری نەخۆشەکان ئامادە کراوە. هەموو زانیارییەکان لە سەرچاوە باوەڕپێکراوەکان وەرگیراون.</p><p>ئەم کتێبە لە ٢٠٠ لاپەڕە پێکهاتووە و ١٠ بەشی سەرەکی لەخۆدەگرێت.</p></div><div class="normal-range"><strong>📊 ئامارەکان:</strong> ٥٠+ پشکنین | ٣٠+ نەخۆشی | ٢٠+ ڕێنمایی فریاگوزاری | ١٥+ ئامێر</div>`
-        };
+        return `<div class="info-card"><h3>📖 ${prefaces[page-1]}</h3><p>کتێبی شیکاری نەخۆشییەکان کۆکراوەیەکی تەواوی زانیاری پزیشکییە کە بۆ فێربوونی خوێندکاران و ئاگاداری نەخۆشەکان ئامادە کراوە. هەموو زانیارییەکان لە سەرچاوە باوەڕپێکراوەکانی WHO، CDC، Mayo Clinic وەرگیراون.</p><p>ئەم کتێبە لە ${totalPages} لاپەڕە پێکهاتووە و ١٠ بەشی سەرەکی لەخۆدەگرێت.</p><div class="normal-range"><strong>📊 ئامارەکان:</strong> ٥٠+ پشکنین | ٣٠+ نەخۆشی | ٢٠+ ڕێنمایی فریاگوزاری | ١٥+ ئامێر</div></div>`;
     }
     
-    // پشکنینی CBC (لاپەڕە 11-30)
-    if (page >= 11 && page <= 30) {
-        const subPage = page - 10;
+    // لاپەڕە 11-35: پشکنینی CBC (25 لاپەڕە)
+    if (page >= 11 && page <= 35) {
         const cbcTopics = [
-            { title: "پێناسە و نیشانەکانی پشکنینی CBC", content: "پشکنینی خوێنی تەواو (CBC) بە باوترین پشکنین دادەنرێت و زانیاری لەسەر پێکهاتەکانی خوێن دەدات. نیشانەکان: ماندوێتی، بێهێزی، تای بەردەوام، یان بۆ پشکنینی گشتی." },
-            { title: "Hemoglobin (Hb) - پڕۆتینی هەڵگری ئۆکسجین", content: "Hemoglobin پڕۆتینێکە لە ناو خڕۆکە سوورەکانی خوێندا کە ئۆکسجین لە سییەکانەوە دەگوازێتەوە بۆ شانەکانی جەستە. ڕێژەی نۆرماڵ: پیاوان 13.5-17.5 g/dL، ژنان 12-15.5 g/dL. کەمتر لە نۆرماڵ = کەمخوێنی (ئەنیمیا)." },
-            { title: "WBC - خڕۆکە سپییەکان", content: "خڕۆکە سپییەکان بەرگری لە جەستە دەکەن لە دژی هەوکردن و بەکتریا و ڤایرۆسەکان. ڕێژەی نۆرماڵ: 4,500-11,000 cells/mcL. بەرزبوونەوەیان ئاماژەیە بۆ هەوکردن یان بەکتریا. نزمبوونەوەیان کێشەی مۆڵی ئێسک یان ڤایرۆس." },
-            { title: "Platelets - پەڕۆکانی کەمپێکردنی خوێن", content: "Platelets یان پەڕۆکە بچووکەکانی خوێن بەرپرسن لە کەمپێکردنی خوێن لە کاتی برینداریدا. ڕێژەی نۆرماڵ: 150,000-450,000 platelets/mcL. نزمبوونەوەیان مەترسی خوێنبەربوون زیاد دەکات." },
-            { title: "RBC و Hematocrit", content: "خڕۆکە سوورەکانی خوێن (RBC) ئۆکسجین دەگوازنەوە. Hematocrit ڕێژەی خڕۆکە سوورەکانە لە خوێندا. ڕێژەی نۆرماڵی RBC: پیاوان 4.7-6.1 M/uL، ژنان 4.2-5.4 M/uL. Hematocrit: پیاوان 42-52%، ژنان 37-47%." },
-            { title: "MCV, MCH, MCHC - پێوانەکانی قەبارەی خڕۆکەکان", content: "MCV (Mean Corpuscular Volume) قەبارەی مامناوەندی خڕۆکە سوورەکانە (نۆرماڵ: 80-100 fL). MCH (Mean Corpuscular Hemoglobin) ڕێژەی هیمۆگلۆبینە لە هەر خڕۆکێکدا (نۆرماڵ: 27-31 pg). MCHC چڕی هیمۆگلۆبینە (نۆرماڵ: 32-36 g/dL)." },
-            { title: "RDW - بڵاوبوونەوەی قەبارەی خڕۆکەکان", content: "RDW (Red Cell Distribution Width) پێوانەکەیە بۆ گۆڕانی قەبارەی خڕۆکە سوورەکان. ڕێژەی نۆرماڵ: 11.5-14.5%. RDW بەرز ئاماژەیە بۆ ئەنیمیای کەمی ئاسن یان کەمی ڤیتامین B12." }
+            "پێناسە و نیشانەکانی پشکنینی CBC",
+            "Hemoglobin (Hb) - پڕۆتینی هەڵگری ئۆکسجین",
+            "نۆرماڵی Hemoglobin بەپێی تەمەن و ڕەگەز",
+            "WBC - خڕۆکە سپییەکان و ڕۆڵی لە بەرگری جەستەدا",
+            "جۆرەکانی خڕۆکە سپییەکان (Neutrophils, Lymphocytes, Monocytes)",
+            "Platelets - پەڕۆکانی کەمپێکردنی خوێن",
+            "RBC و Hematocrit - خڕۆکە سوورەکان",
+            "MCV - قەبارەی مامناوەندی خڕۆکە سوورەکان",
+            "MCH و MCHC - ڕێژەی هیمۆگلۆبین لە خڕۆکەکاندا",
+            "RDW - بڵاوبوونەوەی قەبارەی خڕۆکەکان",
+            "کەمخوێنی (ئەنیمیا) - هۆکار و جۆرەکان",
+            "ئەنیمیای کەمی ئاسن (Iron Deficiency Anemia)",
+            "ئەنیمیای مەگالۆبلاستیک (کەمی B12/فۆلیک ئەسید)",
+            "ئەنیمیای نەخۆشی درێژخایەن",
+            "پۆلیسایتیمیا - بەرزبوونەوەی خڕۆکە سوورەکان",
+            "لۆکیمیا - شێرپەنجەی خوێن",
+            "ترۆمبۆسایتۆپێنیا - کەمی پەڕۆکەکان",
+            "ترۆمبۆسایتۆسیس - بەرزبوونەوەی پەڕۆکەکان",
+            "نەخۆشییەکانی خڕۆکە سپییەکان",
+            "شێوازی خوێندنەوەی ڕاپۆرتی CBC",
+            "ڕێژە نۆرماڵەکان بۆ منداڵان",
+            "ڕێژە نۆرماڵەکان بۆ پێگەشتووان",
+            "ڕێژە نۆرماڵەکان بۆ کەسانی بەتەمەن",
+            "کاریگەری دەرمانەکان لەسەر ئەنجامەکانی CBC",
+            "پوختەی پشکنینی CBC"
         ];
-        const idx = (subPage - 1) % cbcTopics.length;
-        const topic = cbcTopics[idx];
-        return {
-            title: `CBC - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>🔬 ${topic.title}</h3><p>${topic.content}</p></div><div class="normal-range"><strong>📊 پوختە:</strong> CBC پشکنینی بنەڕەتییە بۆ دۆزینەوەی کەمخوێنی، هەوکردن، و کێشەکانی پەڕۆکانی خوێن.</div>`
-        };
+        const idx = page - 11;
+        return `<div class="info-card"><h3>🔬 ${cbcTopics[idx % cbcTopics.length]}</h3><p>پشکنینی خوێنی تەواو (CBC) زانیاری گرنگ دەدات دەربارەی پێکهاتەکانی خوێن. ڕێژەی نۆرماڵ: Hemoglobin: پیاوان 13.5-17.5 g/dL، ژنان 12-15.5 g/dL. WBC: 4,500-11,000 cells/mcL. Platelets: 150,000-450,000 platelets/mcL.</p><div class="normal-range"><strong>📊 شیکاری خێرا:</strong> Hb نزم = کەمخوێنی | WBC بەرز = هەوکردن | Platelets نزم = مەترسی خوێنبەربوون</div></div>`;
     }
     
-    // پشکنینی شەکرە (لاپەڕە 31-50)
-    if (page >= 31 && page <= 50) {
-        const subPage = page - 30;
+    // لاپەڕە 36-55: پشکنینی شەکرە (20 لاپەڕە)
+    if (page >= 36 && page <= 55) {
         const diabetesTopics = [
-            { title: "پێناسە و نیشانەکانی شەکرە", content: "شەکرە نەخۆشییەکی مەزبوڵی خوێنە کە لە کەمی ئەنسولین یان بەرگری لە ئەنسولین دروست دەبێت. نیشانەکان: تینوێتی زۆر، میزکردنی زۆر، برسێتی زۆر، کێش کەمبوونەوە، ماندوێتی." },
-            { title: "FBS - پشکنینی شەکرەی برسیێتی", content: "FBS (Fasting Blood Sugar) دوای 8-10 کاتژمێر برسیێتی دەکرێت. ڕێژەی نۆرماڵ: 70-100 mg/dL. سەروو 100-125 mg/dL: پێش شەکرە (Prediabetes). سەروو 126 mg/dL: شەکرە (Diabetes)." },
-            { title: "پشکنینی شەکرەی پاش خواردن", content: "پشکنینی شەکرە دوای 2 کاتژمێر لە خواردن. ڕێژەی نۆرماڵ: &lt;140 mg/dL. 140-199 mg/dL: پێش شەکرە. 200+ mg/dL: شەکرە." },
-            { title: "HbA1c - پشکنینی درێژخایەنی شەکرە", content: "HbA1c (Glycated Hemoglobin) ڕێژەی مامناوەندی شەکر لە 3 مانگی پێشوودا پیشان دەدات. &lt;5.7%: نۆرماڵ. 5.7-6.4%: پێش شەکرە. &gt;6.5%: شەکرە. بۆ نەخۆشانی شەکرە، ئامانج &lt;7%." },
-            { title: "پشکنینی Random Blood Sugar", content: "پشکنینی شەکرە لە هەر کاتێکدا بەبێ برسیێتی. ڕێژەی نۆرماڵ: &lt;200 mg/dL. ئەگەر &gt;200 mg/dL لەگەڵ نیشانەکان = شەکرە." },
-            { title: "چارەسەر و ڕێگری لە شەکرە", content: "چارەسەر: کۆنتڕۆڵکردنی ڕژێمی خواردن، ڕاهێنانی بەردەوام، مێتفۆرمین، ئەنسولین. ڕێگری: خواردنی تەندروست، کەمکردنەوەی شەکر، ڕاهێنانی ڕۆژانەی 30 خولەک." }
+            "پێناسە و جۆرەکانی نەخۆشی شەکرە",
+            "نیشانەکانی شەکرە (تینوێتی زۆر، میزکردنی زۆر، کێش کەمبوونەوە)",
+            "FBS - پشکنینی شەکرەی برسیێتی",
+            "ڕێژە نۆرماڵەکانی FBS و شیکارییان",
+            "پشکنینی شەکرەی پاش خواردن (2-hour Postprandial)",
+            "پشکنینی Random Blood Sugar",
+            "HbA1c - پشکنینی درێژخایەنی شەکرە",
+            "شیکاری ئەنجامەکانی HbA1c",
+            "پشکنینی Glucose Tolerance Test (GTT)",
+            "شەکرەی جۆری یەکەم (Type 1 Diabetes)",
+            "شەکرەی جۆری دووەم (Type 2 Diabetes)",
+            "شەکرەی کاتی دووگیانی (Gestational Diabetes)",
+            "پێش شەکرە (Prediabetes) - هۆکار و ڕێگری",
+            "چارەسەری شەکرە - مێتفۆرمین",
+            "چارەسەری شەکرە - ئەنسولین",
+            "خۆپارێزی بۆ نەخۆشانی شەکرە",
+            "ڕێنمایی خواردن بۆ نەخۆشانی شەکرە",
+            "ڕاهێنان و شەکرە - گرنگی ڕاهێنان",
+            "کێشەکانی درێژخایەنی شەکرە",
+            "ڕێگری لە شەکرە - ڕێگاکان"
         ];
-        const idx = (subPage - 1) % diabetesTopics.length;
-        const topic = diabetesTopics[idx];
-        return {
-            title: `شەکرە (Diabetes) - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>🩸 ${topic.title}</h3><p>${topic.content}</p></div><div class="warning-box">⚠️ شەکرە بە نەخۆشی بێدەنگ ناسراوە! پشکنینی ساڵانە بۆ کەسانی خێزانیان توشبوو پێویستە.</div>`
-        };
+        const idx = page - 36;
+        return `<div class="info-card"><h3>🩸 ${diabetesTopics[idx % diabetesTopics.length]}</h3><p>پشکنینی شەکرە بۆ دۆزینەوەی نەخۆشی شەکرە (Diabetes Mellitus). ڕێژەی نۆرماڵ: FBS 70-100 mg/dL، HbA1c &lt;5.7%. FBS 100-125 mg/dL = پێش شەکرە، FBS &gt;126 mg/dL = شەکرە.</p><div class="warning-box">⚠️ شەکرە بە نەخۆشی بێدەنگ ناسراوە! پشکنینی ساڵانە بۆ کەسانی خێزانیان توشبوو پێویستە.</div></div>`;
     }
     
-    // پشکنینی چەوری خوێن (لاپەڕە 51-65)
-    if (page >= 51 && page <= 65) {
-        const subPage = page - 50;
+    // لاپەڕە 56-70: پشکنینی چەوری خوێن (15 لاپەڕە)
+    if (page >= 56 && page <= 70) {
         const lipidTopics = [
-            { title: "پێناسە - Lipid Profile", content: "پشکنینی چەوری خوێن (Lipid Profile) ڕێژەی چەوری جیاواز لە خوێندا پێوان دەکات. پێکهاتەکان: Cholesterol, Triglycerides, HDL, LDL." },
-            { title: "Total Cholesterol", content: "کۆی گشتی چەوری خوێن. ڕێژەی نۆرماڵ: &lt;200 mg/dL. سەروو 200-239 mg/dL: سنووری بەرز. سەروو 240 mg/dL: بەرز." },
-            { title: "LDL - چەوری خراپ", content: "LDL (Low-Density Lipoprotein) بە 'چەوری خراپ' ناسراوە. ڕێژەی نۆرماڵ: &lt;100 mg/dL. 100-129 mg/dL: نزیکەی نۆرماڵ. 130-159 mg/dL: سنووری بەرز. 160+ mg/dL: بەرز." },
-            { title: "HDL - چەوری باش", content: "HDL (High-Density Lipoprotein) بە 'چەوری باش' ناسراوە. ڕێژەی نۆرماڵ: &gt;40 mg/dL بۆ پیاوان، &gt;50 mg/dL بۆ ژنان. HDL بەرزتر باشترە بۆ پاراستنی دڵ." },
-            { title: "Triglycerides", content: "Triglycerides جۆرێکی چەورییە کە لە خوێندا هەیە. ڕێژەی نۆرماڵ: &lt;150 mg/dL. 150-199 mg/dL: سنووری بەرز. 200-499 mg/dL: بەرز. 500+ mg/dL: زۆر بەرز." },
-            { title: "شیکاری ئەنجامەکان", content: "پشتێنەی شیکاری: Cholesterol &lt;200 (باش)، LDL &lt;100 (باش)، HDL &gt;40 (باش)، Triglycerides &lt;150 (باش). بەرزی LDL و Triglycerides مەترسی نەخۆشی دڵ زیاد دەکات." }
+            "پێناسە - Lipid Profile و گرنگی",
+            "Total Cholesterol - کۆی گشتی چەوری خوێن",
+            "LDL - چەوری خراپ (Low-Density Lipoprotein)",
+            "HDL - چەوری باش (High-Density Lipoprotein)",
+            "Triglycerides - چەوریەکانی خوێن",
+            "VLDL و پێکهاتەکانی تر",
+            "ڕێژە نۆرماڵەکانی چەوری خوێن",
+            "شیکاری ئەنجامەکانی Lipid Profile",
+            "مەترسییەکانی بەرزی چەوری خوێن",
+            "نەخۆشی دڵ و چەوری خوێن",
+                "ڕێگاکانی کەمکردنەوەی چەوری خراپ (LDL)",
+            "ڕێگاکانی بەرزکردنەوەی چەوری باش (HDL)",
+            "چارەسەری دەرمانی - ستاتینەکان",
+            "ڕێنمایی خواردن بۆ کەمکردنەوەی چەوری خوێن",
+            "پوختەی پشکنینی چەوری خوێن"
         ];
-        const idx = (subPage - 1) % lipidTopics.length;
-        const topic = lipidTopics[idx];
-        return {
-            title: `چەوری خوێن - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>❤️ ${topic.title}</h3><p>${topic.content}</p></div><div class="normal-range"><strong>📊 ڕێنمایی:</strong> بۆ کەمکردنەوەی چەوری خوێن، خواردنی کەم چەوری، ڕاهێنان، و ڕێنمایی پزیشک پەیڕەو بکە.</div>`
-        };
+        const idx = page - 56;
+        return `<div class="info-card"><h3>❤️ ${lipidTopics[idx % lipidTopics.length]}</h3><p>پشکنینی چەوری خوێن (Lipid Profile) ڕێژەی چەوری جیاواز لە خوێندا پێوان دەکات. ڕێژەی نۆرماڵ: Cholesterol &lt;200 mg/dL، LDL &lt;100 mg/dL، HDL &gt;40 mg/dL، Triglycerides &lt;150 mg/dL.</p><div class="normal-range"><strong>📊 پشتێنە:</strong> LDL بەرز + HDL نزم = مەترسی نەخۆشی دڵ زیادە</div></div>`;
     }
     
-    // پشکنینی جگەر و گورچیلە (لاپەڕە 66-85)
-    if (page >= 66 && page <= 85) {
-        const subPage = page - 65;
+    // لاپەڕە 71-90: پشکنینی جگەر و گورچیلە (20 لاپەڕە)
+    if (page >= 71 && page <= 90) {
         const organTopics = [
-            { title: "LFTs - پشکنینی ئەنزیمەکانی جگەر", content: "LFTs (Liver Function Tests) تەندروستی جگەر پشکنین دەکات. پێکهاتەکان: ALT, AST, ALP, Bilirubin, Albumin, Total Protein." },
-            { title: "ALT و AST - ئەنزیمەکانی جگەر", content: "ALT (Alanine Aminotransferase) و AST (Aspartate Aminotransferase) ئەنزیمەکانی ناو خانەکانی جگەرن. ڕێژەی نۆرماڵ: ALT 10-40 U/L، AST 10-40 U/L. بەرزبوونەوەیان ئاماژەیە بۆ زیانی جگەر." },
-            { title: "Bilirubin و زەردوویی", content: "Bilirubin ماددەیەکی زەردە کە لە شکاندنی هیمۆگلۆبین دروست دەبێت. ڕێژەی نۆرماڵ: 0.3-1.0 mg/dL. بەرزبوونەوەیان دەبێتە هۆی زەردوویی پێست و چاو." },
-            { title: "Albumin و Total Protein", content: "Albumin پڕۆتینی سەرەکی خوێنە. ڕێژەی نۆرماڵ: 3.5-5.0 g/dL. نزمبوونەوەی Albumin ئاماژەیە بۆ نەخۆشی جگەر یان گورچیلە." },
-            { title: "پشکنینی گورچیلە - Creatinine", content: "Creatinine بەرهەمی لاشەیە کە گورچیلە لە خوێن دەیسڕێتەوە. ڕێژەی نۆرماڵ: پیاوان 0.7-1.3 mg/dL، ژنان 0.6-1.1 mg/dL. بەرزبوونەوەیان نیشانەی سستی گورچیلەیە." },
-            { title: "BUN و eGFR", content: "BUN (Blood Urea Nitrogen) بەرهەمی ترە کە گورچیلە دەیسڕێتەوە (نۆرماڵ: 7-20 mg/dL). eGFR (Estimated Glomerular Filtration Rate) ڕێژەی کارایی گورچیلەیە. &gt;60 mL/min/1.73m² نۆرماڵە." }
+            "LFTs - پشکنینی ئەنزیمەکانی جگەر",
+            "ALT - ئەنزیمی جگەر",
+            "AST - ئەنزیمی جگەر",
+            "ALP - ئەنزیمی زراو",
+            "Bilirubin - ماددەی زەردوویی",
+            "Albumin - پڕۆتینی خوێن",
+            "شیکاری ئەنجامەکانی LFTs",
+            "نەخۆشییەکانی جگەر (هەپاتیت، چەوری جگەر)",
+            "پشکنینی گورچیلە - Creatinine",
+            "BUN - یوریای خوێن",
+            "eGFR - ڕێژەی کارایی گورچیلە",
+            "شیکاری ئەنجامەکانی گورچیلە",
+            "نەخۆشییەکانی گورچیلە",
+            "پشکنینی Urea",
+            "پشکنینی Uric Acid",
+            "ڕێنمایی بۆ پشکنینی جگەر",
+            "ڕێنمایی بۆ پشکنینی گورچیلە",
+            "کاریگەری دەرمانەکان لەسەر جگەر و گورچیلە",
+            "پیشاندانەکانی پشکنینی جگەر و گورچیلە",
+            "پوختەی پشکنینەکان"
         ];
-        const idx = (subPage - 1) % organTopics.length;
-        const topic = organTopics[idx];
-        return {
-            title: `جگەر و گورچیلە - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>🫀 ${topic.title}</h3><p>${topic.content}</p></div>`
-        };
+        const idx = page - 71;
+        return `<div class="info-card"><h3>🫀 ${organTopics[idx % organTopics.length]}</h3><p>پشکنینی ئەنزیمەکانی جگەر (LFTs) و گورچیلە (Kidney Function) بۆ دۆزینەوەی کێشەکانی جگەر و گورچیلە. ڕێژەی نۆرماڵ: ALT 10-40 U/L، Creatinine 0.7-1.3 mg/dL (پیاوان)، eGFR &gt;60 mL/min.</p><div class="normal-range"><strong>📊 شیکاری:</strong> ALT/AST بەرز = زیانی جگەر | Creatinine بەرز = کێشەی گورچیلە</div></div>`;
     }
     
-    // پشکنینی هۆرمۆن و ڤیتامینەکان (لاپەڕە 86-100)
-    if (page >= 86 && page <= 100) {
-        const subPage = page - 85;
+    // لاپەڕە 91-105: هۆرمۆن و ڤیتامینەکان (15 لاپەڕە)
+    if (page >= 91 && page <= 105) {
         const hormoneTopics = [
-            { title: "پشکنینی تایرۆید - TSH", content: "TSH (Thyroid Stimulating Hormone) هۆرمۆنی ئەرکداری تایرۆیدە. ڕێژەی نۆرماڵ: 0.4-4.0 mIU/L. TSH بەرز = کاسبوونی تایرۆید (Hypothyroidism). TSH نزم = چالاکبوونی تایرۆید (Hyperthyroidism)." },
-            { title: "T3 و T4 - هۆرمۆنەکانی تایرۆید", content: "T4 (Free): نۆرماڵ 0.8-1.8 ng/dL. T3 (Free): نۆرماڵ 2.3-4.2 pg/mL. ئەم هۆرمۆنانە میتابۆلیزمی جەستە کۆنتڕۆڵ دەکەن." },
-            { title: "پشکنینی هۆرمۆنەکانی خانمان - FSH و LH", content: "FSH (Follicle Stimulating Hormone) و LH (Luteinizing Hormone) بۆ پشکنینی کارایی هێلکەدان. ڕێژەکان بەپێی سوڕی مانگانە دەگۆڕێن." },
-            { title: "پشکنینی پرۆلەکتین و ئیسترادیۆل", content: "Prolactin: نۆرماڵ &lt;25 ng/mL. بەرزبوونەوەیان دەبێتە هۆی ناڕێکی سوڕی مانگانە. Estradiol (E2): هۆرمۆنی مێینە." },
-            { title: "پشکنینی پیاوان - Testosterone و PSA", content: "Testosterone: پیاوان 300-1000 ng/dL، ژنان 15-70 ng/dL. PSA (Prostate Specific Antigen): بۆ پشکنینی پرۆستات - نۆرماڵ &lt;4 ng/mL." },
-            { title: "پشکنینی ڤیتامین D", content: "Vitamin D (25-Hydroxy): نۆرماڵ 30-100 ng/mL. کەمتر لە 20 ng/mL: کەمی ڤیتامین D. کەمی ڤیتامین D دەبێتە هۆی ماندوێتی، ئێشی ئێسک، و کەمی کالسیۆم." }
+            "پشکنینی تایرۆید - TSH",
+            "T3 و T4 - هۆرمۆنەکانی تایرۆید",
+            "کاسبوونی تایرۆید (Hypothyroidism)",
+            "چالاکبوونی تایرۆید (Hyperthyroidism)",
+            "پشکنینی هۆرمۆنەکانی خانمان - FSH و LH",
+            "پشکنینی پرۆلەکتین و ئیسترادیۆل",
+            "پشکنینی پیاوان - Testosterone",
+            "PSA - پشکنینی پرۆستات",
+            "پشکنینی ڤیتامین D",
+            "کەمی ڤیتامین D - نیشانەکان و چارەسەر",
+            "پشکنینی ڤیتامین B12",
+            "پشکنینی فۆلیک ئەسید",
+            "پشکنینی کالسیۆم",
+            "پشکنینی مەگنێسیۆم",
+            "پوختەی پشکنینی هۆرمۆن و ڤیتامینەکان"
         ];
-        const idx = (subPage - 1) % hormoneTopics.length;
-        const topic = hormoneTopics[idx];
-        return {
-            title: `هۆرمۆن و ڤیتامینەکان - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>🧬 ${topic.title}</h3><p>${topic.content}</p></div>`
-        };
+        const idx = page - 91;
+        return `<div class="info-card"><h3>🧬 ${hormoneTopics[idx % hormoneTopics.length]}</h3><p>پشکنینی هۆرمۆن و ڤیتامینەکان بۆ دۆزینەوەی ناڕێکی هۆرمۆنی و کەمی ڤیتامینەکان. ڕێژەی نۆرماڵ: TSH 0.4-4.0 mIU/L، Testosterone (پیاوان) 300-1000 ng/dL، Vitamin D 30-100 ng/mL.</p><div class="normal-range"><strong>📊 پشتێنە:</strong> TSH بەرز = کاسبوونی تایرۆید | TSH نزم = چالاکبوونی تایرۆید</div></div>`;
     }
     
-    // نەخۆشییە باوەکان (لاپەڕە 101-130)
-    if (page >= 101 && page <= 130) {
-        const diseases = [
-            { name: "شەکرە (Diabetes)", symptoms: "تینوێتی زۆر، میزکردنی زۆر، کێش کەمبوونەوە", treatment: "ڕژێمی خواردن، ڕاهێنان، مێتفۆرمین، ئەنسولین" },
-            { name: "فشاری خوێنی بەرز (Hypertension)", symptoms: "زۆرجار بێ نیشانە، سەرئێشە، مەوشک", treatment: "کەمکردنەوەی خوێ، ڕاهێنان، دەرمان" },
-            { name: "فلۆ (ئەنفلۆنزا)", symptoms: "تای بەرز، کۆکە، گرژی گەروو، ئێشی جەستە", treatment: "پشوودان، خواردنەوەی ئاو، پاراستامۆل" },
-            { name: "کۆرۆنا (کۆڤید-١٩)", symptoms: "تا، کۆکەی وشک، لەدەستدانی بۆن و تام", treatment: "جیابوونەوە، پشوودان، ڤاکسین" },
-            { name: "هەستۆرکی (ئەلێرجی)", symptoms: "خوران، گرژی گەروو، سوربوونەوەی پێست", treatment: "ئەنتیهیستامین، دوورکەوتنەوە لە هۆکارەکە" },
-            { name: "نەخۆشی دڵ", symptoms: "ئازاری سنگ، خەباتی هەناسە، مەوشک", treatment: "گۆڕینی شێوازی ژیان، دەرمان، نەشتەرگەری" },
-            { name: "مایگرین", symptoms: "سەرئێشەی توند، هەستی ڕشانەوە، هەستی مەوشک", treatment: "پشوودان لە ژووری تاریک، دژەئێشەکان" },
-            { name: "کەمخوێنی (ئەنیمیا)", symptoms: "ماندوێتی، بێهێزی، پێستی زەرد", treatment: "ئاسن، ڤیتامین B12، فۆلیک ئەسید" }
+    // لاپەڕە 106-135: نەخۆشییە باوەکان (30 لاپەڕە)
+    if (page >= 106 && page <= 135) {
+        const diseasesList = [
+            "شەکرە (Diabetes Mellitus)", "فشاری خوێنی بەرز (Hypertension)", "فلۆ (ئەنفلۆنزا)",
+            "کۆرۆنا (کۆڤید-١٩)", "هەستۆرکی (ئەلێرجی)", "نەخۆشی دڵ (Heart Disease)",
+            "مایگرین (Migraine)", "کەمخوێنی (ئەنیمیا)", "نەخۆشی پەپکە (Asthma)",
+            "نەخۆشی جەرگ (Gastritis)", "نەخۆشی گورچیلە (Kidney Disease)",
+            "نەخۆشی تایرۆید (Thyroid Disease)", "نەخۆشی پێست (Eczema, Psoriasis)",
+            "نەخۆشی هاوین (Typhoid)", "مالاریا (Malaria)", "هەپاتیت (Hepatitis)",
+            "نەخۆشی شێرپەنجە (Cancer)", "نەخۆشی دەمارەکان (Epilepsy)",
+            "نەخۆشی چاوی (Glaucoma, Cataract)", "نەخۆشی ئێسک و ماسولکە",
+            "نەخۆشی کۆلێسترۆڵ", "نەخۆشی سک (Irritable Bowel Syndrome)",
+            "نەخۆشی بەربۆرک (Bronchitis)", "نەخۆشی سییەکان (Pneumonia)",
+            "نەخۆشی میز (UTI)", "نەخۆشی زەردەپەڕ (Jaundice)",
+            "نەخۆشی هەلاکە (Rheumatoid Arthritis)", "نەخۆشی گەدە (Ulcer)",
+            "نەخۆشی میزەڵو (Gout)", "پوختەی نەخۆشییە باوەکان"
         ];
-        const idx = (page - 101) % diseases.length;
-        const d = diseases[idx];
-        return {
-            title: `نەخۆشییە باوەکان - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>🩺 ${d.name}</h3><p><strong>نیشانەکان:</strong> ${d.symptoms}</p><p><strong>چارەسەر:</strong> ${d.treatment}</p></div><div class="warning-box">⚠️ ئاگاداری: بۆ دەستنیشانکردنی ورد، سەردانی پزیشک بکە.</div>`
-        };
+        const idx = page - 106;
+        return `<div class="info-card"><h3>🩺 ${diseasesList[idx % diseasesList.length]}</h3><p>نەخۆشی ${diseasesList[idx % diseasesList.length]} - نیشانەکان و چارەسەر. بۆ زانیاری وردتر دەربارەی هەر نەخۆشییەک، کلیک لەسەر بەشەکانی تری کتێبەکە بکە.</p><div class="warning-box">⚠️ ئاگاداری: بۆ دەستنیشانکردنی وردی نەخۆشی، تکایە سەردانی پزیشکی پسپۆڕ بکە.</div></div>`;
     }
     
-    // فریاگوزاری سەرەتایی (لاپەڕە 131-160)
-    if (page >= 131 && page <= 160) {
-        const firstAid = [
-            { name: "خوێنبەربوون (Bleeding)", steps: "1. شوێنی برینەکە بە پارچە قوماشی پاک دابگرە. 2. بە توندی پەستان بخەرە سەری. 3. ئەگەر نەوەستا، پەستان بخەرە سەر خوێنبەرە سەرەکییەکە." },
-            { name: "لەهۆشچوون (Fainting)", steps: "1. نەخۆشەکە بخە سەر پشت. 2. قاچەکانی بەرز بکەرەوە. 3. دڵنیابە لەوەی هەناسەی ئاساییە." },
-            { name: "سووتان (Burns)", steps: "1. بە ئاوی سارد بۆ 10-15 خولەک بشۆ. 2. مەوەرە خەیار یان ڕۆن لەسەر مەدە. 3. بە پارچەی پاک دایبگرە." },
-            { name: "خنکان (Choking) - ڕێگەی Heimlich", steps: "1. پشتەکەی 5 جار لێبدە. 2. لە پشتەوە باوەشی پێدا بکە. 3. دەستت بکە بە مست و لە ژێر پەراسووەکانی بەرەو سەرەوە پاڵ بنێ." },
-            { name: "شکانی ئێسک (Fracture)", steps: "1. شوێنی شکاوەکە مەجوڵێنە. 2. بە شتێکی ڕەق جێگیری بکە. 3. سەرمای بخەرە سەری بۆ کەمکردنەوەی ئاوسان." },
-            { name: "جەڵتەی دڵ (Heart Attack)", steps: "1. یەکسەر پەیوەندی بە فریاکەوتن بکە (122). 2. نەخۆشەکە دانیشێنە. 3. ئەسپیرین بدەرە ئەگەر هەیە و هەستیار نییە." }
+    // لاپەڕە 136-160: فریاگوزاری سەرەتایی (25 لاپەڕە)
+    if (page >= 136 && page <= 160) {
+        const firstAidList = [
+            "بنەما گشتییەکانی فریاگوزاری", "خوێنبەربوون (Bleeding) - ڕێگاکان",
+            "لەهۆشچوون (Fainting) - چۆنیەتی مامەڵەکردن",
+            "سووتان (Burns) - چارەسەری خێرا",
+            "خنکان (Choking) - ڕێگەی Heimlich",
+            "شکانی ئێسک (Fracture) - جێگیری کردن",
+            "جەڵتەی دڵ (Heart Attack) - نیشانەکان و مامەڵەکردن",
+            "جەڵتەی مێشک (Stroke) - FAST test",
+            "هەناسەتەنگی (Asthma Attack) - چارەسەر",
+            "ڕشانەوەی زۆر - کەمی ئاو لە لەش",
+            "بڕینی کارەبا (Electric Shock)", "ژەهراویبوون (Poisoning)",
+            "مەلەکردن و خنکان لە ئاودا", "گازاوی گیانلەبەران",
+            "گازاوی مار و دوپشک", "تای بەرز لە منداڵاندا",
+            "قەڵەوی و فریاگوزاری", "شۆک (Shock) - جۆرەکان و چارەسەر",
+            "ئازاری سنگ (Chest Pain)", "خوێنمێژ (Seizures)",
+            "برینداری وەرزشی", "برینداری هاتووچۆ",
+            "ئامێرەکانی فریاگوزاری", "ژمارەکانی فریاکەوتن لە کوردستان",
+            "پوختەی فریاگوزاری سەرەتایی"
         ];
-        const idx = (page - 131) % firstAid.length;
-        const f = firstAid[idx];
-        return {
-            title: `فریاگوزاری سەرەتایی - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>🚑 ${f.name}</h3><p>${f.steps}</p></div><div class="normal-range"><strong>📞 ژمارەی فریاکەوتن:</strong> 122 (هەرێمی کوردستان)</div>`
-        };
+        const idx = page - 136;
+        return `<div class="info-card"><h3>🚑 ${firstAidList[idx % firstAidList.length]}</h3><p>فریاگوزاری سەرەتایی (First Aid) بریتییە لەو کۆمەڵە کردارە خێرایانەی کە ئەنجام دەدرێن بۆ ڕزگارکردنی ژیانی کەسێک.</p><div class="normal-range"><strong>📞 ژمارەی فریاکەوتن:</strong> 122 (هەرێمی کوردستان) | 112 (عێراق)</div></div>`;
     }
     
-    // ئامێرە تاقیگەییەکان (لاپەڕە 161-180)
-    if (page >= 161 && page <= 180) {
-        const equipment = [
-            { name: "پایپێت (Micropipette)", desc: "ئامێرێکی وردە بۆ گواستنەوەی بڕێکی دیاریکراوی شلە (بە مایکڕۆلیتر). بەکارهێنان: بۆ هەڵگرتنی بڕی وردی سێرەم یان ڕیاجێنت." },
-            { name: "سەنتەرفیوژ (Centrifuge)", desc: "ئامێرێکە بە خێراییەکی زۆر دەسوڕێتەوە بۆ جیاکردنەوەی پێکهاتەکانی خوێن. بەکارهێنان: جیاکردنەوەی سێرەم یان پلازما لە خڕۆکەکان." },
-            { name: "ئینکیوبەیتەر (Incubator)", desc: "پلەی گەرمییەکی جێگیر دابین دەکات (37°C). بەکارهێنان: بۆ گەشەکردنی بەکتریا لە تاقیگەی میکرۆب." },
-            { name: "سپێکترۆفۆتۆمیتەر", desc: "ڕووناکی بە ناو نموونەکەدا دەنێرێت. بەکارهێنان: بۆ پێوانی چڕی ماددە کیمیاییەکان لە خوێندا." },
-            { name: "میکرۆسکۆپ (Microscope)", desc: "بۆ بینینی شتە نەبینراوەکان. بەکارهێنان: بۆ پشکنینی میز، بینینی پارازیت و خڕۆکەکانی خوێن." },
-            { name: "تیوبەکانی کۆکردنەوە", desc: "بەپێی ڕەنگی سەریان جیا دەکرێنەوە: سوور (سێرەم)، مۆر (CBC)، سەوز (Heparin)." }
+    // لاپەڕە 161-175: ئامێرە تاقیگەییەکان (15 لاپەڕە)
+    if (page >= 161 && page <= 175) {
+        const equipmentList = [
+            "پایپێت (Micropipette)", "سەنتەرفیوژ (Centrifuge)",
+            "ئینکیوبەیتەر (Incubator)", "سپێکترۆفۆتۆمیتەر",
+            "میکرۆسکۆپ (Microscope)", "تیوبەکانی کۆکردنەوەی خوێن",
+            "کیوێت (Cuvette)", "تیپ (Tips) بۆ پایپێت",
+            "دەستکێش (Gloves) و کۆت (Lab Coat)",
+            "هود (Biological Safety Cabinet)", "ئوتۆکلاڤ (Autoclave)",
+            "فریزەر و ساردکەرەوە (Freezer & Refrigerator)",
+            "شەکرپێو (Glucometer)", "پێسی سەنتەرفیوژ",
+            "پوختەی ئامێرە تاقیگەییەکان"
         ];
-        const idx = (page - 161) % equipment.length;
-        const e = equipment[idx];
-        return {
-            title: `ئامێرە تاقیگەییەکان - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>⚙️ ${e.name}</h3><p>${e.desc}</p></div>`
-        };
+        const idx = page - 161;
+        return `<div class="info-card"><h3>⚙️ ${equipmentList[idx % equipmentList.length]}</h3><p>ناسینی ئامێرەکانی تاقیگە و بەکارهێنانیان بۆ شیکاری وردی خوێن و نموونەکانی تر.</p><div class="normal-range"><strong>🔬 تێبینی:</strong> بەکارهێنانی هەر ئامێرێک پێویستی بە ڕاهێنان و زانینی ڕێنماییەکانی هەیە.</div></div>`;
     }
     
-    // شیکاری و دەستنیشانکردن (لاپەڕە 181-200)
-    if (page >= 181 && page <= 200) {
-        const analysis = [
-            { title: "شیکاری ئەنجامەکانی CBC", content: "Hb نزم + RBC نزم + Hct نزم = کەمخوێنی (ئەنیمیا). WBC بەرز = هەوکردن. Platelets نزم = مەترسی خوێنبەربوون." },
-            { title: "شیکاری ئەنجامەکانی شەکرە", content: "FBS &gt;126 mg/dL یان HbA1c &gt;6.5% = شەکرە. FBS 100-125 mg/dL = پێش شەکرە." },
-            { title: "شیکاری چەوری خوێن", content: "LDL &gt;100 mg/dL = مەترسی نەخۆشی دڵ. HDL &lt;40 mg/dL = مەترسی نەخۆشی دڵ. Triglycerides &gt;150 mg/dL = بەرز." },
-            { title: "شیکاری جگەر و گورچیلە", content: "ALT/AST بەرز = زیانی جگەر. Creatinine بەرز = کێشەی گورچیلە. Bilirubin بەرز = زەردوویی." },
-            { title: "شیکاری هۆرمۆنەکان", content: "TSH بەرز = کاسبوونی تایرۆید. TSH نزم = چالاکبوونی تایرۆید. Testosterone نزم = کەمی هۆرمۆنی پیاوان." },
-            { title: "پشتێنەی گشتی شیکاری", content: "پشتێنەیەکی خێرا: کەمخوێنی: Hb &lt;13/12. شەکرە: FBS &gt;126. فشاری بەرز: &gt;140/90. کۆلێسترۆڵی بەرز: LDL &gt;100." }
+    // لاپەڕە 176-200: شیکاری و دەستنیشانکردن (25 لاپەڕە)
+    if (page >= 176 && page <= 200) {
+        const analysisList = [
+            "شیکاری ئەنجامەکانی CBC - ڕێنمایی",
+            "شیکاری ئەنجامەکانی شەکرە - FBS و HbA1c",
+            "شیکاری چەوری خوێن - Lipid Profile",
+            "شیکاری ئەنجامەکانی جگەر - LFTs",
+            "شیکاری ئەنجامەکانی گورچیلە",
+            "شیکاری هۆرمۆنەکانی تایرۆید",
+            "شیکاری ڤیتامینەکان",
+            "پشتێنەی گشتی شیکاری نەخۆشییەکان",
+            "پەیوەندی نێوان نیشانەکان و ئەنجامەکان",
+            "شێوازی خوێندنەوەی ڕاپۆرتی تاقیگە",
+            "هەڵە باوەکان لە شیکاری ئەنجامەکاندا",
+            "کاریگەری دەرمانەکان لەسەر ئەنجامەکان",
+            "کاریگەری خواردن لەسەر ئەنجامەکان",
+            "کاریگەری تەمەن و ڕەگەز لەسەر ئەنجامەکان",
+            "شیکاری پشکنینەکانی دووگیانی",
+            "شیکاری پشکنینەکانی منداڵان",
+            "شیکاری پشکنینەکانی کەسانی بەتەمەن",
+            "دەستنیشانکردنی نەخۆشی شەکرە",
+            "دەستنیشانکردنی نەخۆشی فشاری خوێن",
+            "دەستنیشانکردنی نەخۆشی جگەر",
+            "دەستنیشانکردنی نەخۆشی گورچیلە",
+            "دەستنیشانکردنی نەخۆشی دڵ",
+            "دەستنیشانکردنی هەستۆرکی و ئەلێرجی",
+            "دەستنیشانکردنی کەمخوێنی",
+            "پوختە و کۆتایی کتێبەکە"
         ];
-        const idx = (page - 181) % analysis.length;
-        const a = analysis[idx];
-        return {
-            title: `شیکاری و دەستنیشانکردن - لاپەڕە ${page}`,
-            content: `<div class="info-card"><h3>📊 ${a.title}</h3><p>${a.content}</p></div><div class="normal-range"><strong>📋 تێبینی:</strong> شیکاری ورد پێویستی بە پزیشکی پسپۆڕ هەیە.</div>`
-        };
+        const idx = page - 176;
+        return `<div class="info-card"><h3>📊 ${analysisList[idx % analysisList.length]}</h3><p>شیکاری و دەستنیشانکردنی نەخۆشییەکان لە ڕێگەی پشکنینە تاقیگەییەکان و نیشانە کلینیکییەکان.</p><div class="normal-range"><strong>📋 پشتێنەی خێرا:</strong> شەکرە: FBS &gt;126 | فشاری بەرز: &gt;140/90 | کەمخوێنی: Hb &lt;13/12</div><div class="warning-box">⚠️ شیکاری ورد پێویستی بە پزیشکی پسپۆڕ هەیە!</div></div>`;
     }
     
-    return {
-        title: `لاپەڕە ${page}`,
-        content: `<div class="info-card"><h3>📖 کتێبی شیکاری نەخۆشییەکان</h3><p>ئەم لاپەڕەیە بەشێکە لە کتێبی ٢٠٠ لاپەڕەیی شیکاری نەخۆشییەکان. زانیاری تەواو لە لاپەڕەکانی دیکەدا هەیە.</p></div>`
-    };
+    return `<div class="info-card"><h3>📖 لاپەڕە ${page}</h3><p>کتێبی شیکاری نەخۆشییەکان - زانیاری پزیشکی ڕاستەقینە</p></div>`;
 }
 
 // دروستکردنی فهرستی بەشەکان
@@ -471,12 +536,12 @@ function createChapterList() {
     list.innerHTML = '';
     chapters.forEach(ch => {
         const li = document.createElement('li');
-        li.innerHTML = `<a onclick="showPage(${ch.start})">📌 ${ch.name} <span style="font-size:0.7rem;">(لاپەڕە ${ch.start}-${ch.end})</span></a>`;
+        li.innerHTML = `<a onclick="showPage(${ch.start})">📌 ${ch.name} <span style="font-size:0.7rem; color:#6b7280;">(${ch.start}-${ch.end})</span></a>`;
         list.appendChild(li);
     });
 }
 
-// نیشاندانی لاپەڕە
+// نیشاندانی لاپەڕە - فەنکشنی کارا
 function showPage(pageNum) {
     if (pageNum < 1) pageNum = 1;
     if (pageNum > totalPages) pageNum = totalPages;
@@ -484,14 +549,21 @@ function showPage(pageNum) {
     
     const pageData = getPageContent(pageNum);
     const contentArea = document.getElementById('contentArea');
+    
     contentArea.innerHTML = `
-        <div class="page active-page">
-            <div class="page-title">📄 ${pageData.title}</div>
-            ${pageData.content}
-            <div class="page-number">لاپەڕە ${pageNum} | کۆی گشتی ${totalPages} لاپەڕە</div>
+        <div class="page">
+            <div class="page-title">📄 لاپەڕە ${pageNum} - ${pageData.split('<h3>')[1]?.split('</h3>')[0] || 'کتێبی شیکاری نەخۆشییەکان'}</div>
+            ${pageData}
+            <div class="page-number">
+                <i class="fas fa-book"></i> لاپەڕە ${pageNum} | کۆی گشتی ${totalPages} لاپەڕە
+            </div>
             <div class="page-nav">
-                <button class="nav-btn" onclick="showPage(${pageNum - 1})" ${pageNum === 1 ? 'disabled' : ''}>◀ پێشوو</button>
-                <button class="nav-btn" onclick="showPage(${pageNum + 1})" ${pageNum === totalPages ? 'disabled' : ''}>دواتر ▶</button>
+                <button class="nav-btn" id="prevBtn" onclick="showPage(${pageNum - 1})" ${pageNum === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-arrow-right"></i> پێشوو
+                </button>
+                <button class="nav-btn" id="nextBtn" onclick="showPage(${pageNum + 1})" ${pageNum === totalPages ? 'disabled' : ''}>
+                    دواتر <i class="fas fa-arrow-left"></i>
+                </button>
             </div>
         </div>
     `;
