@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📱 دوکانی مۆبایل - موبایل ستۆر</title>
+    <meta name="description" content="دوکانی مۆبایل - نوێترین مۆبایلەکان بە باشترین نرخ لە کوردستان. ئایفۆن، سامسونگ، شیاومی و زیاتر">
+    <meta name="keywords" content="مۆبایل, ئایفۆن, سامسونگ, شیاومی, کڕینی مۆبایل, کوردستان, سلێمانی, هەولێر">
+    <title>📱 موبایل ستۆر | باشترین نرخی مۆبایل لە کوردستان</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rabar_014:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap');
         
         * {
             margin: 0;
@@ -13,229 +16,363 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255,255,255,0.1);
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-            color: #fff;
-            min-height: 100vh;
+            font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+            background: var(--dark);
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* پەردەی پشتەوە */
-        .bg-particles {
-            position: fixed;
+        /* سکرۆڵبار */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        /* ناڤبار */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
         
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, #6366f1, transparent);
-            border-radius: 50%;
-            animation: float 6s infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-20px) scale(1.2); opacity: 0.6; }
-        }
-        
-        /* هێدەری سەرەکی */
-        .header {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-        }
-        
-        .header h1 {
-            font-size: 3rem;
+        .logo {
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(to right, #fff, #e0e7ff);
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
+            text-decoration: none;
         }
         
-        .header p {
-            color: #c7d2fe;
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
         
-        .header .cart-icon {
-            position: absolute;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+            background: rgba(99, 102, 241, 0.2);
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .nav-icon {
+            position: relative;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid rgba(255,255,255,0.3);
-            font-size: 1.8rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
         
-        .header .cart-icon:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+        .nav-icon:hover {
+            background: rgba(99, 102, 241, 0.3);
+            transform: scale(1.1);
         }
         
-        .cart-count {
+        .badge {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #ef4444;
+            background: var(--danger);
             color: white;
             border-radius: 50%;
-            padding: 5px 10px;
-            font-size: 0.85rem;
+            padding: 3px 8px;
+            font-size: 0.75rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(239,68,68,0.5);
-            animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-        
-        /* سێکشنی گەڕان */
-        .search-box {
-            max-width: 600px;
-            margin: 30px auto;
+        /* هێرۆ سێکشن */
+        .hero {
+            background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
+            padding: 60px 20px;
+            text-align: center;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fbbf24, #f59e0b, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(99,102,241,0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139,92,246,0.6);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        
+        /* تراست بادجەکان */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+        }
+        
+        .trust-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        /* گەڕان */
+        .search-section {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(99,102,241,0.3);
         }
         
         .search-box input {
-            width: 100%;
-            padding: 18px 30px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 50px;
-            font-size: 1.2rem;
+            flex: 1;
+            padding: 18px 25px;
+            background: transparent;
+            border: none;
             color: white;
-            text-align: right;
-            transition: all 0.3s;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            font-size: 1.1rem;
+            font-family: inherit;
         }
         
         .search-box input::placeholder {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.5);
         }
         
-        .search-box input:focus {
-            outline: none;
-            border-color: #a78bfa;
-            box-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
-            background: rgba(255,255,255,0.15);
+        .search-box button {
+            padding: 18px 30px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
         }
         
-        /* کەتێگۆرییەکان */
-        .categories {
+        .search-box button:hover {
+            background: var(--secondary);
+        }
+        
+        /* فلتیەرەکان */
+        .filters {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
             padding: 20px;
-            max-width: 900px;
-            margin: 0 auto 30px;
-        }
-        
-        .cat-btn {
-            padding: 12px 25px;
-            border: 2px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            color: #e0e7ff;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .cat-btn:hover {
-            background: rgba(99, 102, 241, 0.3);
-            border-color: #6366f1;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(99,102,241,0.3);
-        }
-        
-        .cat-btn.active {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-color: transparent;
-            color: white;
-            box-shadow: 0 10px 30px rgba(139,92,246,0.5);
-        }
-        
-        /* گریدی بەرهەمەکان */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            padding: 20px;
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #cbd5e1;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+        }
+        
+        /* گریدی بەرهەمەکان */
+        .products-section {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
         .product-card {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(20px);
-            border-radius: 25px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             position: relative;
-        }
-        
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.5s;
-        }
-        
-        .product-card:hover::before {
-            left: 100%;
         }
         
         .product-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 60px rgba(99,102,241,0.4);
-            border-color: rgba(167,139,250,0.5);
+            transform: translateY(-10px);
+            border-color: rgba(99,102,241,0.5);
+            box-shadow: 0 20px 60px rgba(99,102,241,0.3);
         }
         
         .product-image-container {
-            position: relative;
             background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
             padding: 30px;
-            height: 280px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         
         .product-image {
@@ -243,90 +380,79 @@
             max-height: 100%;
             object-fit: contain;
             transition: transform 0.5s;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
         }
         
         .product-card:hover .product-image {
-            transform: scale(1.1) rotate(-3deg);
+            transform: scale(1.1);
         }
         
-        .product-badge {
+        .wishlist-btn {
             position: absolute;
             top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            left: 15px;
+            background: rgba(255,255,255,0.2);
+            border: none;
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: 0 5px 15px rgba(245,158,11,0.3);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wishlist-btn:hover {
+            background: #ef4444;
+            transform: scale(1.1);
         }
         
         .product-info {
-            padding: 25px;
-            background: rgba(0,0,0,0.3);
+            padding: 20px;
         }
         
         .product-brand {
-            color: #a78bfa;
-            font-size: 0.9rem;
+            color: var(--secondary);
             font-weight: 600;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 5px;
         }
         
         .product-name {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 12px;
-            color: #fff;
-            line-height: 1.3;
+            margin-bottom: 8px;
         }
         
-        .product-description {
-            color: #c7d2fe;
-            font-size: 0.95rem;
-            margin-bottom: 18px;
-            line-height: 1.7;
-            opacity: 0.9;
+        .product-rating {
+            color: #fbbf24;
+            margin-bottom: 10px;
         }
         
         .product-specs {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
-        .product-specs span {
+        .spec-tag {
             background: rgba(99,102,241,0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             border: 1px solid rgba(139,92,246,0.3);
-            color: #e0e7ff;
-            transition: all 0.3s;
-        }
-        
-        .product-specs span:hover {
-            background: rgba(139,92,246,0.4);
-            border-color: #a78bfa;
         }
         
         .price-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
+            margin: 15px 0;
         }
         
         .price {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 800;
             background: linear-gradient(135deg, #f59e0b, #fbbf24);
             -webkit-background-clip: text;
@@ -337,49 +463,94 @@
         .old-price {
             text-decoration: line-through;
             color: #ef4444;
-            font-size: 1.2rem;
-            opacity: 0.8;
+            font-size: 1rem;
         }
         
-        .discount {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: 0 5px 15px rgba(239,68,68,0.3);
-        }
-        
-        .add-to-cart {
+        .btn-cart {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
+            color: white;
+            border-radius: 12px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(99,102,241,0.3);
+            font-family: inherit;
         }
         
-        .add-to-cart:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(139,92,246,0.5);
-            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+        .btn-cart:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.4);
         }
         
-        .add-to-cart.out-of-stock {
-            background: linear-gradient(135deg, #4b5563, #6b7280);
-            cursor: not-allowed;
-            box-shadow: none;
+        /* سێکشنی تایبەتمەندییەکان */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
         }
         
-        /* مۆداڵی سەبەتە */
-        .cart-modal {
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        /* سێکشنی ڕێڤیۆ */
+        .reviews-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .review-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .review-stars {
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+        
+        /* مۆدالی سەبەتە */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -388,270 +559,464 @@
             height: 100%;
             background: rgba(0,0,0,0.8);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 2000;
             justify-content: center;
             align-items: center;
         }
         
-        .cart-modal.active {
+        .modal.active {
             display: flex;
         }
         
-        .cart-content {
-            background: rgba(30,27,75,0.95);
+        .modal-content {
+            background: rgba(30,27,75,0.98);
             backdrop-filter: blur(30px);
-            border-radius: 30px;
-            padding: 40px;
+            border-radius: 25px;
+            padding: 30px;
             width: 90%;
-            max-width: 650px;
-            max-height: 85vh;
+            max-width: 600px;
+            max-height: 80vh;
             overflow-y: auto;
             border: 1px solid rgba(167,139,250,0.3);
-            box-shadow: 0 30px 80px rgba(99,102,241,0.4);
-            animation: modalSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: modalIn 0.4s ease;
         }
         
-        @keyframes modalSlide {
-            from {
-                transform: translateY(100px) scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
+        @keyframes modalIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+        .modal-close {
+            float: left;
+            font-size: 1.5rem;
+            cursor: pointer;
             color: white;
+            background: rgba(255,255,255,0.1);
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            font-size: 1.3rem;
-            cursor: pointer;
+            border: none;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .close-btn:hover {
+        .modal-close:hover {
             background: rgba(239,68,68,0.3);
-            border-color: #ef4444;
         }
         
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
+            border-radius: 12px;
+            margin-bottom: 10px;
         }
         
-        .cart-item:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(167,139,250,0.3);
-        }
-        
-        .remove-btn {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+        .btn-remove {
+            background: var(--danger);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 8px 15px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
+            font-family: inherit;
         }
         
-        .remove-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(239,68,68,0.4);
-        }
-        
-        .total {
-            font-size: 2rem;
+        .cart-total {
+            font-size: 1.5rem;
             font-weight: 800;
-            text-align: left;
             color: #fbbf24;
-            margin: 25px 0;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-        }
-        
-        .checkout-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(16,185,129,0.3);
-            letter-spacing: 1px;
-        }
-        
-        .checkout-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(16,185,129,0.5);
-        }
-        
-        /* دوگمەی واتساپ */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            cursor: pointer;
-            box-shadow: 0 10px 40px rgba(37,211,102,0.5);
-            z-index: 500;
-            text-decoration: none;
-            transition: all 0.3s;
-            animation: floatBtn 3s infinite;
-        }
-        
-        @keyframes floatBtn {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .whatsapp-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 15px 50px rgba(37,211,102,0.7);
+            text-align: left;
+            margin: 20px 0;
         }
         
         /* نۆتیفیکەیشن */
         .notification {
             position: fixed;
-            bottom: 40px;
-            left: 40px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            bottom: 30px;
+            left: 30px;
+            background: var(--success);
             color: white;
-            padding: 18px 35px;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
             display: none;
             z-index: 3000;
-            box-shadow: 0 15px 40px rgba(16,185,129,0.4);
-            animation: slideInLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(16,185,129,0.4);
+            animation: slideIn 0.4s ease;
         }
         
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-300px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        @keyframes slideIn {
+            from { transform: translateX(-300px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
         .notification.show {
             display: block;
         }
         
+        /* واتساپ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 500;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.4);
+            animation: bounce 2s infinite;
+            text-decoration: none;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* نیوزلێتەر */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.3));
+            padding: 50px 20px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 20px auto;
+            gap: 10px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: inherit;
+        }
+        
         /* فووەتەر */
         .footer {
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(20px);
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
+            padding: 50px 20px 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         
-        .footer p {
-            color: #c7d2fe;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+        }
+        
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            display: block;
             margin: 8px 0;
-            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+        
+        .payment-badges {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-badges span {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* ڕێسپۆنسیڤ */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .navbar { padding: 15px; }
+            .products-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- پەردەی پشتەوە -->
-<div class="bg-particles">
-    <div class="particle" style="width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s;"></div>
-    <div class="particle" style="width: 200px; height: 200px; top: 60%; right: 10%; animation-delay: 2s;"></div>
-    <div class="particle" style="width: 250px; height: 250px; bottom: 20%; left: 20%; animation-delay: 4s;"></div>
-</div>
+<!-- ناڤبار -->
+<nav class="navbar">
+    <a href="#" class="logo">📱 موبایل ستۆر</a>
+    <div class="nav-links">
+        <a href="#home">سەرەکی</a>
+        <a href="#products">بەرهەمەکان</a>
+        <a href="#about">دەربارە</a>
+        <a href="#contact">پەیوەندی</a>
+        <a href="#faq">پرسیارەکان</a>
+    </div>
+    <div class="nav-icons">
+        <div class="nav-icon" onclick="toggleWishlist()" title="خواستەکان">
+            <i class="fas fa-heart"></i>
+            <span class="badge" id="wishlistCount">0</span>
+        </div>
+        <div class="nav-icon" onclick="toggleCart()" title="سەبەتە">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge" id="cartCount">0</span>
+        </div>
+        <div class="nav-icon" title="هەژمار">
+            <i class="fas fa-user"></i>
+        </div>
+    </div>
+</nav>
 
-<!-- هێدەر -->
-<div class="header">
-    <h1>📱 موبایل ستۆر</h1>
-    <p>نوێترین مۆبایلەکان بە باشترین نرخ لە کوردستان</p>
-    <div class="cart-icon" onclick="toggleCart()">
-        🛒
-        <span class="cart-count" id="cartCount">0</span>
+<!-- هێرۆ -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>نوێترین مۆبایلەکان</h1>
+        <p>باشترین نرخ و گەرەنتی لە هەموو کوردستان 🚀</p>
+        <div class="hero-buttons">
+            <a href="#products" class="btn btn-primary">
+                <i class="fas fa-shopping-bag"></i> کڕین ئێستا
+            </a>
+            <a href="#about" class="btn btn-outline">
+                <i class="fas fa-info-circle"></i> زیاتر بزانە
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- تراست بادجەکان -->
+<div class="trust-badges">
+    <div class="trust-item">
+        <i class="fas fa-shield-alt"></i>
+        <span>گەرەنتی ١٢ مانگە</span>
+    </div>
+    <div class="trust-item">
+        <i class="fas fa-truck"></i>
+        <span>گەیاندنی خێرا</span>
+    </div>
+    <div class="trust-item">
+        <i class="fas fa-undo"></i>
+        <span>گەڕاندنەوەی ٧ ڕۆژە</span>
+    </div>
+    <div class="trust-item">
+        <i class="fas fa-lock"></i>
+        <span>پاراستنی زانیاری</span>
     </div>
 </div>
 
 <!-- گەڕان -->
-<div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 گەڕان بەدوای مۆبایلی خەونەکانت..." onkeyup="filterProducts()">
+<div class="search-section">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 گەڕان بە ناوی مۆبایل، براند یان تایبەتمەندی..." onkeyup="filterProducts()">
+        <button onclick="filterProducts()"><i class="fas fa-search"></i></button>
+    </div>
 </div>
 
-<!-- کەتێگۆرییەکان -->
-<div class="categories">
-    <button class="cat-btn active" onclick="filterByCategory('all', this)">🎯 هەموو</button>
-    <button class="cat-btn" onclick="filterByCategory('iphone', this)">🍎 ئایفۆن</button>
-    <button class="cat-btn" onclick="filterByCategory('samsung', this)">⭐ سامسونگ</button>
-    <button class="cat-btn" onclick="filterByCategory('xiaomi', this)">🚀 شیاومی</button>
-    <button class="cat-btn" onclick="filterByCategory('google', this)">🤖 گوگڵ</button>
-    <button class="cat-btn" onclick="filterByCategory('oneplus', this)">⚡ وەن پڵەس</button>
-    <button class="cat-btn" onclick="filterByCategory('huawei', this)">🌺 هواوی</button>
+<!-- فلتیەرەکان -->
+<div class="filters" id="categoryFilters">
+    <button class="filter-btn active" onclick="filterByCategory('all', this)">🎯 هەموو</button>
+    <button class="filter-btn" onclick="filterByCategory('iphone', this)">🍎 ئایفۆن</button>
+    <button class="filter-btn" onclick="filterByCategory('samsung', this)">⭐ سامسونگ</button>
+    <button class="filter-btn" onclick="filterByCategory('xiaomi', this)">🚀 شیاومی</button>
+    <button class="filter-btn" onclick="filterByCategory('google', this)">🤖 گوگڵ</button>
+    <button class="filter-btn" onclick="filterByCategory('oneplus', this)">⚡ وەن پڵەس</button>
+    <button class="filter-btn" onclick="filterByCategory('huawei', this)">🌺 هواوی</button>
 </div>
 
 <!-- بەرهەمەکان -->
-<div class="products-grid" id="productsGrid"></div>
+<section class="products-section" id="products">
+    <h2 class="section-title">📱 بەرهەمە تایبەتەکان</h2>
+    <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- تایبەتمەندییەکان -->
+<div class="features">
+    <div class="feature-card">
+        <i class="fas fa-medal"></i>
+        <h3>گەرەنتی ڕاستەقینە</h3>
+        <p>هەموو مۆبایلێک گەرەنتی ١٢ مانگەی فەرمی هەیە</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-shipping-fast"></i>
+        <h3>گەیاندنی خێرا</h3>
+        <p>گەیاندن بۆ هەموو شارەکانی کوردستان لە ٢٤ کاتژمێردا</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-headset"></i>
+        <h3>پشتگیری ٢٤/٧</h3>
+        <p>تیمی پشتگیری ئامادەیە لە هەموو کاتێکدا</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>نوێترین مۆدێلەکان</h3>
+        <p>هەموو براندە نێودەوڵەتییەکان بە نوێترین مۆدێل</p>
+    </div>
+</div>
+
+<!-- ڕێڤیۆکان -->
+<section class="reviews-section">
+    <h2 class="section-title">⭐ بیروباوەڕی کڕیاران</h2>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p>"باشترین دوکانی مۆبایل! ئایفۆنەکەم بە نرخێکی زۆر باش کڕی و گەیاندنەکەشی زۆر خێرا بوو"</p>
+            <strong>- ئارام محەمەد</strong>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p>"گەرەنتی ڕاستەقینە و خزمەتگوزاری نایاب. زۆر ڕازی بووم بە کڕینەکەم"</p>
+            <strong>- سارا ئیبراهیم</strong>
+        </div>
+        <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p>"پشتگیری باش و ڕێنمایی زۆر باش پێش کڕین. بێگومان دووبارە دەگەڕێمەوە"</p>
+            <strong>- هێمن عوسمان</strong>
+        </div>
+    </div>
+</section>
+
+<!-- نیوزلێتەر -->
+<section class="newsletter">
+    <h2 style="font-size: 2rem; margin-bottom: 10px;">📧 بەشداربە لە هەواڵنامەکەمان</h2>
+    <p style="margin-bottom: 20px;">نوێترین مۆبایل و داشکاندنەکان ڕاستەوخۆ بۆ ئیمەیڵەکەت</p>
+    <div class="newsletter-form">
+        <input type="email" placeholder="ئیمەیڵەکەت بنووسە...">
+        <button class="btn btn-primary">بەشداربوون</button>
+    </div>
+</section>
+
+<!-- فووەتەر -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-section">
+            <h4>📱 موبایل ستۆر</h4>
+            <p>باشترین و متمانەپێکراوترین دوکانی مۆبایل لە کوردستان</p>
+            <div class="social-links">
+                <a href="#" title="فیسبووک"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" title="ئینستاگرام"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="تیکتۆک"><i class="fab fa-tiktok"></i></a>
+                <a href="#" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>🔗 لینکە خێراکان</h4>
+            <a href="#home">سەرەکی</a>
+            <a href="#products">بەرهەمەکان</a>
+            <a href="#about">دەربارەی ئێمە</a>
+            <a href="#faq">پرسیارە باوەکان</a>
+            <a href="#blog">بڵۆگ</a>
+        </div>
+        <div class="footer-section">
+            <h4>📞 پەیوەندی</h4>
+            <p><i class="fas fa-phone"></i> 0770-123-4567</p>
+            <p><i class="fas fa-envelope"></i> info@mobilestore.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> سلێمانی، شەقامی سالم</p>
+        </div>
+        <div class="footer-section">
+            <h4>💳 شێوازی پارەدان</h4>
+            <div class="payment-badges">
+                <span>💰 کاش</span>
+                <span>💳 ڤیزا</span>
+                <span>📱 فاست پەی</span>
+                <span>🏦 بانک</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 موبایل ستۆر. هەموو مافەکان پارێزراون. | <a href="#" style="color: #cbd5e1;">سیاسەتی پاراستنی زانیاری</a> | <a href="#" style="color: #cbd5e1;">مەرج و یاساکان</a></p>
+    </div>
+</footer>
 
 <!-- مۆدالی سەبەتە -->
-<div class="cart-modal" id="cartModal">
-    <div class="cart-content" style="position: relative;">
-        <button class="close-btn" onclick="toggleCart()">✕</button>
-        <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🛒 سەبەتەی کڕین</h2>
+<div class="modal" id="cartModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="toggleCart()">✕</button>
+        <h2 style="text-align: center; margin-bottom: 20px;">🛒 سەبەتەی کڕین</h2>
         <div id="cartItems"></div>
-        <div class="total" id="cartTotal">کۆی گشتی: 0 د.ع</div>
-        <button class="checkout-btn" onclick="openCheckout()">📦 تەواوکردنی داواکاری</button>
+        <div class="cart-total" id="cartTotal">کۆی گشتی: 0 د.ع</div>
+        <button class="btn btn-primary" style="width: 100%;" onclick="openCheckout()">
+            📦 تەواوکردنی داواکاری
+        </button>
+    </div>
+</div>
+
+<!-- مۆدالی خواستەکان -->
+<div class="modal" id="wishlistModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="toggleWishlist()">✕</button>
+        <h2 style="text-align: center; margin-bottom: 20px;">❤️ خواستەکان</h2>
+        <div id="wishlistItems"></div>
     </div>
 </div>
 
 <!-- فۆرمی داواکاری -->
-<div class="form-modal" id="checkoutModal">
-    <div class="form-content">
-        <h2 style="text-align: center; margin-bottom: 20px; color: #333;">📝 زانیاری داواکاری</h2>
-        <form onsubmit="submitOrder(event)">
-            <label>👤 ناوی تەواو</label>
-            <input type="text" id="customerName" required placeholder="ناوی خۆت بنووسە">
+<div class="modal" id="checkoutModal">
+    <div class="modal-content" style="background: white; color: #333;">
+        <button class="modal-close" style="color: #333;" onclick="closeCheckout()">✕</button>
+        <h2 style="text-align: center; margin-bottom: 20px;">📝 زانیاری داواکاری</h2>
+        <form onsubmit="submitOrder(event)" style="text-align: right;">
+            <label style="display: block; margin-top: 15px; font-weight: 600;">👤 ناوی تەواو</label>
+            <input type="text" id="customerName" required style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ddd; margin-top: 5px;">
             
-            <label>📱 ژمارەی تەلەفۆن</label>
-            <input type="tel" id="customerPhone" required placeholder="0770-XXX-XXXX">
+            <label style="display: block; margin-top: 15px; font-weight: 600;">📱 ژمارەی تەلەفۆن</label>
+            <input type="tel" id="customerPhone" required placeholder="0770-XXX-XXXX" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ddd; margin-top: 5px;">
             
-            <label>🏙️ شار</label>
-            <select id="customerCity" required>
+            <label style="display: block; margin-top: 15px; font-weight: 600;">🏙️ شار</label>
+            <select id="customerCity" required style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ddd; margin-top: 5px;">
                 <option value="">شار هەڵبژێرە</option>
                 <option>سلێمانی</option>
                 <option>هەولێر</option>
@@ -660,11 +1025,15 @@
                 <option>بەغداد</option>
             </select>
             
-            <label>📍 ناونیشان</label>
-            <textarea id="customerAddress" required placeholder="ناونیشانی تەواوت بنووسە" rows="3"></textarea>
+            <label style="display: block; margin-top: 15px; font-weight: 600;">📍 ناونیشان</label>
+            <textarea id="customerAddress" required rows="3" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ddd; margin-top: 5px;"></textarea>
             
-            <button type="submit" class="checkout-btn" style="margin-top: 20px;">✅ تەواوکردنی داواکاری</button>
-            <button type="button" class="remove-btn" style="margin-top: 10px; width: 100%;" onclick="closeCheckout()">🔙 گەڕانەوە</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                ✅ تەواوکردنی داواکاری
+            </button>
+            <button type="button" onclick="closeCheckout()" style="width: 100%; padding: 12px; background: #dc3545; color: white; border: none; border-radius: 10px; margin-top: 10px; cursor: pointer; font-family: inherit;">
+                🔙 گەڕانەوە
+            </button>
         </form>
     </div>
 </div>
@@ -672,20 +1041,13 @@
 <!-- نۆتیفیکەیشن -->
 <div class="notification" id="notification"></div>
 
-<!-- دوگمەی واتساپ -->
-<a href="https://wa.me/9647701234567" target="_blank" class="whatsapp-btn" title="پەیوەندیمان پێوەبکە">
-    💬
+<!-- واتساپ -->
+<a href="https://wa.me/9647701234567" target="_blank" class="whatsapp-float" title="پەیوەندی واتساپ">
+    <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- فووەتەر -->
-<div class="footer">
-    <p style="font-size: 1.2rem; font-weight: bold;">© 2024 موبایل ستۆر - هەموو مافەکان پارێزراون</p>
-    <p>📞 0770-123-4567 | 📧 info@mobilestore.com</p>
-    <p>دروستکراوە بە ❤️ لە کوردستان</p>
-</div>
-
 <script>
-// داتای بەرهەمەکان - وەک خۆی دەمێنێتەوە
+// داتای بەرهەمەکان
 const products = [
     {
         id: 1,
@@ -694,10 +1056,13 @@ const products = [
         category: 'iphone',
         price: 1450000,
         oldPrice: 1650000,
+        rating: 4.8,
+        reviews: 124,
         description: 'نوێترین ئایفۆن لەگەڵ کامێرای ٤٨ مێگاپێکسڵ و پڕۆسێسەری A17 Pro',
         specs: ['6.7" OLED', '48MP', 'A17 Pro', '4422mAh', '256GB'],
         image: 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-max-1.jpg',
-        stock: 15
+        stock: 15,
+        warranty: '12 مانگ'
     },
     {
         id: 2,
@@ -706,10 +1071,13 @@ const products = [
         category: 'samsung',
         price: 1350000,
         oldPrice: 1500000,
+        rating: 4.9,
+        reviews: 89,
         description: 'گالاکسی S24 ئەلترا لەگەڵ پێنسی S-Pen و کامێرای ٢٠٠ مێگاپێکسڵ',
         specs: ['6.8" AMOLED', '200MP', 'Snapdragon 8 Gen 3', '5000mAh', '512GB'],
         image: 'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s24-ultra-1.jpg',
-        stock: 12
+        stock: 12,
+        warranty: '12 مانگ'
     },
     {
         id: 3,
@@ -718,10 +1086,13 @@ const products = [
         category: 'xiaomi',
         price: 850000,
         oldPrice: 950000,
+        rating: 4.7,
+        reviews: 56,
         description: 'مۆبایلی بەهێز لەگەڵ کامێرای لایکا و پڕۆسێسەری Snapdragon 8 Gen 3',
         specs: ['6.73" AMOLED', '50MP x3', 'Snapdragon 8 Gen 3', '4880mAh', '256GB'],
         image: 'https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-14-pro-1.jpg',
-        stock: 20
+        stock: 20,
+        warranty: '12 مانگ'
     },
     {
         id: 4,
@@ -730,10 +1101,13 @@ const products = [
         category: 'google',
         price: 1100000,
         oldPrice: 1200000,
+        rating: 4.6,
+        reviews: 42,
         description: 'مۆبایلی گوگڵ لەگەڵ ئەندڕۆیدی پاك و کامێرای ژیری دەستکرد',
         specs: ['6.7" LTPO OLED', '50MP', 'Tensor G3', '5050mAh', '128GB'],
         image: 'https://fdn2.gsmarena.com/vv/pics/google/google-pixel-8-pro-1.jpg',
-        stock: 8
+        stock: 8,
+        warranty: '12 مانگ'
     },
     {
         id: 5,
@@ -742,10 +1116,13 @@ const products = [
         category: 'oneplus',
         price: 950000,
         oldPrice: 1050000,
+        rating: 4.5,
+        reviews: 38,
         description: 'مۆبایلی خێرا و بەهێز لەگەڵ شاشەی 120Hz و بارگاویکەری خێرا',
         specs: ['6.82" AMOLED', '50MP', 'Snapdragon 8 Gen 3', '5400mAh', '256GB'],
         image: 'https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-12-1.jpg',
-        stock: 10
+        stock: 10,
+        warranty: '12 مانگ'
     },
     {
         id: 6,
@@ -754,15 +1131,19 @@ const products = [
         category: 'huawei',
         price: 750000,
         oldPrice: 850000,
+        rating: 4.4,
+        reviews: 31,
         description: 'مۆبایلی هواوی لەگەڵ کامێرای نایاب و دیزاینی جوان',
         specs: ['6.67" OLED', '48MP', 'Snapdragon 8+ Gen 1', '4815mAh', '256GB'],
         image: 'https://fdn2.gsmarena.com/vv/pics/huawei/huawei-p60-pro-1.jpg',
-        stock: 7
+        stock: 7,
+        warranty: '12 مانگ'
     }
 ];
 
-// سەبەتەی کڕین
+// سەبەتە و خواستەکان
 let cart = [];
+let wishlist = [];
 let currentCategory = 'all';
 
 // نیشاندانی بەرهەمەکان
@@ -770,32 +1151,41 @@ function displayProducts(productsToShow) {
     const grid = document.getElementById('productsGrid');
     grid.innerHTML = '';
     
+    if (productsToShow.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 50px; color: #94a3b8; font-size: 1.2rem;">هیچ بەرهەمێک نەدۆزرایەوە 🔍</p>';
+        return;
+    }
+    
     productsToShow.forEach(product => {
         const discount = product.oldPrice ? Math.round((1 - product.price/product.oldPrice) * 100) : 0;
+        const stars = '⭐'.repeat(Math.floor(product.rating));
         
         grid.innerHTML += `
             <div class="product-card">
                 <div class="product-image-container">
-                    ${discount > 0 ? `<div class="product-badge">🔥 -${discount}%</div>` : ''}
+                    ${discount > 0 ? `<span style="position: absolute; top: 15px; right: 15px; background: #ef4444; color: white; padding: 5px 12px; border-radius: 15px; font-weight: bold;">-${discount}%</span>` : ''}
+                    <button class="wishlist-btn" onclick="toggleWishlistItem(${product.id})" title="زیادکردن بۆ خواستەکان">
+                        <i class="fas fa-heart"></i>
+                    </button>
                     <img src="${product.image}" alt="${product.name}" class="product-image" 
                          onerror="this.src='https://via.placeholder.com/300x300?text=No+Image'">
                 </div>
                 <div class="product-info">
-                    <div class="product-brand">⭐ ${product.brand}</div>
+                    <div class="product-brand">${product.brand}</div>
                     <div class="product-name">${product.name}</div>
-                    <div class="product-description">${product.description}</div>
+                    <div class="product-rating">
+                        ${stars} <small>(${product.reviews} ڕێڤیۆ)</small>
+                    </div>
                     <div class="product-specs">
-                        ${product.specs.map(spec => `<span>${spec}</span>`).join('')}
+                        ${product.specs.map(spec => `<span class="spec-tag">${spec}</span>`).join('')}
                     </div>
                     <div class="price-section">
                         <div>
-                            ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString()} د.ع</span>` : ''}
+                            ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString()} د.ع</span><br>` : ''}
                             <span class="price">${product.price.toLocaleString()} د.ع</span>
                         </div>
-                        ${discount > 0 ? `<span class="discount">-${discount}%</span>` : ''}
                     </div>
-                    <button class="add-to-cart ${product.stock === 0 ? 'out-of-stock' : ''}" 
-                            ${product.stock === 0 ? 'disabled' : ''}
+                    <button class="btn-cart" ${product.stock === 0 ? 'disabled style="opacity:0.5;"' : ''}
                             onclick="addToCart(${product.id})">
                         ${product.stock > 0 ? '🛒 زیادکردن بۆ سەبەتە' : '❌ تەواو بووە'}
                     </button>
@@ -805,21 +1195,16 @@ function displayProducts(productsToShow) {
     });
 }
 
-// فلتیەر بە کەتێگۆری
+// فلتیەر
 function filterByCategory(category, btn) {
     currentCategory = category;
-    
-    // چالاککردنی دوگمە
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#categoryFilters .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    
     filterProducts();
 }
 
-// گەڕان و فلتیەر
 function filterProducts() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    
     let filtered = products;
     
     if (currentCategory !== 'all') {
@@ -830,47 +1215,48 @@ function filterProducts() {
         filtered = filtered.filter(p => 
             p.name.toLowerCase().includes(searchTerm) ||
             p.brand.toLowerCase().includes(searchTerm) ||
-            p.description.toLowerCase().includes(searchTerm)
+            p.specs.some(s => s.toLowerCase().includes(searchTerm))
         );
     }
     
     displayProducts(filtered);
 }
 
-// زیادکردن بۆ سەبەتە
+// سەبەتە
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
+    const existing = cart.find(item => item.id === productId);
     
-    const existingItem = cart.find(item => item.id === productId);
-    if (existingItem) {
-        existingItem.quantity++;
+    if (existing) {
+        existing.quantity++;
     } else {
         cart.push({...product, quantity: 1});
     }
     
     updateCartCount();
-    showNotification(`${product.name} زیادکرا بۆ سەبەتە ✅`);
+    showNotification('✅ بەرهەمەکە زیادکرا بۆ سەبەتە');
 }
 
-// نوێکردنەوەی ژمارەی سەبەتە
-function updateCartCount() {
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('cartCount').textContent = count;
-}
-
-// کردنەوە و داخستنی سەبەتە
-function toggleCart() {
-    const modal = document.getElementById('cartModal');
-    modal.classList.toggle('active');
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartCount();
     displayCartItems();
 }
 
-// نیشاندانی ناوەڕۆکی سەبەتە
+function updateCartCount() {
+    document.getElementById('cartCount').textContent = cart.reduce((sum, i) => sum + i.quantity, 0);
+}
+
+function toggleCart() {
+    document.getElementById('cartModal').classList.toggle('active');
+    displayCartItems();
+}
+
 function displayCartItems() {
-    const cartItems = document.getElementById('cartItems');
+    const container = document.getElementById('cartItems');
     
     if (cart.length === 0) {
-        cartItems.innerHTML = '<p style="text-align: center; padding: 40px; color: #c7d2fe; font-size: 1.2rem;">🛒 سەبەتەکەت بەتاڵە</p>';
+        container.innerHTML = '<p style="text-align: center; padding: 30px;">سەبەتەکەت بەتاڵە 🛒</p>';
         document.getElementById('cartTotal').textContent = 'کۆی گشتی: 0 د.ع';
         return;
     }
@@ -881,33 +1267,57 @@ function displayCartItems() {
     cart.forEach(item => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
-        
         html += `
             <div class="cart-item">
                 <div>
-                    <strong style="color: #fff; font-size: 1.1rem;">${item.name}</strong><br>
-                    <small style="color: #a78bfa;">${item.quantity} x ${item.price.toLocaleString()} د.ع</small>
+                    <strong>${item.name}</strong><br>
+                    <small>${item.quantity} x ${item.price.toLocaleString()} د.ع</small>
                 </div>
                 <div style="text-align: left;">
-                    <strong style="color: #fbbf24; font-size: 1.2rem;">${itemTotal.toLocaleString()} د.ع</strong>
-                    <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ سڕینەوە</button>
+                    <strong style="color: #fbbf24;">${itemTotal.toLocaleString()} د.ع</strong>
+                    <button class="btn-remove" onclick="removeFromCart(${item.id})">🗑️</button>
                 </div>
             </div>
         `;
     });
     
-    cartItems.innerHTML = html;
+    container.innerHTML = html;
     document.getElementById('cartTotal').textContent = `کۆی گشتی: ${total.toLocaleString()} د.ع`;
 }
 
-// سڕینەوە لە سەبەتە
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    updateCartCount();
-    displayCartItems();
+// خواستەکان
+function toggleWishlistItem(productId) {
+    const index = wishlist.indexOf(productId);
+    if (index > -1) {
+        wishlist.splice(index, 1);
+        showNotification('لە خواستەکان سڕایەوە');
+    } else {
+        wishlist.push(productId);
+        showNotification('❤️ زیادکرا بۆ خواستەکان');
+    }
+    updateWishlistCount();
 }
 
-// فۆرمی داواکاری
+function updateWishlistCount() {
+    document.getElementById('wishlistCount').textContent = wishlist.length;
+}
+
+function toggleWishlist() {
+    const modal = document.getElementById('wishlistModal');
+    modal.classList.toggle('active');
+    
+    const container = document.getElementById('wishlistItems');
+    if (wishlist.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 30px;">خواستەکانت بەتاڵە 💔</p>';
+    } else {
+        container.innerHTML = wishlist.map(id => {
+            const p = products.find(prod => prod.id === id);
+            return `<p style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; margin: 5px 0;">📱 ${p.name} - ${p.price.toLocaleString()} د.ع</p>`;
+        }).join('');
+    }
+}
+
+// چێکئاوت
 function openCheckout() {
     if (cart.length === 0) {
         showNotification('⚠️ سەبەتەکەت بەتاڵە!');
@@ -921,7 +1331,6 @@ function closeCheckout() {
     document.getElementById('checkoutModal').classList.remove('active');
 }
 
-// ناردنی داواکاری
 function submitOrder(event) {
     event.preventDefault();
     
@@ -929,15 +1338,10 @@ function submitOrder(event) {
     const phone = document.getElementById('customerPhone').value;
     const city = document.getElementById('customerCity').value;
     const address = document.getElementById('customerAddress').value;
-    
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
-    // دروستکردنی پەیامی واتساپ
     let message = `📱 داواکاری نوێ%0A%0A`;
-    message += `👤 ناو: ${name}%0A`;
-    message += `📱 تەلەفۆن: ${phone}%0A`;
-    message += `📍 ناونیشان: ${address}، ${city}%0A%0A`;
-    message += `🛒 بەرهەمەکان:%0A`;
+    message += `👤 ناو: ${name}%0A📱 تەلەفۆن: ${phone}%0A📍 ${address}، ${city}%0A%0A🛒 بەرهەمەکان:%0A`;
     
     cart.forEach(item => {
         message += `- ${item.name} (${item.quantity}x)%0A`;
@@ -945,38 +1349,30 @@ function submitOrder(event) {
     
     message += `%0A💰 کۆی گشتی: ${total.toLocaleString()} د.ع`;
     
-    // کردنەوەی واتساپ
-    const whatsappNumber = '9647701234567';
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    window.open(`https://wa.me/9647701234567?text=${message}`, '_blank');
     
-    // سڕینەوەی سەبەتە
     cart = [];
     updateCartCount();
-    document.getElementById('checkoutModal').classList.remove('active');
+    closeCheckout();
+    showNotification('✅ داواکاریت بە سەرکەوتوویی تۆمارکرا!');
     
-    showNotification('✅ داواکاریت بە سەرکەوتوویی تۆمارکرا! لە واتساپ پەیوەندیت پێوە دەکەین');
-    
-    // ڕیستارتکردنی فۆرم
-    document.getElementById('customerName').value = '';
-    document.getElementById('customerPhone').value = '';
-    document.getElementById('customerCity').value = '';
-    document.getElementById('customerAddress').value = '';
+    ['customerName', 'customerPhone', 'customerCity', 'customerAddress'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
 }
 
 // نۆتیفیکەیشن
-function showNotification(message) {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.classList.add('show');
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
+function showNotification(msg) {
+    const n = document.getElementById('notification');
+    n.textContent = msg;
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 3000);
 }
 
 // دەستپێکردن
 displayProducts(products);
 updateCartCount();
+updateWishlistCount();
 </script>
 
 </body>
