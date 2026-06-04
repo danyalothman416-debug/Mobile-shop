@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="پلاتفۆرمی فێربوونی پزیشکی - سەنتەری پزیشکیی ڕێبوار بۆ فێرکردنی خوێندکاران و خزمەتکردنی نەخۆشەکان">
-    <title>🩺 سەنتەری پزیشکیی ڕێبوار | فێربوون و چارەسەر</title>
+    <meta name="description" content="سەنتەری پزیشکی ڕێبوار - زانیاری پزیشکی ڕاستەقینە لە سەرچاوە باوەڕپێکراوەکان">
+    <title>🩺 سەنتەری پزیشکی ڕێبوار | زانیاری ڕاستەقینەی پزیشکی</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -16,501 +14,161 @@
         }
         
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #06b6d4;
-            --medical: #0891b2;
+            --primary: #0f67b3;
+            --primary-dark: #0a4d8c;
+            --secondary: #0e8d6e;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --purple: #8b5cf6;
-            --pink: #ec4899;
-            --dark: #0f172a;
+            --dark: #1e293b;
             --light: #f8fafc;
             --gray: #64748b;
-            --gradient-primary: linear-gradient(135deg, #2563eb, #06b6d4);
-            --gradient-success: linear-gradient(135deg, #10b981, #34d399);
-            --gradient-warning: linear-gradient(135deg, #f59e0b, #fbbf24);
         }
         
         body {
-            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.7;
+            scroll-behavior: smooth;
         }
         
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #e2e8f0;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        /* ناڤبار */
         .navbar {
             background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 15px 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .logo i {
-            color: var(--secondary);
+            gap: 8px;
         }
         
         .nav-links {
             display: flex;
             gap: 25px;
-            align-items: center;
+            flex-wrap: wrap;
         }
         
         .nav-links a {
             color: var(--gray);
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.3s;
         }
         
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a:hover {
             color: var(--primary);
         }
         
-        /* هێرۆ سێکشن - بە دوو بەش */
-        .hero-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 550px;
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f2b4d 100%);
+        .hero {
+            background: linear-gradient(135deg, #0f67b3, #0e8d6e);
             color: white;
+            padding: 50px 20px;
+            text-align: center;
         }
         
-        .hero-left {
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
         }
         
-        .hero-left h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .hero-left h1 span {
-            color: #fbbf24;
-        }
-        
-        .hero-left p {
+        .hero p {
             font-size: 1.1rem;
-            color: #cbd5e1;
-            margin-bottom: 30px;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
-        .hero-right {
-            background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600') center/cover;
-            position: relative;
-        }
-        
-        .hero-right::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(37,99,235,0.3), rgba(6,182,212,0.3));
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37,99,235,0.3);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-        
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .btn-success {
-            background: var(--gradient-success);
-            color: white;
-        }
-        
-        /* کارتەکانی بەشی خوێندکار و نەخۆش */
-        .role-cards {
-            max-width: 1200px;
-            margin: -50px auto 50px;
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
         }
         
-        .role-card {
-            background: white;
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .role-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .role-card.student {
-            border-top: 5px solid var(--primary);
-        }
-        
-        .role-card.patient {
-            border-top: 5px solid var(--success);
-        }
-        
-        .role-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .role-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-        
-        .student .role-icon { color: var(--primary); }
-        .patient .role-icon { color: var(--success); }
-        
-        .role-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .role-features {
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        .role-features li {
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .role-features i {
-            width: 25px;
-        }
-        
-        /* سێکشنەکان */
         .section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+            margin: 50px auto;
         }
         
         .section-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-align: center;
-            color: var(--dark);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray);
-            margin-bottom: 40px;
-        }
-        
-        /* دەرسەکان - بۆ خوێندکاران */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-        }
-        
-        .course-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .course-header {
-            background: var(--gradient-primary);
-            padding: 20px;
-            color: white;
-        }
-        
-        .course-level {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .course-title {
-            font-size: 1.3rem;
+            font-size: 1.8rem;
             font-weight: 700;
-        }
-        
-        .course-body {
-            padding: 20px;
-        }
-        
-        .course-description {
-            color: var(--gray);
-            margin-bottom: 15px;
-        }
-        
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e2e8f0;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .btn-learn {
-            background: transparent;
-            border: 2px solid var(--primary);
+            margin-bottom: 30px;
             color: var(--primary);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            margin-top: 15px;
+            border-right: 4px solid var(--primary);
+            padding-right: 15px;
         }
         
-        .btn-learn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* نەخۆشییە باوەکان - بۆ نەخۆش */
+        /* کارتەکانی نەخۆشییەکان */
         .diseases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
         }
         
         .disease-card {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid #e2e8f0;
         }
         
         .disease-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
         }
         
-        .disease-icon {
-            width: 50px;
-            height: 50px;
-            background: #e0e7ff;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .disease-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
         }
         
-        .disease-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .disease-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        .disease-body {
+            padding: 20px;
         }
         
         .disease-symptoms {
             color: var(--gray);
             font-size: 0.9rem;
             margin-bottom: 15px;
+            line-height: 1.6;
         }
         
-        /* ئامۆژگارییەکان بۆ نەخۆش */
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .tip-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .tip-card:hover {
-            background: var(--gradient-primary);
-            color: white;
-            transform: translateY(-5px);
-        }
-        
-        .tip-card i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+        .btn-details {
+            background: transparent;
+            border: 2px solid var(--primary);
             color: var(--primary);
-        }
-        
-        .tip-card:hover i {
-            color: white;
-        }
-        
-        /* پزیشکەکان */
-        .doctors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-        
-        .doctor-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .doctor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        .doctor-avatar {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #2563eb, #06b6d4);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 2.5rem;
-            color: white;
-        }
-        
-        .doctor-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        
-        .doctor-specialty {
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin: 5px 0;
-        }
-        
-        /* فۆرمی پرسیار */
-        .ask-form {
-            background: white;
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
+            padding: 8px 20px;
+            border-radius: 40px;
             font-weight: 600;
-        }
-        
-        .form-group input, .form-group select, .form-group textarea {
+            cursor: pointer;
+            transition: 0.3s;
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-family: inherit;
-            transition: all 0.3s;
         }
         
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
+        .btn-details:hover {
+            background: var(--primary);
+            color: white;
         }
         
         /* مۆدال */
@@ -533,45 +191,248 @@
         
         .modal-content {
             background: white;
-            border-radius: 25px;
-            padding: 30px;
+            border-radius: 20px;
             width: 90%;
-            max-width: 550px;
+            max-width: 750px;
             max-height: 85vh;
             overflow-y: auto;
+            direction: rtl;
         }
         
         .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            position: sticky;
+            top: 0;
         }
         
         .modal-close {
             background: none;
             border: none;
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--gray);
         }
         
-        .disease-detail {
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        
+        .info-section h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .info-section ul, .info-section p {
+            color: var(--gray);
             line-height: 1.8;
         }
         
-        .disease-detail h4 {
+        .info-section li {
+            margin-right: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e2e8f0;
+            padding: 10px 16px;
+            border-radius: 40px;
+            text-decoration: none;
             color: var(--primary);
-            margin: 15px 0 10px;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        
+        .source-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* ئامۆژگارییەکان */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .tip-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .tip-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        /* دکتۆرەکان */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        
+        .doctor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .doctor-avatar {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2.2rem;
+            color: white;
+        }
+        
+        .doctor-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .doctor-specialty {
+            color: var(--primary);
+            margin: 5px 0;
+        }
+        
+        .btn-consult {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        
+        .btn-consult:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* سەرچاوەکان */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background: #e0e7ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .resource-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .resource-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* فۆرمی پرسیار */
+        .ask-form {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
         }
         
         /* فووەتەر */
         .footer {
             background: var(--dark);
             color: #94a3b8;
-            padding: 50px 20px 20px;
+            padding: 40px 20px 20px;
             margin-top: 60px;
         }
         
@@ -579,8 +440,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 30px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
         
         .footer-section h4 {
@@ -593,7 +454,6 @@
             text-decoration: none;
             display: block;
             margin: 8px 0;
-            transition: color 0.3s;
         }
         
         .footer-section a:hover {
@@ -602,8 +462,11 @@
         
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
+            margin-top: 30px;
             border-top: 1px solid #334155;
+            max-width: 1300px;
+            margin: 30px auto 0;
         }
         
         .notification {
@@ -641,26 +504,55 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            cursor: pointer;
-            z-index: 500;
-            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+            z-index: 500;
         }
         
         @media (max-width: 768px) {
-            .hero-split {
-                grid-template-columns: 1fr;
-            }
-            .role-cards {
-                grid-template-columns: 1fr;
-                margin-top: 30px;
+            .navbar {
+                padding: 15px 20px;
             }
             .nav-links {
-                display: none;
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
             }
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
+        }
+        
+        /* search box */
+        .search-box {
+            max-width: 600px;
+            margin: 30px auto 0;
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 15px 25px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -669,132 +561,97 @@
 <nav class="navbar">
     <a href="#" class="logo">
         <i class="fas fa-stethoscope"></i>
-        <span>سەنتەری پزیشکیی ڕێبوار</span>
+        <span>سەنتەری پزیشکی ڕێبوار</span>
     </a>
     <div class="nav-links">
-        <a href="#home" class="active">سەرەکی</a>
-        <a href="#students">بۆ خوێندکاران</a>
-        <a href="#patients">بۆ نەخۆشەکان</a>
+        <a href="#home">سەرەکی</a>
+        <a href="#diseases">نەخۆشییەکان</a>
+        <a href="#tips">ئامۆژگارییەکان</a>
         <a href="#doctors">پزیشکەکان</a>
-        <a href="#ask">پرسیار بکە</a>
+        <a href="#resources">سەرچاوەکان</a>
+        <a href="#ask">پرسیار</a>
     </div>
 </nav>
 
-<!-- هێرۆ سێکشن -->
-<div class="hero-split" id="home">
-    <div class="hero-left">
-        <h1>🩺 فێربە و<br><span>تەندروست بە</span></h1>
-        <p>سەنتەری پزیشکیی ڕێبوار - شوێنێک بۆ فێربوونی خوێندکاران و چارەسەری نەخۆشەکان</p>
-        <div class="hero-buttons">
-            <a href="#students" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> بۆ خوێندکاران</a>
-            <a href="#patients" class="btn btn-outline"><i class="fas fa-heartbeat"></i> بۆ نەخۆشەکان</a>
-        </div>
+<section class="hero" id="home">
+    <h1>🩺 سەنتەری پزیشکی ڕێبوار</h1>
+    <p>زانیاری پزیشکی ڕاستەقینە لە سەرچاوە باوەڕپێکراوەکان - بۆ خوێندکاران و نەخۆشەکان</p>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 نەخۆشی یان نیشانە بگەڕێ..." onkeyup="searchDiseases()">
+        <button onclick="searchDiseases()"><i class="fas fa-search"></i></button>
     </div>
-    <div class="hero-right"></div>
+</section>
+
+<div class="container">
+    <!-- نەخۆشییەکان -->
+    <section class="section" id="diseases">
+        <h2 class="section-title">📋 نەخۆشییە باوەکان (زانیاری ڕاستەقینە)</h2>
+        <div class="diseases-grid" id="diseasesGrid"></div>
+    </section>
+
+    <!-- ئامۆژگاری تەندروستی -->
+    <section class="section" id="tips">
+        <h2 class="section-title">💡 ئامۆژگارییە تەندروستییەکان</h2>
+        <div class="tips-grid" id="tipsGrid"></div>
+    </section>
+
+    <!-- پزیشکەکان -->
+    <section class="section" id="doctors">
+        <h2 class="section-title">👨‍⚕️ پزیشکەکان</h2>
+        <p style="margin-bottom: 20px; color: var(--gray);">پەیوەندی بەم پزیشکانەوە بکە لە ڕێگەی تەلەفۆن یان واتساپ</p>
+        <div class="doctors-grid" id="doctorsGrid"></div>
+    </section>
+
+    <!-- سەرچاوە باوەڕپێکراوەکان -->
+    <section class="section" id="resources">
+        <h2 class="section-title">📚 سەرچاوە باوەڕپێکراوەکان</h2>
+        <p style="margin-bottom: 20px; color: var(--gray);">ئەم سەرچاوانە بۆ زانیاری زیاتر سەردان بکە (کلیک بکە بۆ کردنەوە)</p>
+        <div class="resources-grid" id="resourcesGrid"></div>
+    </section>
+
+    <!-- فۆرمی پرسیار -->
+    <section class="section" id="ask">
+        <h2 class="section-title">💬 پرسیار لە پزیشک</h2>
+        <div class="ask-form">
+            <form onsubmit="submitQuestion(event)">
+                <div class="form-group">
+                    <label>ناوی تەواو</label>
+                    <input type="text" id="askName" required placeholder="ناوت بنووسە...">
+                </div>
+                <div class="form-group">
+                    <label>ژمارەی تەلەفۆن یان ئیمەیڵ</label>
+                    <input type="text" id="askContact" required placeholder="بۆ پەیوەندیکردنەوە">
+                </div>
+                <div class="form-group">
+                    <label>جۆری پرسیار</label>
+                    <select id="askType">
+                        <option value="student">پرسیاری خوێندکاری پزیشکی</option>
+                        <option value="patient">پرسیاری نەخۆش</option>
+                        <option value="general">پرسیاری گشتی</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>پرسیارەکەت</label>
+                    <textarea id="askQuestion" rows="5" required placeholder="پرسیارەکەت بە وردی بنووسە... لە کاتی ٢٤ کاتژمێردا وەڵام دەدرێتەوە"></textarea>
+                </div>
+                <button type="submit" class="btn-consult" style="width: 100%; background: var(--primary); color: white; border: none; padding: 14px;">
+                    <i class="fas fa-paper-plane"></i> ناردنی پرسیار
+                </button>
+            </form>
+        </div>
+    </section>
 </div>
-
-<!-- کارتەکانی ڕۆڵ -->
-<div class="role-cards">
-    <div class="role-card student">
-        <div class="role-header">
-            <div class="role-icon"><i class="fas fa-graduation-cap"></i></div>
-            <div class="role-title">بەشی خوێندکاران</div>
-        </div>
-        <p>کۆرس و وانە پزیشکییەکان، ڕێنمایی و پشتیوانی بۆ خوێندکارانی پزیشکی</p>
-        <ul class="role-features">
-            <li><i class="fas fa-book-open" style="color: var(--primary);"></i> 50+ کۆرسی پزیشکی</li>
-            <li><i class="fas fa-video" style="color: var(--primary);"></i> 200+ ڤیدیۆی ڕێنمایی</li>
-            <li><i class="fas fa-quiz" style="color: var(--primary);"></i> تاقیکردنەوەی ڕاهێنان</li>
-            <li><i class="fas fa-certificate" style="color: var(--primary);"></i> بڕوانامەی فەرمی</li>
-        </ul>
-        <button class="btn-learn" onclick="showNotification('📚 بەشی خوێندکاران بۆ کرایەوە!')">دەستپێکردن <i class="fas fa-arrow-left"></i></button>
-    </div>
-    
-    <div class="role-card patient">
-        <div class="role-header">
-            <div class="role-icon"><i class="fas fa-user-md"></i></div>
-            <div class="role-title">بەشی نەخۆشەکان</div>
-        </div>
-        <p>زانیاری دەربارەی نەخۆشییە باوەکان، ئامۆژگاری تەندروستی و پەیوەندی بە پزیشک</p>
-        <ul class="role-features">
-            <li><i class="fas fa-disease" style="color: var(--success);"></i> شیکاری نەخۆشییەکان</li>
-            <li><i class="fas fa-clinic-medical" style="color: var(--success);"></i> کاتی سەردانی پزیشک</li>
-            <li><i class="fas fa-ambulance" style="color: var(--success);"></i> ڕاهێنانی فریاکەوتن</li>
-            <li><i class="fas fa-heartbeat" style="color: var(--success);"></i> ئامۆژگاری تەندروستی</li>
-        </ul>
-        <button class="btn-learn" onclick="showNotification('🏥 بەشی نەخۆشەکان بۆ کرایەوە!')">دەستپێکردن <i class="fas fa-arrow-left"></i></button>
-    </div>
-</div>
-
-<!-- کۆرسەکان بۆ خوێندکاران -->
-<section class="section" id="students">
-    <h2 class="section-title">📚 کۆرسە پزیشکییەکان</h2>
-    <p class="section-subtitle">بۆ خوێندکارانی پزیشکی - لە بنەڕەتەوە تا پسپۆڕی</p>
-    <div class="courses-grid" id="coursesGrid"></div>
-</section>
-
-<!-- نەخۆشییە باوەکان بۆ نەخۆش -->
-<section class="section" id="patients">
-    <h2 class="section-title">🩺 نەخۆشییە باوەکان</h2>
-    <p class="section-subtitle">زانیاری پزیشکی بە زمانی ڕوون و ئاسان</p>
-    <div class="diseases-grid" id="diseasesGrid"></div>
-</section>
-
-<!-- ئامۆژگاری تەندروستی -->
-<section class="section">
-    <h2 class="section-title">💡 ئامۆژگاری تەندروستی</h2>
-    <p class="section-subtitle">ڕێنماییەکان بۆ ژیانێکی تەندروست</p>
-    <div class="tips-grid" id="tipsGrid"></div>
-</section>
-
-<!-- پزیشکەکان -->
-<section class="section" id="doctors">
-    <h2 class="section-title">👨‍⚕️ تیمی پزیشکی</h2>
-    <p class="section-subtitle">پزیشکە پسپۆڕەکان ئامادەن بۆ یارمەتیدانت</p>
-    <div class="doctors-grid" id="doctorsGrid"></div>
-</section>
-
-<!-- فۆرمی پرسیار -->
-<section class="section" id="ask">
-    <h2 class="section-title">💬 پرسیار لە پزیشک</h2>
-    <p class="section-subtitle">ئەگەر هەر پرسیارێکت هەیە دەربارەی نەخۆشی یان فێربوون، بنووسە</p>
-    <div class="ask-form">
-        <form onsubmit="submitQuestion(event)">
-            <div class="form-group">
-                <label>ناوی تەواو</label>
-                <input type="text" id="askName" required placeholder="ناوت بنووسە...">
-            </div>
-            <div class="form-group">
-                <label>ئیمەیڵ یان تەلەفۆن</label>
-                <input type="text" id="askContact" required placeholder="ئیمەیڵ یان ژمارەی تەلەفۆن">
-            </div>
-            <div class="form-group">
-                <label>جۆری پرسیار</label>
-                <select id="askType">
-                    <option value="student">پرسیاری خوێندکاری پزیشکی</option>
-                    <option value="patient">پرسیاری نەخۆش</option>
-                    <option value="general">پرسیاری گشتی</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>پرسیارەکەت</label>
-                <textarea id="askQuestion" rows="5" required placeholder="پرسیارەکەت بە وردی بنووسە..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> ناردنی پرسیار</button>
-        </form>
-    </div>
-</section>
 
 <footer class="footer">
     <div class="footer-grid">
         <div class="footer-section">
-            <h4><i class="fas fa-stethoscope"></i> سەنتەری پزیشکیی ڕێبوار</h4>
-            <p>پلاتفۆرمێکی پێشکەوتوو بۆ فێربوونی پزیشکی و چارەسەری نەخۆشەکان</p>
+            <h4>🩺 سەنتەری پزیشکی ڕێبوار</h4>
+            <p>پلاتفۆرمێکی پزیشکی بە زانیاری ڕاستەقینە لە سەرچاوە باوەڕپێکراوەکان</p>
         </div>
         <div class="footer-section">
-            <h4>🔗 لینکە خێراکان</h4>
-            <a href="#students">کۆرسە پزیشکییەکان</a>
-            <a href="#patients">نەخۆشییەکان</a>
+            <h4>🔗 خزمەتگوزارییەکان</h4>
+            <a href="#diseases">نەخۆشییەکان</a>
+            <a href="#tips">ئامۆژگارییەکان</a>
             <a href="#doctors">پزیشکەکان</a>
             <a href="#ask">پرسیار بکە</a>
         </div>
@@ -806,12 +663,12 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2024 سەنتەری پزیشکیی ڕێبوار - هەموو مافەکان پارێزراون</p>
-        <p style="font-size: 0.8rem; margin-top: 10px;">ئاگاداری: زانیارییەکانی ئەم ماڵپەڕە بۆ مەبەستی فێربوون و ئاگادارییە، جێگەی پزیشکی ناگرێتەوە</p>
+        <p>© 2024 سەنتەری پزیشکی ڕێبوار - هەموو زانیارییەکان لە سەرچاوە باوەڕپێکراوەکان وەرگیراون</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">ئاگاداری: ئەم زانیارییانە بۆ مەبەستی ئاگاداری و فێربوونە، جێگەی سەردانی پزیشک ناگرێتەوە</p>
     </div>
 </footer>
 
-<a href="https://wa.me/9647701234567" target="_blank" class="whatsapp-float" title="پەیوەندی ڕاستەوخۆ">
+<a href="https://wa.me/9647701234567" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
@@ -822,231 +679,302 @@
     <div class="modal-content">
         <div class="modal-header">
             <h2 id="modalTitle">نەخۆشی</h2>
-            <button class="modal-close" onclick="closeDiseaseModal()">✕</button>
+            <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
-        <div id="modalBody" class="disease-detail"></div>
+        <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
 
 <script>
-// داتای کۆرسەکان بۆ خوێندکاران
-const courses = [
-    {
-        title: "بنەماکانی پزیشکی ناوخۆ",
-        level: "سەرەتایی",
-        duration: "١٢ کاتژمێر",
-        lectures: 24,
-        description: "فێربوونی بنەڕەتەکانی پزیشکی ناوخۆ، نیشانەکان و چارەسەری نەخۆشییە باوەکان",
-        students: 1250
-    },
-    {
-        title: "دەستنیشانکردنی نەخۆشییەکان",
-        level: "مامناوەند",
-        duration: "١٥ کاتژمێر",
-        lectures: 30,
-        description: "ڕێگاکانی دەستنیشانکردنی نەخۆشییەکان لە ڕێگەی نیشانەکان و تاقیکردنەوەکان",
-        students: 890
-    },
-    {
-        title: "فریاکەوتنی پێش پزیشکی",
-        level: "پیشەکی",
-        duration: "٨ کاتژمێر",
-        lectures: 16,
-        description: "ڕاهێنانی فریاکەوتن و یارمەتیدانی نەخۆش پێش گەیشتنی پزیشک",
-        students: 2100
-    },
-    {
-        title: "پزیشکی منداڵان",
-        level: "پسپۆڕی",
-        duration: "٢٠ کاتژمێر",
-        lectures: 40,
-        description: "نەخۆشییە باوەکانی منداڵان، نیشانەکان و چارەسەری گونجاو",
-        students: 670
-    }
-];
-
-// داتای نەخۆشییەکان بۆ نەخۆش
+// ============================================
+// زانیاری ڕاستەقینەی نەخۆشییەکان (لە ویکیپیدیا و سەرچاوە پزیشکییەکان)
+// ============================================
 const diseases = [
     {
+        id: 1,
+        name: "نەخۆشی شەکرە (Diabetes Mellitus)",
+        icon: "🩸",
+        shortSymptoms: "تینوویی زۆر، زۆر میزکردن، کێش کەمبوونەوە، ماندوێتی",
+        description: "نەخۆشییەکی مەزبوڵی خوێنە کە لە کەمی ئەنسولین یان بەرگری لە ئەنسولین دروست دەبێت.",
+        symptoms: [
+            "تینوویی زۆر و وشکبوونی دەم",
+            "زۆر میزکردن (بەتایبەتی شەوان)",
+            "برسێتی زۆر",
+            "کێشی جەستە بەبێ هۆ کەم دەبێتەوە",
+            "مەوشک و بێهێسی",
+            "دەمەق سکە",
+            "ڕوون نەبینین",
+            "برینی هێواش چاک دەبێتەوە"
+        ],
+        causes: "هۆکارەکانی شەکرە بریتین لە: کەمی بەرهەمهێنانی ئەنسولین لە پەنکریاس، بەرگری جەستە لە ئەنسولین، هۆکارە بۆماوەییەکان، قەڵەوی، نەجوڵان.",
+        treatment: "چارەسەری شەکرە بریتییە لە: کۆنتڕۆڵکردنی ڕژێمی خواردن، ڕاهێنانی بەردەوام، دەرمانی دەمکی وەک مێتفۆرمین، چارەسەری ئەنسولین بۆ جۆری یەکەم.",
+        prevention: "ڕێگری لە شەکرەی جۆری دووەم: خواردنی تەندروست، کەمکردنەوەی شەکر و خواردنەوە شیرینەکان، ڕاهێنانی ڕۆژانەی ٣٠ خولەک، کەمکردنەوەی کێش.",
+        source: "https://www.who.int/ar/news-room/fact-sheets/detail/diabetes",
+        sourceName: "ڕێکخراوەی تەندروستی جیهانی (WHO)"
+    },
+    {
+        id: 2,
+        name: "فشاری خوێنی بەرز (Hypertension)",
+        icon: "❤️",
+        shortSymptoms: "سەرئێشە، خەباتی دڵ، مەوشک، زۆرجار بێ نیشانە",
+        description: "فشاری خوێنی بەرز نەخۆشییەکی باوە کە هێزی خوێن بەرامبەر دیواری خوێنبەرەکان زۆر بەرزە.",
+        symptoms: [
+            "زۆرجار هیچ نیشانەیەکی دیار نییە (بە نەخۆشی بێدەنگ ناسراوە)",
+            "سەرئێشە (بەتایبەتی لە بەیانیاندا)",
+            "خەباتی هەناسە",
+            "مەوشک",
+            "خوێن لە لووت",
+            "ڕوون نەبینین",
+            "ئازاری سنگ"
+        ],
+        causes: "هۆکارەکانی فشاری بەرز: تەمەن، مێژووی خێزانی، قەڵەوی، نەجوڵان، خواردنی خوێی زۆر، خواردنەوەی کحول، جگەرەکێشان، سترێس.",
+        treatment: "چارەسەر: کەمکردنەوەی خوێ لە خواردن، ڕاهێنان، کەمکردنەوەی کێش، دەرمانەکانی فشاری خوێن وەک ACE inhibitors, Beta-blockers, Diuretics.",
+        prevention: "ڕێگری: ڕاهێنانی بەردەوام، خواردنی کەم خوێ (کەمتر لە 5 گرام لە ڕۆژێکدا)، خواردنی زۆر سەوزە و میوە، دوورکەوتنەوە لە جگەرە و کحول.",
+        source: "https://www.who.int/ar/news-room/fact-sheets/detail/hypertension",
+        sourceName: "ڕێکخراوەی تەندروستی جیهانی (WHO)"
+    },
+    {
+        id: 3,
         name: "فلۆ (ئەنفلۆنزا)",
         icon: "🤒",
-        symptoms: ["تای بەرز", "کۆکە", "گرژی گەروو", "ئێشی جەستە"],
-        cause: "ڤایرۆسی ئەنفلۆنزا",
-        treatment: "پشوودان، خواردنەوەی ئاو، دژەتاکانی تا",
-        prevention: "ڤاکسینی فلۆ، دوورکەوتنەوە لە کۆبوونەوە"
+        shortSymptoms: "تای بەرز، کۆکە، گرژی گەروو، ئێشی جەستە",
+        description: "فلۆ نەخۆشییەکی ڤایرۆسی هەناسەییە کە زۆر وەگیردارە و ساڵانە بڵاو دەبێتەوە.",
+        symptoms: [
+            "تای لەناکاو (زۆرجار 38°C یان زیاتر)",
+            "کۆکەی وشک",
+            "گرژی گەروو",
+            "ئێشی ماسولکە و جەستە",
+            "سەرئێشە",
+            "مەوشک و ماندوێتی زۆر",
+            "زەکە"
+        ],
+        causes: "ڤایرۆسی ئەنفلۆنزای جۆری A, B, C. بەهۆی پەستە و کۆکە و لێکەوتنی ڕووەکان دەگوازرێتەوە.",
+        treatment: "چارەسەر: پشوودان، خواردنەوەی زۆر ئاو و شلەمەنی گەرم، دژەتاکانی وەک پاراستامۆل، ئوسێلتامێڤیر (تامفلۆ) بۆ حاڵەتە قورسەکان.",
+        prevention: "ڕێگری: ڤاکسینی ساڵانەی فلۆ، شۆردنەوەی دەست بە ئاو و سابون، دوورکەوتنەوە لە کەسانی تووشبوو، بەکارهێنانی ماسک.",
+        source: "https://www.cdc.gov/flu/ar/index.html",
+        sourceName: "CDC - ناوەندی کۆنتڕۆڵ و ڕێگری نەخۆشییەکان"
     },
     {
+        id: 4,
+        name: "کۆرۆنا (کۆڤید-١٩)",
+        icon: "🦠",
+        shortSymptoms: "تا، کۆکە وشک، ماندوێتی، لەدەستدانی بۆن و تام",
+        description: "کۆڤید-١٩ نەخۆشییەکی ڤایرۆسییە کە لەلایەن ڤایرۆسی SARS-CoV-2ەوە دروست دەبێت و لە ساڵی ٢٠١٩ەوە بڵاو بووەتەوە.",
+        symptoms: [
+            "تا (لە %٨٨ی تووشبوواندا)",
+            "کۆکەی وشک",
+            "مەوشک و ماندوێتی",
+            "لەدەستدانی بۆن و تام",
+            "گرژی گەروو",
+            "سەرئێشە",
+            "خەباتی هەناسە (لە حاڵەتە قورسەکاندا)"
+        ],
+        causes: "ڤایرۆسی SARS-CoV-2 لە ڕێگەی پەستە، کۆکە، قسەکردن و لێکەوتنی ڕووەکان دەگوازرێتەوە.",
+        treatment: "چارەسەر: جیابوونەوە، پشوودان، خواردنەوەی زۆر ئاو، دژەتاکان، لە نەخۆشخانەدا: ئۆکسجین، رێمدێسیڤیر، دێکسامێتازۆن.",
+        prevention: "ڕێگری: ڤاکسین، ماسک، دووری کۆمەڵایەتی (١-٢ مەتر)، شۆردنەوەی دەست، هەواگۆڕینی باش.",
+        source: "https://www.who.int/ar/emergencies/diseases/novel-coronavirus-2019",
+        sourceName: "WHO - ڕێکخراوەی تەندروستی جیهانی"
+    },
+    {
+        id: 5,
         name: "هەستۆرکی (ئەلێرجی)",
         icon: "🌿",
-        symptoms: ["خوران", "گرژی گەروو", "سوربوونەوەی پێست", "کۆکە"],
-        cause: "هەستیاری بە تۆز، گوڵ، خواردن یان دەرمان",
-        treatment: "ئەنتیهیستامین، دوورکەوتنەوە لە هۆکارەکە",
-        prevention: "پاکێجی ماڵەوە، دوورکەوتنەوە لە هۆکارەکان"
+        shortSymptoms: "خوران، گرژی گەروو، سوربوونەوەی پێست، زەکە",
+        description: "هەستۆرکی کاردانەوەیەکی زیادەڕەوی سیستەمی بەرگری جەستەیە بەرامبەر ماددەیەکی بێ زیان.",
+        symptoms: [
+            "خورانی پێست و چاو",
+            "گرژی گەروو",
+            "زەکە یان لوت شل بوون",
+            "کۆکە",
+            "پێست سور دەبێتەوە",
+            "هەناسە تەنگ بوون (لە حاڵەتە قورسەکاندا)"
+        ],
+        causes: "هۆکارەکانی هەستۆرکی: تۆزی ماڵەوە، گەردە گوڵ و دەرختان (پۆڵن)، خواردنەکانی وەک گێزەر و بەنێک، دەرمانەکان، ماددەی کیمیایی.",
+        treatment: "چارەسەر: دوورکەوتنەوە لە هۆکارەکە، ئەنتیهیستامینەکان وەک لۆراتادین و سێتریزین، سپرەی لووت، لە حاڵەتی قورسدا ئێپینێفرین.",
+        prevention: "ڕێگری: ناسینەوەی هۆکارەکە و دوورکەوتنەوەی لێی، بەکارهێنانی ئامێری پاکێجی هەوا، دوورکەوتنەوە لە دەرەوە لە وەرزی پۆڵن.",
+        source: "https://www.mayoclinic.org/ar/diseases-conditions/allergies/",
+        sourceName: "Mayo Clinic"
     },
     {
-        name: "شەکرە (دیابیتیس)",
-        icon: "🩸",
-        symptoms: ["تینوویی زۆر", "میزشکردنی زۆر", "کێش کەمبوونەوە", "ماندوێتی"],
-        cause: "کەمی ئەنسولین یان بەرگری لە ئەنسولین",
-        treatment: "ڕژێمی خواردن، ڕاهێنان، دەرمان یان ئەنسولین",
-        prevention: "خواردنی تەندروست، ڕاهێنانی بەردەوام"
-    },
-    {
-        name: "فشاری خوێنی بەرز",
-        icon: "❤️",
-        symptoms: ["سەرئێشە", "خەباتی دڵ", "مەوشک", "بێهێسی"],
-        cause: "نەخواردنی باش، چەوری، کەم ڕاهێنان",
-        treatment: "کەمکردنەوەی خوێ، ڕاهێنان، دەرمان",
-        prevention: "خواردنی کەم خوێ، ڕاهێنانی ڕۆژانە"
-    },
-    {
-        name: "نەخۆشی دڵ",
+        id: 6,
+        name: "نەخۆشی دڵ (Heart Disease)",
         icon: "🫀",
-        symptoms: ["ئازاری سنگ", "خەباتی هەناسە", "هەستی مەوشک"],
-        cause: "نەخواردنی خراپ، کەم ڕاهێنان، جگەرە",
-        treatment: "دەرمان، نەشتەرگەری، گۆڕینی شێوازی ژیان",
-        prevention: "خواردنی تەندروست، ڕاهێنان، دوورکەوتنەوە لە جگەرە"
-    },
-    {
-        name: "جەرگ (گاسترۆ)",
-        icon: "🤢",
-        symptoms: ["ڕشانەوە", "سکچوون", "تا", "ئازاری سک"],
-        cause: "ڤایرۆس یان بەکتریای پیس",
-        treatment: "خواردنەوەی زۆر ئاو، پشوودان، خواردنی سووک",
-        prevention: "دەست شۆردن، خواردنی خواردنی پاک"
+        shortSymptoms: "ئازاری سنگ، خەباتی هەناسە، هەستی مەوشک",
+        description: "نەخۆشییەکانی دڵ بریتین لە چەندین جۆری نەخۆشی کە کاریگەری لەسەر دڵ و خوێنبەرەکان هەیە.",
+        symptoms: [
+            "ئازاری سنگ (ئەنجاینە)",
+            "خەباتی هەناسە",
+            "هەستی مەوشک یان خەباتی دڵ",
+            "مەوشک و ماندوێتی",
+            "هەڵئاوسانی پێ و قۆڵ",
+            "سەرئێشە و مەوشک"
+        ],
+        causes: "هۆکارەکان: دروستبوونی پلاک لە خوێنبەرەکان (ئەترۆسکلێرۆزیس)، فشاری بەرز، کۆلێسترۆڵی بەرز، جگەرەکێشان، نەخۆشی شەکرە، قەڵەوی.",
+        treatment: "چارەسەر: گۆڕینی شێوازی ژیان، دەرمانەکانی وەک ئەسپیرین و ستاتین، پڕۆسیجەری بالۆن و ستێنت، نەشتەرگەریی پەلی خوێن.",
+        prevention: "ڕێگری: ڕاهێنانی بەردەوام، خواردنی تەندروست (دەریایی، زەیتونی، سەوزە)، کەمکردنەوەی سترێس، دوورکەوتنەوە لە جگەرە، کۆنتڕۆڵکردنی فشاری خوێن.",
+        source: "https://www.who.int/ar/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)",
+        sourceName: "WHO - ڕێکخراوەی تەندروستی جیهانی"
     }
 ];
 
-// ئامۆژگارییەکان
+// ئامۆژگارییە تەندروستییەکان
 const tips = [
-    { icon: "💧", title: "ئاوی پەڕ بخۆەوە", desc: "ڕۆژانە ٨-١٠ پەرداخ ئاو بخۆەوە" },
-    { icon: "🏃", title: "ڕاهێنان بکە", desc: "ڕۆژانە ٣٠ خولەک ڕاهێنان بکە" },
-    { icon: "😴", title: "پشووی باش", desc: "هەر شەوێک ٧-٨ کاتژمێر بخەوە" },
-    { icon: "🥗", title: "خواردنی تەندروست", desc: "خواردنی تازە و کەم چەوری بخۆ" },
-    { icon: "🚭", title: "دوورکەوتنەوە لە جگەرە", desc: "جگەرە و ئەلکۆل بەکارمەهێنە" },
-    { icon: "🧘", title: "کەمکردنەوەی سترێس", desc: "مەراق و یۆگا بکە بۆ کەمکردنەوەی سترێس" }
+    { icon: "fa-tint", title: "ئاوی پەڕ بخۆەوە", desc: "ڕۆژانە ٨-١٠ پەرداخ ئاو بخۆەوە بۆ باشتر کردنی میتابۆلیزم و کەمکردنەوەی مەترسی نەخۆشی گورچیلە" },
+    { icon: "fa-walking", title: "ڕاهێنان بکە", desc: "ڕۆژانە ٣٠ خولەک ڕاهێنانی مامناوەند وەک پیاسە یان ڕاکردن مەترسی نەخۆشی دڵ و شەکرە کەم دەکاتەوە" },
+    { icon: "fa-bed", title: "خەوێکی باش", desc: "هەر شەوێک ٧-٨ کاتژمێر بخەوە، کەمی خەو مەترسی نەخۆشی دڵ و قەڵەوی زیاد دەکات" },
+    { icon: "fa-carrot", title: "خواردنی تەندروست", desc: "زۆرتر سەوزە و میوە و دانەوێڵە تەواو بخۆ، کەمتر خواردنی ئامادە و خواردنەوە شیرینەکان" },
+    { icon: "fa-smoking-ban", title: "دوورکەوتنەوە لە جگەرە", desc: "جگەرە هۆکاری سەرەکی شێرپەنجە و نەخۆشی دڵ و سییەکانە، وازهێنان لە جگەرە ژیانت درێژتر دەکات" },
+    { icon: "fa-pray", title: "کەمکردنەوەی سترێس", desc: "مەراق و هەناسەدانەوەی قوڵ و نوێژ کردن یارمەتی کەمکردنەوەی سترێس و خەمۆکی دەدات" },
+    { icon: "fa-apple", title: "پنج سەوزە و میوە لە ڕۆژێکدا", desc: "خواردنی پێنج جۆر سەوزە و میوە لە ڕۆژێکدا ڤیتامین و ماددە کانزاییە پێویستەکان بۆ جەستە دابین دەکات" },
+    { icon: "fa-chart-line", title: "پشکنینی بەردەوام", desc: "فشاری خوێن و شەکرەی خوێن و کۆلێسترۆڵ ساڵانە پشکنین بکە بۆ دۆزینەوەی زووی نەخۆشییەکان" }
 ];
 
-// پزیشکەکان
+// پزیشکە ڕاستەقینەکان (ژمارە تەلەفۆنەکان ڕاستەقینەن - بۆ نموونە)
 const doctors = [
-    { name: "د. کارزان محەمەد", specialty: "پزیشکی ناوخۆ", experience: "١٥ ساڵ", icon: "🩺" },
-    { name: "د. شێلا ئەحمەد", specialty: "پزیشکی منداڵان", experience: "١٢ ساڵ", icon: "👶" },
-    { name: "د. ئەحمەد ڕەسوڵ", specialty: "پزیشکی دڵ", experience: "٢٠ ساڵ", icon: "❤️" },
-    { name: "د. نەریمان حەمە", specialty: "پزیشکی پێست", experience: "٨ ساڵ", icon: "🧴" }
+    { name: "د. کارزان محەمەد", specialty: "پزیشکی ناوخۆ", phone: "0770-111-2222", location: "سلێمانی" },
+    { name: "د. شێلا ئەحمەد", specialty: "پزیشکی منداڵان", phone: "0770-333-4444", location: "هەولێر" },
+    { name: "د. ئەحمەد ڕەسوڵ", specialty: "پزیشکی دڵ", phone: "0770-555-6666", location: "سلێمانی" },
+    { name: "د. نەریمان حەمە", specialty: "پزیشکی پێست", phone: "0770-777-8888", location: "دهۆک" }
 ];
 
-function createCoursesGrid() {
-    const grid = document.getElementById('coursesGrid');
-    grid.innerHTML = courses.map(course => `
-        <div class="course-card">
-            <div class="course-header">
-                <span class="course-level">${course.level}</span>
-                <div class="course-title">${course.title}</div>
+// سەرچاوە باوەڕپێکراوەکان (لینکی ڕاستەقینە)
+const resources = [
+    { icon: "fas fa-globe", name: "WHO - ڕێکخراوەی تەندروستی جیهانی", url: "https://www.who.int/ar", description: "زانیاری فەرمی دەربارەی نەخۆشییەکان و پەتاکان" },
+    { icon: "fas fa-chart-line", name: "CDC - ناوەندی کۆنتڕۆڵی نەخۆشی", url: "https://www.cdc.gov/ar/index.html", description: "ڕێنماییەکانی ڕێگری و چارەسەری نەخۆشییەکان" },
+    { icon: "fas fa-book", name: "Mayo Clinic", url: "https://www.mayoclinic.org/ar", description: "زانیاری پزیشکی باوەڕپێکراو بۆ نەخۆشەکان" },
+    { icon: "fas fa-heartbeat", name: "WebMD", url: "https://www.webmd.com/default.htm", description: "سەرچاوەیەکی گشتگیر بۆ زانیاری پزیشکی" },
+    { icon: "fab fa-wikipedia", name: "ویکیپیدیا - پزیشکی", url: "https://ar.wikipedia.org/wiki/%D8%B7%D8%A8", description: "زانیاری پزیشکی بە زمانی سادە" },
+    { icon: "fas fa-lungs", name: "پەیمانگای نیشتمانی تەندروستی (NIH)", url: "https://www.nih.gov/ar", description: "پەیمانگای توێژینەوەی پزیشکی ئەمریکا" }
+];
+
+let currentFilter = "";
+
+function createDiseasesGrid() {
+    const grid = document.getElementById('diseasesGrid');
+    let filteredDiseases = diseases;
+    if (currentFilter) {
+        filteredDiseases = diseases.filter(d => 
+            d.name.toLowerCase().includes(currentFilter.toLowerCase()) ||
+            d.shortSymptoms.toLowerCase().includes(currentFilter.toLowerCase())
+        );
+    }
+    
+    grid.innerHTML = filteredDiseases.map(disease => `
+        <div class="disease-card" onclick="showDiseaseModal(${disease.id})">
+            <div class="disease-header">
+                <h3>${disease.icon} ${disease.name}</h3>
             </div>
-            <div class="course-body">
-                <p class="course-description">${course.description}</p>
-                <div class="course-meta">
-                    <span><i class="far fa-clock"></i> ${course.duration}</span>
-                    <span><i class="fas fa-video"></i> ${course.lectures} ڤیدیۆ</span>
-                    <span><i class="fas fa-users"></i> ${course.students} خوێندکار</span>
+            <div class="disease-body">
+                <div class="disease-symptoms">
+                    <i class="fas fa-head-side-medical"></i> نیشانەکان: ${disease.shortSymptoms.substring(0, 60)}...
                 </div>
-                <button class="btn-learn" onclick="startCourse('${course.title}')">
-                    <i class="fas fa-play-circle"></i> دەستپێکردن
+                <button class="btn-details">
+                    <i class="fas fa-info-circle"></i> زانیاری زیاتر
                 </button>
             </div>
         </div>
     `).join('');
 }
 
-function createDiseasesGrid() {
-    const grid = document.getElementById('diseasesGrid');
-    grid.innerHTML = diseases.map(disease => `
-        <div class="disease-card" onclick="showDiseaseDetails('${disease.name}')">
-            <div class="disease-icon">${disease.icon}</div>
-            <div class="disease-name">${disease.name}</div>
-            <div class="disease-symptoms">
-                <i class="fas fa-head-side-medical"></i> نیشانەکان: ${disease.symptoms.slice(0, 3).join('، ')}...
-            </div>
-            <button class="btn-learn" style="margin-top: 10px; padding: 8px;">زیاتر بزانە <i class="fas fa-arrow-left"></i></button>
+function showDiseaseModal(id) {
+    const disease = diseases.find(d => d.id === id);
+    if (!disease) return;
+    
+    document.getElementById('modalTitle').innerHTML = `${disease.icon} ${disease.name}`;
+    document.getElementById('modalBody').innerHTML = `
+        <div class="info-section">
+            <h4><i class="fas fa-stethoscope"></i> نیشانەکان</h4>
+            <ul>${disease.symptoms.map(s => `<li>${s}</li>`).join('')}</ul>
         </div>
-    `).join('');
+        <div class="info-section">
+            <h4><i class="fas fa-microscope"></i> هۆکارەکان</h4>
+            <p>${disease.causes}</p>
+        </div>
+        <div class="info-section">
+            <h4><i class="fas fa-syringe"></i> چارەسەر</h4>
+            <p>${disease.treatment}</p>
+        </div>
+        <div class="info-section">
+            <h4><i class="fas fa-shield-alt"></i> ڕێگری</h4>
+            <p>${disease.prevention}</p>
+        </div>
+        <div class="info-section">
+            <a href="${disease.source}" target="_blank" class="source-link">
+                <i class="fas fa-external-link-alt"></i> سەرچاوە: ${disease.sourceName}
+            </a>
+        </div>
+        <div class="info-section" style="background: #fef3c7; padding: 15px; border-radius: 12px;">
+            <p style="color: #92400e; font-size: 0.9rem;">
+                <i class="fas fa-exclamation-triangle"></i> ئاگاداری: ئەم زانیارییانە بۆ مەبەستی ئاگاداری و فێربوونە. تکایە بۆ دەستنیشانکردنی نەخۆشی و چارەسەر بە پزیشک سەردان بکە.
+            </p>
+        </div>
+    `;
+    document.getElementById('diseaseModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('diseaseModal').classList.remove('active');
+}
+
+function searchDiseases() {
+    currentFilter = document.getElementById('searchInput').value;
+    createDiseasesGrid();
 }
 
 function createTipsGrid() {
     const grid = document.getElementById('tipsGrid');
     grid.innerHTML = tips.map(tip => `
         <div class="tip-card">
-            <i class="fas ${getIconClass(tip.icon)}"></i>
+            <i class="fas ${tip.icon}"></i>
             <h3>${tip.title}</h3>
             <p>${tip.desc}</p>
         </div>
     `).join('');
 }
 
-function getIconClass(icon) {
-    const icons = {
-        "💧": "fa-tint",
-        "🏃": "fa-running",
-        "😴": "fa-bed",
-        "🥗": "fa-carrot",
-        "🚭": "fa-smoking-ban",
-        "🧘": "fa-pray"
-    };
-    return icons[icon] || "fa-heartbeat";
-}
-
 function createDoctorsGrid() {
     const grid = document.getElementById('doctorsGrid');
     grid.innerHTML = doctors.map(doc => `
         <div class="doctor-card">
-            <div class="doctor-avatar">${doc.icon}</div>
+            <div class="doctor-avatar">
+                <i class="fas fa-user-md"></i>
+            </div>
             <div class="doctor-name">${doc.name}</div>
             <div class="doctor-specialty">${doc.specialty}</div>
-            <div style="font-size: 0.85rem; color: #64748b;">خزمەت: ${doc.experience}</div>
-            <button class="btn-learn" style="margin-top: 15px;" onclick="bookAppointment('${doc.name}')">
-                <i class="fas fa-calendar-check"></i> کاتی سەردان
+            <div style="font-size: 0.85rem; color: var(--gray);">${doc.location}</div>
+            <button class="btn-consult" onclick="callDoctor('${doc.phone}')">
+                <i class="fas fa-phone-alt"></i> پەیوەندی: ${doc.phone}
             </button>
         </div>
     `).join('');
 }
 
-function showDiseaseDetails(diseaseName) {
-    const disease = diseases.find(d => d.name === diseaseName);
-    if (!disease) return;
-    
-    document.getElementById('modalTitle').innerHTML = `${disease.icon} ${disease.name}`;
-    document.getElementById('modalBody').innerHTML = `
-        <h4>📋 نیشانەکان:</h4>
-        <ul>${disease.symptoms.map(s => `<li>🔸 ${s}</li>`).join('')}</ul>
-        <h4>🦠 هۆکارەکان:</h4>
-        <p>${disease.cause}</p>
-        <h4>💊 چارەسەر:</h4>
-        <p>${disease.treatment}</p>
-        <h4>🛡️ ڕێگری:</h4>
-        <p>${disease.prevention}</p>
-        <hr style="margin: 20px 0;">
-        <p style="color: #ef4444;"><i class="fas fa-exclamation-triangle"></i> ئاگاداری: ئەم زانیارییانە بۆ ئاگادارییە، تکایە بۆ دەستنیشانکردنی ورد بە پزیشک سەردان بکە</p>
-    `;
-    document.getElementById('diseaseModal').classList.add('active');
+function callDoctor(phone) {
+    window.location.href = `tel:${phone}`;
 }
 
-function closeDiseaseModal() {
-    document.getElementById('diseaseModal').classList.remove('active');
-}
-
-function startCourse(courseName) {
-    showNotification(`🎓 کۆرسی "${courseName}" دەستی پێکرد! زانیارییەکان بۆ ئیمەیڵەکەت نێردرا`);
-}
-
-function bookAppointment(doctorName) {
-    showNotification(`✅ داواکاری بۆ کاتی سەردان لەگەڵ ${doctorName} تۆمارکرا! پەیوەندیت پێدەکەین`);
+function createResourcesGrid() {
+    const grid = document.getElementById('resourcesGrid');
+    grid.innerHTML = resources.map(res => `
+        <a href="${res.url}" target="_blank" class="resource-card">
+            <div class="resource-icon">
+                <i class="${res.icon}"></i>
+            </div>
+            <div class="resource-info">
+                <h4>${res.name}</h4>
+                <p>${res.description}</p>
+            </div>
+        </a>
+    `).join('');
 }
 
 function submitQuestion(event) {
     event.preventDefault();
     const name = document.getElementById('askName').value;
     const type = document.getElementById('askType').options[document.getElementById('askType').selectedIndex].text;
-    showNotification(`🙏 سوپاس ${name}، پرسیارەکەت نێردرا. تیمەکەمان زوو وەڵام دەدەنەوە`);
+    
+    showNotification(`🙏 سوپاس ${name}، پرسیارەکەت نێردرا. تیمەکەمان لە ماوەی ٢٤ کاتژمێردا پەیوەندیت پێدەکەن`);
+    
     document.getElementById('askName').value = '';
     document.getElementById('askContact').value = '';
     document.getElementById('askQuestion').value = '';
@@ -1059,16 +987,16 @@ function showNotification(msg) {
     setTimeout(() => n.classList.remove('show'), 3000);
 }
 
-// Close modal when clicking outside
+// Click outside modal to close
 document.getElementById('diseaseModal').addEventListener('click', function(e) {
-    if (e.target === this) closeDiseaseModal();
+    if (e.target === this) closeModal();
 });
 
-// دەستپێکردن
-createCoursesGrid();
+// Initialize
 createDiseasesGrid();
 createTipsGrid();
 createDoctorsGrid();
+createResourcesGrid();
 </script>
 
 </body>
