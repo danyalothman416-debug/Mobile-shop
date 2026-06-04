@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
         
-        /* سکرۆڵبار */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -49,7 +48,6 @@
             border-radius: 10px;
         }
         
-        /* ناڤبار */
         .navbar {
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
@@ -132,96 +130,130 @@
             font-weight: bold;
         }
         
-        /* هێرۆ سێکشن */
-        .hero {
-            background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
-            padding: 60px 20px;
-            text-align: center;
+        /* ========== هێرۆ سلایدەر ========== */
+        .hero-slider {
             position: relative;
+            height: 500px;
             overflow: hidden;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .hero-content {
+        .slider-container {
             position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
             z-index: 1;
         }
         
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #fbbf24, #f59e0b, #fff);
+        .slide-content {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            max-width: 80%;
+            z-index: 10;
+        }
+        
+        .slide-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 15px;
         }
         
-        .hero p {
-            font-size: 1.3rem;
-            color: #cbd5e1;
-            margin-bottom: 30px;
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #e2e8f0;
         }
         
-        .hero-buttons {
+        .slide-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+        
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
-            gap: 20px;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s;
+            font-size: 1.5rem;
+            border: none;
         }
         
-        .btn {
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
+        .slider-btn:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .slider-btn.prev {
+            right: 20px;
+        }
+        
+        .slider-btn.next {
+            left: 20px;
+        }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 20;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
             cursor: pointer;
             transition: all 0.3s;
-            text-decoration: none;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 10px 30px rgba(99,102,241,0.4);
+        .dot.active {
+            background: var(--primary);
+            width: 30px;
+            border-radius: 10px;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(139,92,246,0.6);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,0.3);
-            color: white;
-        }
-        
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: white;
-        }
-        
-        /* تراست بادجەکان */
+        /* ========== تراست بادجەکان ========== */
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -230,6 +262,9 @@
             padding: 30px;
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
+            margin-top: -30px;
+            position: relative;
+            z-index: 5;
         }
         
         .trust-item {
@@ -244,7 +279,7 @@
             color: var(--accent);
         }
         
-        /* گەڕان */
+        /* گەڕان و فلتیەر - هەروەک خۆی */
         .search-section {
             max-width: 700px;
             margin: 30px auto;
@@ -294,7 +329,6 @@
             background: var(--secondary);
         }
         
-        /* فلتیەرەکان */
         .filters {
             display: flex;
             justify-content: center;
@@ -325,7 +359,6 @@
             box-shadow: 0 8px 25px rgba(99,102,241,0.4);
         }
         
-        /* گریدی بەرهەمەکان */
         .products-section {
             max-width: 1300px;
             margin: 40px auto;
@@ -484,7 +517,6 @@
             box-shadow: 0 10px 30px rgba(99,102,241,0.4);
         }
         
-        /* سێکشنی تایبەتمەندییەکان */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -523,7 +555,6 @@
             margin-bottom: 10px;
         }
         
-        /* سێکشنی ڕێڤیۆ */
         .reviews-section {
             max-width: 1200px;
             margin: 60px auto;
@@ -549,7 +580,6 @@
             margin-bottom: 10px;
         }
         
-        /* مۆدالی سەبەتە */
         .modal {
             display: none;
             position: fixed;
@@ -631,7 +661,6 @@
             margin: 20px 0;
         }
         
-        /* نۆتیفیکەیشن */
         .notification {
             position: fixed;
             bottom: 30px;
@@ -656,7 +685,6 @@
             display: block;
         }
         
-        /* واتساپ */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -682,7 +710,6 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* نیوزلێتەر */
         .newsletter {
             background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.3));
             padding: 50px 20px;
@@ -707,7 +734,6 @@
             font-family: inherit;
         }
         
-        /* فووەتەر */
         .footer {
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(20px);
@@ -786,12 +812,15 @@
             font-size: 0.9rem;
         }
         
-        /* ڕێسپۆنسیڤ */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
+            .hero-slider { height: 400px; }
+            .slide-content h2 { font-size: 1.5rem; }
+            .slide-content p { font-size: 1rem; }
+            .slide-price { font-size: 1.3rem; }
             .nav-links { display: none; }
             .navbar { padding: 15px; }
             .products-grid { grid-template-columns: 1fr; }
+            .slider-btn { width: 35px; height: 35px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -822,21 +851,13 @@
     </div>
 </nav>
 
-<!-- هێرۆ -->
-<section class="hero" id="home">
-    <div class="hero-content">
-        <h1>نوێترین مۆبایلەکان</h1>
-        <p>باشترین نرخ و گەرەنتی لە هەموو کوردستان 🚀</p>
-        <div class="hero-buttons">
-            <a href="#products" class="btn btn-primary">
-                <i class="fas fa-shopping-bag"></i> کڕین ئێستا
-            </a>
-            <a href="#about" class="btn btn-outline">
-                <i class="fas fa-info-circle"></i> زیاتر بزانە
-            </a>
-        </div>
-    </div>
-</section>
+<!-- ========== هێرۆ سلایدەر ========== -->
+<div class="hero-slider" id="heroSlider">
+    <div class="slider-container" id="sliderContainer"></div>
+    <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+    <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+    <div class="slider-dots" id="sliderDots"></div>
+</div>
 
 <!-- تراست بادجەکان -->
 <div class="trust-badges">
@@ -934,8 +955,8 @@
     <h2 style="font-size: 2rem; margin-bottom: 10px;">📧 بەشداربە لە هەواڵنامەکەمان</h2>
     <p style="margin-bottom: 20px;">نوێترین مۆبایل و داشکاندنەکان ڕاستەوخۆ بۆ ئیمەیڵەکەت</p>
     <div class="newsletter-form">
-        <input type="email" placeholder="ئیمەیڵەکەت بنووسە...">
-        <button class="btn btn-primary">بەشداربوون</button>
+        <input type="email" id="newsletterEmail" placeholder="ئیمەیڵەکەت بنووسە...">
+        <button class="btn btn-primary" onclick="subscribeNewsletter()">بەشداربوون</button>
     </div>
 </section>
 
@@ -981,7 +1002,7 @@
     </div>
 </footer>
 
-<!-- مۆدالی سەبەتە -->
+<!-- مۆدالەکان -->
 <div class="modal" id="cartModal">
     <div class="modal-content">
         <button class="modal-close" onclick="toggleCart()">✕</button>
@@ -994,7 +1015,6 @@
     </div>
 </div>
 
-<!-- مۆدالی خواستەکان -->
 <div class="modal" id="wishlistModal">
     <div class="modal-content">
         <button class="modal-close" onclick="toggleWishlist()">✕</button>
@@ -1003,7 +1023,6 @@
     </div>
 </div>
 
-<!-- فۆرمی داواکاری -->
 <div class="modal" id="checkoutModal">
     <div class="modal-content" style="background: white; color: #333;">
         <button class="modal-close" style="color: #333;" onclick="closeCheckout()">✕</button>
@@ -1038,15 +1057,102 @@
     </div>
 </div>
 
-<!-- نۆتیفیکەیشن -->
 <div class="notification" id="notification"></div>
 
-<!-- واتساپ -->
 <a href="https://wa.me/9647701234567" target="_blank" class="whatsapp-float" title="پەیوەندی واتساپ">
     <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
+// داتای سلایدەر
+const slides = [
+    {
+        title: "📱 ئایفۆن ١٥ پرۆ مەکس",
+        description: "نوێترین تەکنەلۆژیا لە جیهانی ئایفۆن",
+        price: "1,450,000 د.ع",
+        bgImage: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-max-1.jpg"
+    },
+    {
+        title: "⭐ سامسونگ گالاکسی S24 ئەلترا",
+        description: "کامێرای ٢٠٠ مێگاپێکسڵ",
+        price: "1,350,000 د.ع",
+        bgImage: "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s24-ultra-1.jpg"
+    },
+    {
+        title: "🚀 شیاومی ١٤ پرۆ",
+        description: "پڕۆسێسەری Snapdragon 8 Gen 3",
+        price: "850,000 د.ع",
+        bgImage: "https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-14-pro-1.jpg"
+    },
+    {
+        title: "🤖 گوگڵ پێکسڵ ٨ پرۆ",
+        description: "ئەندڕۆیدی پاك و کامێرای زیرەک",
+        price: "1,100,000 د.ع",
+        bgImage: "https://fdn2.gsmarena.com/vv/pics/google/google-pixel-8-pro-1.jpg"
+    }
+];
+
+let currentSlide = 0;
+let slideInterval;
+
+// دروستکردنی سلایدەر
+function createSlider() {
+    const container = document.getElementById('sliderContainer');
+    const dotsContainer = document.getElementById('sliderDots');
+    
+    container.innerHTML = '';
+    dotsContainer.innerHTML = '';
+    
+    slides.forEach((slide, index) => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
+        slideDiv.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('${slide.bgImage}')`;
+        slideDiv.style.backgroundSize = 'cover';
+        slideDiv.style.backgroundPosition = 'center';
+        slideDiv.innerHTML = `
+            <div class="slide-content">
+                <h2>${slide.title}</h2>
+                <p>${slide.description}</p>
+                <div class="slide-price">💰 ${slide.price}</div>
+                <a href="#products" class="btn btn-primary" onclick="showNotification('📱 بەرهەمەکانمان ببینە!')">
+                    <i class="fas fa-shopping-bag"></i> کڕین ئێستا
+                </a>
+            </div>
+        `;
+        container.appendChild(slideDiv);
+        
+        const dot = document.createElement('div');
+        dot.className = `dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index);
+        dotsContainer.appendChild(dot);
+    });
+}
+
+function goToSlide(index) {
+    const slidesList = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    slidesList[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = (index + slides.length) % slides.length;
+    
+    slidesList[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+function changeSlide(direction) {
+    goToSlide(currentSlide + direction);
+    resetInterval();
+}
+
+function resetInterval() {
+    if (slideInterval) clearInterval(slideInterval);
+    slideInterval = setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+}
+
 // داتای بەرهەمەکان
 const products = [
     {
@@ -1141,12 +1247,10 @@ const products = [
     }
 ];
 
-// سەبەتە و خواستەکان
 let cart = [];
 let wishlist = [];
 let currentCategory = 'all';
 
-// نیشاندانی بەرهەمەکان
 function displayProducts(productsToShow) {
     const grid = document.getElementById('productsGrid');
     grid.innerHTML = '';
@@ -1195,7 +1299,6 @@ function displayProducts(productsToShow) {
     });
 }
 
-// فلتیەر
 function filterByCategory(category, btn) {
     currentCategory = category;
     document.querySelectorAll('#categoryFilters .filter-btn').forEach(b => b.classList.remove('active'));
@@ -1222,7 +1325,6 @@ function filterProducts() {
     displayProducts(filtered);
 }
 
-// سەبەتە
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     const existing = cart.find(item => item.id === productId);
@@ -1285,7 +1387,6 @@ function displayCartItems() {
     document.getElementById('cartTotal').textContent = `کۆی گشتی: ${total.toLocaleString()} د.ع`;
 }
 
-// خواستەکان
 function toggleWishlistItem(productId) {
     const index = wishlist.indexOf(productId);
     if (index > -1) {
@@ -1317,7 +1418,6 @@ function toggleWishlist() {
     }
 }
 
-// چێکئاوت
 function openCheckout() {
     if (cart.length === 0) {
         showNotification('⚠️ سەبەتەکەت بەتاڵە!');
@@ -1361,7 +1461,16 @@ function submitOrder(event) {
     });
 }
 
-// نۆتیفیکەیشن
+function subscribeNewsletter() {
+    const email = document.getElementById('newsletterEmail').value;
+    if (email && email.includes('@')) {
+        showNotification('✅ بە شێوەیەکی سەرکەوتوو بەشداربوویت!');
+        document.getElementById('newsletterEmail').value = '';
+    } else {
+        showNotification('⚠️ تکایە ئیمەیڵێکی دروست بنووسە');
+    }
+}
+
 function showNotification(msg) {
     const n = document.getElementById('notification');
     n.textContent = msg;
@@ -1370,6 +1479,8 @@ function showNotification(msg) {
 }
 
 // دەستپێکردن
+createSlider();
+resetInterval();
 displayProducts(products);
 updateCartCount();
 updateWishlistCount();
