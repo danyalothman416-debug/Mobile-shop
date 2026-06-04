@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="سەنتەری پزیشکی ڕێبوار - زانیاری پزیشکی ڕاستەقینە لە سەرچاوە باوەڕپێکراوەکان">
-    <title>🩺 سەنتەری پزیشکی ڕێبوار | زانیاری ڕاستەقینەی پزیشکی</title>
+    <meta name="description" content="سەنتەری پزیشکی ڕێبوار - پشکنینەکانی تاقیگە، فریاگوزاری سەرەتایی، و ئامێرە پزیشکییەکان">
+    <title>🩺 سەنتەری پزیشکی ڕێبوار | پشکنینەکان و فریاگوزاری</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -20,6 +20,7 @@
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
+            --info: #3b82f6;
             --dark: #1e293b;
             --light: #f8fafc;
             --gray: #64748b;
@@ -30,7 +31,6 @@
             background: var(--light);
             color: var(--dark);
             line-height: 1.7;
-            scroll-behavior: smooth;
         }
         
         .navbar {
@@ -59,7 +59,7 @@
         
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         
@@ -82,24 +82,18 @@
         }
         
         .hero h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 15px;
         }
         
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
         .section {
-            margin: 50px auto;
+            margin: 60px auto;
         }
         
         .section-title {
@@ -111,47 +105,89 @@
             padding-right: 15px;
         }
         
-        /* کارتەکانی نەخۆشییەکان */
-        .diseases-grid {
+        /* تاپ و کارتەکان */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            border-radius: 40px;
+            transition: 0.3s;
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tests-grid, .firstaid-grid, .equipment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
         }
         
-        .disease-card {
+        .test-card, .firstaid-card, .equipment-card {
             background: white;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
         
-        .disease-card:hover {
+        .test-card:hover, .firstaid-card:hover, .equipment-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 24px rgba(0,0,0,0.12);
         }
         
-        .disease-header {
+        .test-header, .firstaid-header, .equipment-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 20px;
         }
         
-        .disease-header h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
+        .test-header h3, .firstaid-header h3, .equipment-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
         
-        .disease-body {
+        .test-body, .firstaid-body, .equipment-body {
             padding: 20px;
         }
         
-        .disease-symptoms {
+        .test-symptoms, .firstaid-desc {
             color: var(--gray);
             font-size: 0.9rem;
             margin-bottom: 15px;
             line-height: 1.6;
+        }
+        
+        .normal-range {
+            background: #e0f2fe;
+            padding: 10px;
+            border-radius: 12px;
+            margin: 10px 0;
+            font-size: 0.85rem;
         }
         
         .btn-details {
@@ -193,10 +229,9 @@
             background: white;
             border-radius: 20px;
             width: 90%;
-            max-width: 750px;
+            max-width: 800px;
             max-height: 85vh;
             overflow-y: auto;
-            direction: rtl;
         }
         
         .modal-header {
@@ -223,250 +258,37 @@
         }
         
         .info-section {
-            margin-bottom: 25px;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
             padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
         }
         
         .info-section h4 {
             color: var(--primary);
             margin-bottom: 10px;
-            font-size: 1.1rem;
         }
         
-        .info-section ul, .info-section p {
-            color: var(--gray);
-            line-height: 1.8;
+        .info-section ul {
+            padding-right: 20px;
         }
         
         .info-section li {
-            margin-right: 20px;
-            margin-bottom: 5px;
-        }
-        
-        .source-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #e2e8f0;
-            padding: 10px 16px;
-            border-radius: 40px;
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 500;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-        
-        .source-link:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* ئامۆژگارییەکان */
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .tip-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        
-        .tip-card:hover {
-            transform: translateY(-4px);
-        }
-        
-        .tip-card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .tip-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        
-        /* دکتۆرەکان */
-        .doctors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
-        
-        .doctor-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        
-        .doctor-avatar {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 2.2rem;
-            color: white;
-        }
-        
-        .doctor-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        
-        .doctor-specialty {
-            color: var(--primary);
-            margin: 5px 0;
-        }
-        
-        .btn-consult {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 15px;
-        }
-        
-        .btn-consult:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* سەرچاوەکان */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .resource-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: var(--dark);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: 0.3s;
-        }
-        
-        .resource-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        
-        .resource-icon {
-            width: 50px;
-            height: 50px;
-            background: #e0e7ff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .resource-info h4 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-        
-        .resource-info p {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-        
-        /* فۆرمی پرسیار */
-        .ask-form {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
             margin-bottom: 8px;
-            font-weight: 600;
         }
         
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e2e8f0;
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .steps-list li {
+            background: #f1f5f9;
+            margin: 10px 0;
+            padding: 12px;
             border-radius: 12px;
-            font-family: inherit;
-            transition: 0.3s;
-        }
-        
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        /* فووەتەر */
-        .footer {
-            background: var(--dark);
-            color: #94a3b8;
-            padding: 40px 20px 20px;
-            margin-top: 60px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        
-        .footer-section h4 {
-            color: white;
-            margin-bottom: 15px;
-        }
-        
-        .footer-section a {
-            color: #94a3b8;
-            text-decoration: none;
-            display: block;
-            margin: 8px 0;
-        }
-        
-        .footer-section a:hover {
-            color: var(--primary);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid #334155;
-            max-width: 1300px;
-            margin: 30px auto 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .notification {
@@ -479,80 +301,35 @@
             border-radius: 12px;
             display: none;
             z-index: 3000;
-            animation: slideIn 0.4s ease;
         }
         
         .notification.show {
             display: block;
         }
         
-        @keyframes slideIn {
-            from { transform: translateX(-300px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .footer {
+            background: var(--dark);
+            color: #94a3b8;
+            padding: 40px 20px 20px;
+            margin-top: 60px;
         }
         
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
-            z-index: 500;
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
         }
         
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
             }
-            .nav-links {
-                gap: 15px;
-            }
-            .hero h1 {
-                font-size: 1.6rem;
+            .tests-grid, .firstaid-grid, .equipment-grid {
+                grid-template-columns: 1fr;
             }
             .section-title {
                 font-size: 1.4rem;
             }
-        }
-        
-        /* search box */
-        .search-box {
-            max-width: 600px;
-            margin: 30px auto 0;
-            display: flex;
-            background: white;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .search-box input {
-            flex: 1;
-            padding: 15px 25px;
-            border: none;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-        
-        .search-box input:focus {
-            outline: none;
-        }
-        
-        .search-box button {
-            padding: 15px 25px;
-            background: var(--primary);
-            border: none;
-            color: white;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -564,121 +341,64 @@
         <span>سەنتەری پزیشکی ڕێبوار</span>
     </a>
     <div class="nav-links">
-        <a href="#home">سەرەکی</a>
-        <a href="#diseases">نەخۆشییەکان</a>
-        <a href="#tips">ئامۆژگارییەکان</a>
-        <a href="#doctors">پزیشکەکان</a>
-        <a href="#resources">سەرچاوەکان</a>
-        <a href="#ask">پرسیار</a>
+        <a href="#tests">پشکنینەکان</a>
+        <a href="#firstaid">فریاگوزاری</a>
+        <a href="#equipment">ئامێرەکان</a>
     </div>
 </nav>
 
-<section class="hero" id="home">
-    <h1>🩺 سەنتەری پزیشکی ڕێبوار</h1>
-    <p>زانیاری پزیشکی ڕاستەقینە لە سەرچاوە باوەڕپێکراوەکان - بۆ خوێندکاران و نەخۆشەکان</p>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 نەخۆشی یان نیشانە بگەڕێ..." onkeyup="searchDiseases()">
-        <button onclick="searchDiseases()"><i class="fas fa-search"></i></button>
-    </div>
+<section class="hero">
+    <h1>🩺 پشکنینەکان و فریاگوزاری سەرەتایی</h1>
+    <p>زانیاری ڕاستەقینەی پزیشکی بۆ فێربوون و ئاگاداری</p>
 </section>
 
 <div class="container">
-    <!-- نەخۆشییەکان -->
-    <section class="section" id="diseases">
-        <h2 class="section-title">📋 نەخۆشییە باوەکان (زانیاری ڕاستەقینە)</h2>
-        <div class="diseases-grid" id="diseasesGrid"></div>
-    </section>
+    <!-- تاپەکان -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('tests')">🔬 پشکنینەکان</button>
+        <button class="tab-btn" onclick="showTab('firstaid')">🚑 فریاگوزاری سەرەتایی</button>
+        <button class="tab-btn" onclick="showTab('equipment')">⚙️ ئامێرە تاقیگەییەکان</button>
+    </div>
 
-    <!-- ئامۆژگاری تەندروستی -->
-    <section class="section" id="tips">
-        <h2 class="section-title">💡 ئامۆژگارییە تەندروستییەکان</h2>
-        <div class="tips-grid" id="tipsGrid"></div>
-    </section>
-
-    <!-- پزیشکەکان -->
-    <section class="section" id="doctors">
-        <h2 class="section-title">👨‍⚕️ پزیشکەکان</h2>
-        <p style="margin-bottom: 20px; color: var(--gray);">پەیوەندی بەم پزیشکانەوە بکە لە ڕێگەی تەلەفۆن یان واتساپ</p>
-        <div class="doctors-grid" id="doctorsGrid"></div>
-    </section>
-
-    <!-- سەرچاوە باوەڕپێکراوەکان -->
-    <section class="section" id="resources">
-        <h2 class="section-title">📚 سەرچاوە باوەڕپێکراوەکان</h2>
-        <p style="margin-bottom: 20px; color: var(--gray);">ئەم سەرچاوانە بۆ زانیاری زیاتر سەردان بکە (کلیک بکە بۆ کردنەوە)</p>
-        <div class="resources-grid" id="resourcesGrid"></div>
-    </section>
-
-    <!-- فۆرمی پرسیار -->
-    <section class="section" id="ask">
-        <h2 class="section-title">💬 پرسیار لە پزیشک</h2>
-        <div class="ask-form">
-            <form onsubmit="submitQuestion(event)">
-                <div class="form-group">
-                    <label>ناوی تەواو</label>
-                    <input type="text" id="askName" required placeholder="ناوت بنووسە...">
-                </div>
-                <div class="form-group">
-                    <label>ژمارەی تەلەفۆن یان ئیمەیڵ</label>
-                    <input type="text" id="askContact" required placeholder="بۆ پەیوەندیکردنەوە">
-                </div>
-                <div class="form-group">
-                    <label>جۆری پرسیار</label>
-                    <select id="askType">
-                        <option value="student">پرسیاری خوێندکاری پزیشکی</option>
-                        <option value="patient">پرسیاری نەخۆش</option>
-                        <option value="general">پرسیاری گشتی</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>پرسیارەکەت</label>
-                    <textarea id="askQuestion" rows="5" required placeholder="پرسیارەکەت بە وردی بنووسە... لە کاتی ٢٤ کاتژمێردا وەڵام دەدرێتەوە"></textarea>
-                </div>
-                <button type="submit" class="btn-consult" style="width: 100%; background: var(--primary); color: white; border: none; padding: 14px;">
-                    <i class="fas fa-paper-plane"></i> ناردنی پرسیار
-                </button>
-            </form>
+    <!-- پشکنینەکان -->
+    <div id="tests" class="tab-content active">
+        <div class="section">
+            <h2 class="section-title">🔬 پشکنینەکانی تاقیگە</h2>
+            <div class="tests-grid" id="testsGrid"></div>
         </div>
-    </section>
+    </div>
+
+    <!-- فریاگوزاری سەرەتایی -->
+    <div id="firstaid" class="tab-content">
+        <div class="section">
+            <h2 class="section-title">🚑 فریاگوزاری سەرەتایی</h2>
+            <div class="firstaid-grid" id="firstaidGrid"></div>
+        </div>
+    </div>
+
+    <!-- ئامێرە تاقیگەییەکان -->
+    <div id="equipment" class="tab-content">
+        <div class="section">
+            <h2 class="section-title">⚙️ ئامێرەکانی تاقیگە</h2>
+            <div class="equipment-grid" id="equipmentGrid"></div>
+        </div>
+    </div>
 </div>
 
 <footer class="footer">
-    <div class="footer-grid">
-        <div class="footer-section">
-            <h4>🩺 سەنتەری پزیشکی ڕێبوار</h4>
-            <p>پلاتفۆرمێکی پزیشکی بە زانیاری ڕاستەقینە لە سەرچاوە باوەڕپێکراوەکان</p>
-        </div>
-        <div class="footer-section">
-            <h4>🔗 خزمەتگوزارییەکان</h4>
-            <a href="#diseases">نەخۆشییەکان</a>
-            <a href="#tips">ئامۆژگارییەکان</a>
-            <a href="#doctors">پزیشکەکان</a>
-            <a href="#ask">پرسیار بکە</a>
-        </div>
-        <div class="footer-section">
-            <h4>📞 پەیوەندی</h4>
-            <p><i class="fas fa-phone"></i> 0770-123-4567</p>
-            <p><i class="fas fa-envelope"></i> info@rebwar-med.com</p>
-            <p><i class="fas fa-map-marker-alt"></i> سلێمانی، کوردستان</p>
-        </div>
-    </div>
     <div class="footer-bottom">
         <p>© 2024 سەنتەری پزیشکی ڕێبوار - هەموو زانیارییەکان لە سەرچاوە باوەڕپێکراوەکان وەرگیراون</p>
         <p style="font-size: 0.8rem; margin-top: 10px;">ئاگاداری: ئەم زانیارییانە بۆ مەبەستی ئاگاداری و فێربوونە، جێگەی سەردانی پزیشک ناگرێتەوە</p>
     </div>
 </footer>
 
-<a href="https://wa.me/9647701234567" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
 <div class="notification" id="notification"></div>
 
-<!-- مۆدالی نەخۆشی -->
-<div class="modal" id="diseaseModal">
+<!-- مۆدال -->
+<div class="modal" id="infoModal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2 id="modalTitle">نەخۆشی</h2>
+            <h2 id="modalTitle">زانیاری</h2>
             <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
         <div class="modal-body" id="modalBody"></div>
@@ -687,316 +407,419 @@
 
 <script>
 // ============================================
-// زانیاری ڕاستەقینەی نەخۆشییەکان (لە ویکیپیدیا و سەرچاوە پزیشکییەکان)
+// ١. پشکنینەکانی تاقیگە (ڕاستەقینە)
 // ============================================
-const diseases = [
+const labTests = [
     {
         id: 1,
-        name: "نەخۆشی شەکرە (Diabetes Mellitus)",
+        name: "پشکنینی خوێنی تەواو (CBC)",
         icon: "🩸",
-        shortSymptoms: "تینوویی زۆر، زۆر میزکردن، کێش کەمبوونەوە، ماندوێتی",
-        description: "نەخۆشییەکی مەزبوڵی خوێنە کە لە کەمی ئەنسولین یان بەرگری لە ئەنسولین دروست دەبێت.",
-        symptoms: [
-            "تینوویی زۆر و وشکبوونی دەم",
-            "زۆر میزکردن (بەتایبەتی شەوان)",
-            "برسێتی زۆر",
-            "کێشی جەستە بەبێ هۆ کەم دەبێتەوە",
-            "مەوشک و بێهێسی",
-            "دەمەق سکە",
-            "ڕوون نەبینین",
-            "برینی هێواش چاک دەبێتەوە"
+        symptoms: "ماندوێتی، بێهێزی، تای بەردەوام، یان بۆ پشکنینی گشتی",
+        components: [
+            "Hemoglobin (Hb): پڕۆتینی هەڵگری ئۆکسجین - نۆرماڵ: پیاوان 13.5-17.5 g/dL، ژنان 12-15.5 g/dL",
+            "WBC: خڕۆکە سپییەکان - نۆرماڵ: 4,500-11,000 cells/mcL",
+            "Platelets: بۆ کەمپێکردنی خوێن - نۆرماڵ: 150,000-450,000 platelets/mcL"
         ],
-        causes: "هۆکارەکانی شەکرە بریتین لە: کەمی بەرهەمهێنانی ئەنسولین لە پەنکریاس، بەرگری جەستە لە ئەنسولین، هۆکارە بۆماوەییەکان، قەڵەوی، نەجوڵان.",
-        treatment: "چارەسەری شەکرە بریتییە لە: کۆنتڕۆڵکردنی ڕژێمی خواردن، ڕاهێنانی بەردەوام، دەرمانی دەمکی وەک مێتفۆرمین، چارەسەری ئەنسولین بۆ جۆری یەکەم.",
-        prevention: "ڕێگری لە شەکرەی جۆری دووەم: خواردنی تەندروست، کەمکردنەوەی شەکر و خواردنەوە شیرینەکان، ڕاهێنانی ڕۆژانەی ٣٠ خولەک، کەمکردنەوەی کێش.",
-        source: "https://www.who.int/ar/news-room/fact-sheets/detail/diabetes",
-        sourceName: "ڕێکخراوەی تەندروستی جیهانی (WHO)"
+        normalRange: "Hb: 13.5-17.5 g/dL (پیاوان), WBC: 4.5-11 K/uL, Platelets: 150-450 K/uL",
+        abnormal: "کەمخوێنی (ئەنیمیا)، بەرزبوونەوەی خڕۆکە سپییەکان (هەوکردن یان نەخۆشی خوێن)"
     },
     {
         id: 2,
-        name: "فشاری خوێنی بەرز (Hypertension)",
-        icon: "❤️",
-        shortSymptoms: "سەرئێشە، خەباتی دڵ، مەوشک، زۆرجار بێ نیشانە",
-        description: "فشاری خوێنی بەرز نەخۆشییەکی باوە کە هێزی خوێن بەرامبەر دیواری خوێنبەرەکان زۆر بەرزە.",
-        symptoms: [
-            "زۆرجار هیچ نیشانەیەکی دیار نییە (بە نەخۆشی بێدەنگ ناسراوە)",
-            "سەرئێشە (بەتایبەتی لە بەیانیاندا)",
-            "خەباتی هەناسە",
-            "مەوشک",
-            "خوێن لە لووت",
-            "ڕوون نەبینین",
-            "ئازاری سنگ"
+        name: "پشکنینی شەکرەی خوێن (Blood Sugar)",
+        icon: "🩸",
+        symptoms: "تینوێتی زۆر، میزکردنی زۆر، دابەزینی کێش بەبێ هۆکار",
+        components: [
+            "FBS (برسیێتی): دوای 8-10 کاتژمێر برسیێتی",
+            "Random Blood Sugar: لە هەر کاتێکدا دەکرێت"
         ],
-        causes: "هۆکارەکانی فشاری بەرز: تەمەن، مێژووی خێزانی، قەڵەوی، نەجوڵان، خواردنی خوێی زۆر، خواردنەوەی کحول، جگەرەکێشان، سترێس.",
-        treatment: "چارەسەر: کەمکردنەوەی خوێ لە خواردن، ڕاهێنان، کەمکردنەوەی کێش، دەرمانەکانی فشاری خوێن وەک ACE inhibitors, Beta-blockers, Diuretics.",
-        prevention: "ڕێگری: ڕاهێنانی بەردەوام، خواردنی کەم خوێ (کەمتر لە 5 گرام لە ڕۆژێکدا)، خواردنی زۆر سەوزە و میوە، دوورکەوتنەوە لە جگەرە و کحول.",
-        source: "https://www.who.int/ar/news-room/fact-sheets/detail/hypertension",
-        sourceName: "ڕێکخراوەی تەندروستی جیهانی (WHO)"
+        normalRange: "FBS: 70-100 mg/dL (برسیێتی)، دوای خواردن: <140 mg/dL",
+        abnormal: "سەروو 126 mg/dL بە برسیێتی ئاماژەیە بۆ شەکرە (Diabetes)"
     },
     {
         id: 3,
-        name: "فلۆ (ئەنفلۆنزا)",
-        icon: "🤒",
-        shortSymptoms: "تای بەرز، کۆکە، گرژی گەروو، ئێشی جەستە",
-        description: "فلۆ نەخۆشییەکی ڤایرۆسی هەناسەییە کە زۆر وەگیردارە و ساڵانە بڵاو دەبێتەوە.",
-        symptoms: [
-            "تای لەناکاو (زۆرجار 38°C یان زیاتر)",
-            "کۆکەی وشک",
-            "گرژی گەروو",
-            "ئێشی ماسولکە و جەستە",
-            "سەرئێشە",
-            "مەوشک و ماندوێتی زۆر",
-            "زەکە"
+        name: "پشکنینی ئەنزیمەکانی جگەر (LFTs)",
+        icon: "🧪",
+        symptoms: "زەردوویی (پێست یان سپێنەی چاو)، ئازاری لای ڕاستی سک، ڕشانەوە",
+        components: [
+            "ALT (Alanine Aminotransferase): نۆرماڵ: 10-40 U/L",
+            "AST (Aspartate Aminotransferase): نۆرماڵ: 10-40 U/L",
+            "Bilirubin: نۆرماڵ: 0.3-1.0 mg/dL",
+            "Albumin: نۆرماڵ: 3.5-5.0 g/dL"
         ],
-        causes: "ڤایرۆسی ئەنفلۆنزای جۆری A, B, C. بەهۆی پەستە و کۆکە و لێکەوتنی ڕووەکان دەگوازرێتەوە.",
-        treatment: "چارەسەر: پشوودان، خواردنەوەی زۆر ئاو و شلەمەنی گەرم، دژەتاکانی وەک پاراستامۆل، ئوسێلتامێڤیر (تامفلۆ) بۆ حاڵەتە قورسەکان.",
-        prevention: "ڕێگری: ڤاکسینی ساڵانەی فلۆ، شۆردنەوەی دەست بە ئاو و سابون، دوورکەوتنەوە لە کەسانی تووشبوو، بەکارهێنانی ماسک.",
-        source: "https://www.cdc.gov/flu/ar/index.html",
-        sourceName: "CDC - ناوەندی کۆنتڕۆڵ و ڕێگری نەخۆشییەکان"
+        normalRange: "ALT: 10-40 U/L, AST: 10-40 U/L, Bilirubin: 0.3-1.0 mg/dL",
+        abnormal: "بەرزبوونەوەیان ئاماژەیە بۆ هەوکردنی جگەر، چەوری جگەر، یان کێشەی زراو"
     },
     {
         id: 4,
-        name: "کۆرۆنا (کۆڤید-١٩)",
-        icon: "🦠",
-        shortSymptoms: "تا، کۆکە وشک، ماندوێتی، لەدەستدانی بۆن و تام",
-        description: "کۆڤید-١٩ نەخۆشییەکی ڤایرۆسییە کە لەلایەن ڤایرۆسی SARS-CoV-2ەوە دروست دەبێت و لە ساڵی ٢٠١٩ەوە بڵاو بووەتەوە.",
-        symptoms: [
-            "تا (لە %٨٨ی تووشبوواندا)",
-            "کۆکەی وشک",
-            "مەوشک و ماندوێتی",
-            "لەدەستدانی بۆن و تام",
-            "گرژی گەروو",
-            "سەرئێشە",
-            "خەباتی هەناسە (لە حاڵەتە قورسەکاندا)"
+        name: "پشکنینی گورچیلە (Kidney Function)",
+        icon: "🩺",
+        symptoms: "ئاوسانی قاچەکان، گۆڕانی ڕەنگی میز، بەرزبوونەوەی پەستانی خوێن",
+        components: [
+            "Creatinine: نۆرماڵ: پیاوان 0.7-1.3 mg/dL، ژنان 0.6-1.1 mg/dL",
+            "Blood Urea Nitrogen (BUN): نۆرماڵ: 7-20 mg/dL",
+            "eGFR (Estimated Glomerular Filtration Rate): >60 mL/min/1.73m²"
         ],
-        causes: "ڤایرۆسی SARS-CoV-2 لە ڕێگەی پەستە، کۆکە، قسەکردن و لێکەوتنی ڕووەکان دەگوازرێتەوە.",
-        treatment: "چارەسەر: جیابوونەوە، پشوودان، خواردنەوەی زۆر ئاو، دژەتاکان، لە نەخۆشخانەدا: ئۆکسجین، رێمدێسیڤیر، دێکسامێتازۆن.",
-        prevention: "ڕێگری: ڤاکسین، ماسک، دووری کۆمەڵایەتی (١-٢ مەتر)، شۆردنەوەی دەست، هەواگۆڕینی باش.",
-        source: "https://www.who.int/ar/emergencies/diseases/novel-coronavirus-2019",
-        sourceName: "WHO - ڕێکخراوەی تەندروستی جیهانی"
+        normalRange: "Creatinine: 0.7-1.3 mg/dL، BUN: 7-20 mg/dL، eGFR: >60",
+        abnormal: "بەرزبوونەوەیان نیشانەی تەمبەڵی یان سستی گورچیلەیە"
     },
     {
         id: 5,
-        name: "هەستۆرکی (ئەلێرجی)",
-        icon: "🌿",
-        shortSymptoms: "خوران، گرژی گەروو، سوربوونەوەی پێست، زەکە",
-        description: "هەستۆرکی کاردانەوەیەکی زیادەڕەوی سیستەمی بەرگری جەستەیە بەرامبەر ماددەیەکی بێ زیان.",
-        symptoms: [
-            "خورانی پێست و چاو",
-            "گرژی گەروو",
-            "زەکە یان لوت شل بوون",
-            "کۆکە",
-            "پێست سور دەبێتەوە",
-            "هەناسە تەنگ بوون (لە حاڵەتە قورسەکاندا)"
+        name: "پشکنینی چەوری خوێن (Lipid Profile)",
+        icon: "❤️",
+        symptoms: "زۆرتر بۆ خۆپارێزی و کەسانی تەمەن سەروو ٤٠ ساڵ",
+        components: [
+            "Total Cholesterol: نۆرماڵ: <200 mg/dL",
+            "Triglycerides: نۆرماڵ: <150 mg/dL",
+            "HDL (چەوری باش): >40 mg/dL (پیاوان)، >50 mg/dL (ژنان)",
+            "LDL (چەوری خراپ): <100 mg/dL"
         ],
-        causes: "هۆکارەکانی هەستۆرکی: تۆزی ماڵەوە، گەردە گوڵ و دەرختان (پۆڵن)، خواردنەکانی وەک گێزەر و بەنێک، دەرمانەکان، ماددەی کیمیایی.",
-        treatment: "چارەسەر: دوورکەوتنەوە لە هۆکارەکە، ئەنتیهیستامینەکان وەک لۆراتادین و سێتریزین، سپرەی لووت، لە حاڵەتی قورسدا ئێپینێفرین.",
-        prevention: "ڕێگری: ناسینەوەی هۆکارەکە و دوورکەوتنەوەی لێی، بەکارهێنانی ئامێری پاکێجی هەوا، دوورکەوتنەوە لە دەرەوە لە وەرزی پۆڵن.",
-        source: "https://www.mayoclinic.org/ar/diseases-conditions/allergies/",
-        sourceName: "Mayo Clinic"
+        normalRange: "Cholesterol: <200، LDL: <100، HDL: >40، Triglycerides: <150",
+        abnormal: "بەرزی LDL و Triglycerides مەترسی ڕەقبوونی خوێنبەرەکان زیاد دەکات"
     },
     {
         id: 6,
-        name: "نەخۆشی دڵ (Heart Disease)",
-        icon: "🫀",
-        shortSymptoms: "ئازاری سنگ، خەباتی هەناسە، هەستی مەوشک",
-        description: "نەخۆشییەکانی دڵ بریتین لە چەندین جۆری نەخۆشی کە کاریگەری لەسەر دڵ و خوێنبەرەکان هەیە.",
-        symptoms: [
-            "ئازاری سنگ (ئەنجاینە)",
-            "خەباتی هەناسە",
-            "هەستی مەوشک یان خەباتی دڵ",
-            "مەوشک و ماندوێتی",
-            "هەڵئاوسانی پێ و قۆڵ",
-            "سەرئێشە و مەوشک"
+        name: "پشکنینی هەوکردن (CRP / ESR)",
+        icon: "🔬",
+        symptoms: "بۆ زانینی بوونی هەوکردن لە لەشدا",
+        components: [
+            "CRP (C-Reactive Protein): نۆرماڵ: <10 mg/L",
+            "ESR (Erythrocyte Sedimentation Rate): نۆرماڵ: پیاوان 0-15 mm/hr، ژنان 0-20 mm/hr"
         ],
-        causes: "هۆکارەکان: دروستبوونی پلاک لە خوێنبەرەکان (ئەترۆسکلێرۆزیس)، فشاری بەرز، کۆلێسترۆڵی بەرز، جگەرەکێشان، نەخۆشی شەکرە، قەڵەوی.",
-        treatment: "چارەسەر: گۆڕینی شێوازی ژیان، دەرمانەکانی وەک ئەسپیرین و ستاتین، پڕۆسیجەری بالۆن و ستێنت، نەشتەرگەریی پەلی خوێن.",
-        prevention: "ڕێگری: ڕاهێنانی بەردەوام، خواردنی تەندروست (دەریایی، زەیتونی، سەوزە)، کەمکردنەوەی سترێس، دوورکەوتنەوە لە جگەرە، کۆنتڕۆڵکردنی فشاری خوێن.",
-        source: "https://www.who.int/ar/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)",
-        sourceName: "WHO - ڕێکخراوەی تەندروستی جیهانی"
+        normalRange: "CRP: <10 mg/L, ESR: 0-20 mm/hr",
+        abnormal: "بەرزبوونەوەیان دەڵێت 'هەوکردنێک لە لەشدا هەیە'، پێویستە بەدواداچوونی زیاتر بکرێت"
     }
 ];
 
-// ئامۆژگارییە تەندروستییەکان
-const tips = [
-    { icon: "fa-tint", title: "ئاوی پەڕ بخۆەوە", desc: "ڕۆژانە ٨-١٠ پەرداخ ئاو بخۆەوە بۆ باشتر کردنی میتابۆلیزم و کەمکردنەوەی مەترسی نەخۆشی گورچیلە" },
-    { icon: "fa-walking", title: "ڕاهێنان بکە", desc: "ڕۆژانە ٣٠ خولەک ڕاهێنانی مامناوەند وەک پیاسە یان ڕاکردن مەترسی نەخۆشی دڵ و شەکرە کەم دەکاتەوە" },
-    { icon: "fa-bed", title: "خەوێکی باش", desc: "هەر شەوێک ٧-٨ کاتژمێر بخەوە، کەمی خەو مەترسی نەخۆشی دڵ و قەڵەوی زیاد دەکات" },
-    { icon: "fa-carrot", title: "خواردنی تەندروست", desc: "زۆرتر سەوزە و میوە و دانەوێڵە تەواو بخۆ، کەمتر خواردنی ئامادە و خواردنەوە شیرینەکان" },
-    { icon: "fa-smoking-ban", title: "دوورکەوتنەوە لە جگەرە", desc: "جگەرە هۆکاری سەرەکی شێرپەنجە و نەخۆشی دڵ و سییەکانە، وازهێنان لە جگەرە ژیانت درێژتر دەکات" },
-    { icon: "fa-pray", title: "کەمکردنەوەی سترێس", desc: "مەراق و هەناسەدانەوەی قوڵ و نوێژ کردن یارمەتی کەمکردنەوەی سترێس و خەمۆکی دەدات" },
-    { icon: "fa-apple", title: "پنج سەوزە و میوە لە ڕۆژێکدا", desc: "خواردنی پێنج جۆر سەوزە و میوە لە ڕۆژێکدا ڤیتامین و ماددە کانزاییە پێویستەکان بۆ جەستە دابین دەکات" },
-    { icon: "fa-chart-line", title: "پشکنینی بەردەوام", desc: "فشاری خوێن و شەکرەی خوێن و کۆلێسترۆڵ ساڵانە پشکنین بکە بۆ دۆزینەوەی زووی نەخۆشییەکان" }
-];
-
-// پزیشکە ڕاستەقینەکان (ژمارە تەلەفۆنەکان ڕاستەقینەن - بۆ نموونە)
-const doctors = [
-    { name: "د. کارزان محەمەد", specialty: "پزیشکی ناوخۆ", phone: "0770-111-2222", location: "سلێمانی" },
-    { name: "د. شێلا ئەحمەد", specialty: "پزیشکی منداڵان", phone: "0770-333-4444", location: "هەولێر" },
-    { name: "د. ئەحمەد ڕەسوڵ", specialty: "پزیشکی دڵ", phone: "0770-555-6666", location: "سلێمانی" },
-    { name: "د. نەریمان حەمە", specialty: "پزیشکی پێست", phone: "0770-777-8888", location: "دهۆک" }
-];
-
-// سەرچاوە باوەڕپێکراوەکان (لینکی ڕاستەقینە)
-const resources = [
-    { icon: "fas fa-globe", name: "WHO - ڕێکخراوەی تەندروستی جیهانی", url: "https://www.who.int/ar", description: "زانیاری فەرمی دەربارەی نەخۆشییەکان و پەتاکان" },
-    { icon: "fas fa-chart-line", name: "CDC - ناوەندی کۆنتڕۆڵی نەخۆشی", url: "https://www.cdc.gov/ar/index.html", description: "ڕێنماییەکانی ڕێگری و چارەسەری نەخۆشییەکان" },
-    { icon: "fas fa-book", name: "Mayo Clinic", url: "https://www.mayoclinic.org/ar", description: "زانیاری پزیشکی باوەڕپێکراو بۆ نەخۆشەکان" },
-    { icon: "fas fa-heartbeat", name: "WebMD", url: "https://www.webmd.com/default.htm", description: "سەرچاوەیەکی گشتگیر بۆ زانیاری پزیشکی" },
-    { icon: "fab fa-wikipedia", name: "ویکیپیدیا - پزیشکی", url: "https://ar.wikipedia.org/wiki/%D8%B7%D8%A8", description: "زانیاری پزیشکی بە زمانی سادە" },
-    { icon: "fas fa-lungs", name: "پەیمانگای نیشتمانی تەندروستی (NIH)", url: "https://www.nih.gov/ar", description: "پەیمانگای توێژینەوەی پزیشکی ئەمریکا" }
-];
-
-let currentFilter = "";
-
-function createDiseasesGrid() {
-    const grid = document.getElementById('diseasesGrid');
-    let filteredDiseases = diseases;
-    if (currentFilter) {
-        filteredDiseases = diseases.filter(d => 
-            d.name.toLowerCase().includes(currentFilter.toLowerCase()) ||
-            d.shortSymptoms.toLowerCase().includes(currentFilter.toLowerCase())
-        );
+// ============================================
+// ٢. فریاگوزاری سەرەتایی (First Aid)
+// ============================================
+const firstAid = [
+    {
+        id: 1,
+        name: "بنەما گشتییەکان",
+        icon: "🛡️",
+        description: "سەلامەتی خۆت، ئارامبە، پەیوەندی بە فریاکەوتن",
+        steps: [
+            "سەلامەتی خۆت: دڵنیابە کە شوێنەکە بۆ خۆت سەلامەتە (بۆ نموونە ئەگەر کارەبایی بوو، سەرەتا کارەباکە ببڕەوە)",
+            "ئارامبە: بە هێمنی هەنگاو بنێ بۆ ئەوەی نەخۆشەکەش هەست بە ئارامی بکات",
+            "پەیوەندی: ئەگەر دۆخەکە مەترسیدارە، یەکسەر پەیوەندی بە فریاکەوتنی خێرا (122 لە هەرێمی کوردستان) بکە"
+        ]
+    },
+    {
+        id: 2,
+        name: "خوێنبەربوون (Bleeding)",
+        icon: "🩸",
+        description: "خوێنبەربوون بە پارچە قوماشی پاک دابگرە",
+        steps: [
+            "شوێنی برینەکە بە پارچە قوماشێکی پاک یان گاز (Gauze) بە توندی دابگرە بۆ ڕاگرتنی خوێنەکە",
+            "ئەگەر خوێنبەربوونەکە زۆرە و بە دڵپێداگرتن نەوەستا، پەستان بخەرە سەر ئەو خوێنبەرەی خوێن بۆ برینەکە دەبات",
+            "ئەگەر پارچە قوماشەکە پڕ بوو لە خوێن، لابەری مەدە، پارچەی تر لەسەری دابنێ"
+        ]
+    },
+    {
+        id: 3,
+        name: "لەهۆشچوون (Fainting)",
+        icon: "😵",
+        description: "نەخۆشەکە بخە سەر پشت و قاچەکانی بەرز بکەرەوە",
+        steps: [
+            "نەخۆشەکە بخە سەر پشت و قاچەکانی بەرز بکەرەوە (نزیکەی ٣٠ سم) بۆ ئەوەی خوێن باشتر بگاتە مێشک",
+            "دڵنیابە لەوەی هەناسەی ئاساییە و ڕێگای هەناسەدانی کراوەیە",
+            "کراس و پانتۆڵەکانی لێ بکەرەوە بۆ ئەوەی هەناسەدان ئاسانتر بێت",
+            "ئەگەر بەرز نەبووەوە، بیخەرە شوێنی رەق لایەک"
+        ]
+    },
+    {
+        id: 4,
+        name: "سووتان (Burns)",
+        icon: "🔥",
+        description: "بە ئاوی سارد بۆ ماوەی ١٠-١٥ خولەک بشۆ",
+        steps: [
+            "بە خێرایی شوێنی سووتانەکە بە ئاوی سارد (نەک بەستوو) بۆ ماوەی ١٠-١٥ خولەک بشۆ",
+            "مەوەرە خەیار، ددان، یان ڕۆن لەسەر شوێنی سووتانەکە، چونکە مەترسی هەوکردن زیاد دەکەن",
+            "ئەگەر سووتانەکە گەورە بوو، بە پارچەی پاک و نەرم دایبگرە",
+            "خواردنەوە و ئاوی پەڕ بدەرە"
+        ]
+    },
+    {
+        id: 5,
+        name: "خنکان (Choking)",
+        icon: "😰",
+        description: "ڕێگەی Heimlich بەکاربێنە",
+        steps: [
+            "ئەگەر کەسەکە ناتوانێت قسە بکات یان هەناسە بدات، پشتەکەی بە دەستت لە نێوان هەردوو شانی لێبدە (٥ جار)",
+            "ئەگەر سوودی نەبوو، لە پشتەوە باوەشی پێدا بکە، دەستت بکە بە مست و لە ژێر پەراسووەکانی بەرەو سەرەوە بە هێز پاڵ بنێ (٥ جار)",
+            "ئەم هەنگاوانە دووبارە بکەرەوە تاوەکو شتەکە دەردەچێت یان کەسەکە لەهۆش دەچێت",
+            "ئەگەر لەهۆش چوو، دەستبەجێ بە CPR دەستپێبکە"
+        ]
+    },
+    {
+        id: 6,
+        name: "شکانی ئێسک (Fracture)",
+        icon: "🦴",
+        description: "شوێنی شکاوەکە مەجوڵێنە و جێگیری بکە",
+        steps: [
+            "شوێنی شکاوەکە مەجوڵێنە و هەوڵبدە بە شتێکی ڕەق (وەک پارچە دار یان کارتۆن) جێگیری بکەیت (Splinting) تا دەگەنە پزیشک",
+            "ئەگەر خوێن دەڕوات، پەستانی بەسەردا بخە",
+            "شوێنی شکاوەکە بەرز بکەرەوە بۆ کەمکردنەوەی ئاوسان",
+            "سەرمای بخەرە سەر شوێنەکە (بە پارچە قوماشەوە)"
+        ]
     }
-    
-    grid.innerHTML = filteredDiseases.map(disease => `
-        <div class="disease-card" onclick="showDiseaseModal(${disease.id})">
-            <div class="disease-header">
-                <h3>${disease.icon} ${disease.name}</h3>
+];
+
+// ============================================
+// ٣. ئامێرە تاقیگەییەکان (Laboratory Equipment)
+// ============================================
+const equipment = [
+    {
+        id: 1,
+        name: "پایپێت (Micropipette)",
+        icon: "🧪",
+        description: "ئامێرێکی بچووک و وردە بۆ گواستنەوەی بڕێکی دیاریکراوی شلە",
+        usage: "بۆ هەڵگرتنی بڕی وردی سێرەم (Serum) یان ڕیاجێنت (Reagent) لە کاتی پشکنینەکاندا",
+        types: "بە پێی قەبارە: P10 (10 μl), P100 (100 μl), P1000 (1000 μl)"
+    },
+    {
+        id: 2,
+        name: "سەنتەرفیوژ (Centrifuge)",
+        icon: "⚡",
+        description: "ئامێرێکە بە خێراییەکی زۆر دەسوڕێتەوە",
+        usage: "بۆ جیاکردنەوەی پێکهاتەکانی خوێن. بەتایبەت بۆ جیاکردنەوەی 'سێرەم' یان 'پلازما' لە خڕۆکەکانی خوێن",
+        types: "Refrigerated Centrifuge, Microcentrifuge, Hematocrit Centrifuge"
+    },
+    {
+        id: 3,
+        name: "ئینکیوبەیتەر (Incubator)",
+        icon: "🌡️",
+        description: "ئامێرێکە پلەی گەرمییەکی جێگیر دابین دەکات",
+        usage: "بۆ گەشەکردنی بەکتریا (لە تاقیگەی میکرۆب) یان بۆ ئەو پشکنینانەی پێویستیان بە گەرمی ٣٧ پلەی سەدی هەیە",
+        types: "CO2 Incubator, BOD Incubator"
+    },
+    {
+        id: 4,
+        name: "سپێکترۆفۆتۆمیتەر (Spectrophotometer)",
+        icon: "🔆",
+        description: "ئامێرێکە ڕووناکی بە ناو نموونەکەدا دەنێرێت",
+        usage: "بۆ پێوانی چڕیی ماددە کیمیاییەکان لە خوێندا (وەک شەکرە، کۆلیسترۆڵ، و ئەنزیمەکان)",
+        principle: "پێوانی ڕووناکی هەڵمژراو (Absorbance) - پەیوەندی بە چڕی ماددەکەوە هەیە"
+    },
+    {
+        id: 5,
+        name: "میکرۆسکۆپ (Microscope)",
+        icon: "🔬",
+        description: "بۆ بینینی شتە نەبینراوەکان بە چاوی ئاسایی",
+        usage: "بۆ پشکنینی میز (Urine Analysis) یان بینینی پارازیت و خڕۆکەکانی خوێن",
+        parts: "چاوەی (Eyepiece)، لێنز (Objective lens)، مێز (Stage)، ڕووناکی (Light source)"
+    },
+    {
+        id: 6,
+        name: "تیوبەکانی کۆکردنەوە (Collection Tubes)",
+        icon: "🧴",
+        description: "بۆری بچووکن بەپێی ڕەنگی سەریان جیا دەکرێنەوە",
+        usage: "بۆ کۆکردنەوە و عەمبارکردنی نموونەی خوێن",
+        types: "سەری سوور (بۆ سێرەم)، سەری مۆر (بۆ CBC)، سەری سەوز (بۆ Heparin)، سەری زەرد (بۆ وەستانی خوێن)"
+    },
+    {
+        id: 7,
+        name: "کیوێت (Cuvette)",
+        icon: "📦",
+        description: "کۆنتێنەرێکی بچووکی چوارگۆشەیی (پلاستیکی یان شووشەیی)",
+        usage: "دەخرێتە ناو ئامێری سپێکترۆفۆتۆمیتەر بۆ پێوانی ڕەنگی خوێن و دیاریکردنی ڕێژەی ماددەکان",
+        material: "پلاستیک (بۆ یەک جار بەکارهێنان) یان شووشە (بۆ چەند جار)"
+    },
+    {
+        id: 8,
+        name: "تیپ (Tips)",
+        icon: "🔌",
+        description: "سەری پلاستیکی بچووکن کە دەخرێنە سەر پایپێت",
+        usage: "بۆ ئەوەی نموونەکان تێکەڵ نەبن، هەر جارێک بەکاردێن و فڕێ دەدرێن (Disposable)",
+        types: "Filtered Tips (بۆ کاری سترایل)، Non-Filtered Tips (بۆ کارگشتی)"
+    },
+    {
+        id: 9,
+        name: "دەستکێش (Gloves) و کۆت (Lab Coat)",
+        icon: "🧤",
+        description: "کەرەستەی سەلامەتی بۆ پاراستنی کارمەند",
+        usage: "دەستکێش بۆ پاراستنی دەست لە خوێن و ماددە کیمیاییەکان، کۆت بۆ پاراستنی جلوبەرگ",
+        material: "Latex, Nitrile, Vinyl (دەستکێش); Cotton, Polyester (کۆت)"
+    }
+];
+
+// Grid ایجاد کردن
+function createTestsGrid() {
+    const grid = document.getElementById('testsGrid');
+    grid.innerHTML = labTests.map(test => `
+        <div class="test-card" onclick="showTestDetails(${test.id})">
+            <div class="test-header">
+                <h3>${test.icon} ${test.name}</h3>
             </div>
-            <div class="disease-body">
-                <div class="disease-symptoms">
-                    <i class="fas fa-head-side-medical"></i> نیشانەکان: ${disease.shortSymptoms.substring(0, 60)}...
+            <div class="test-body">
+                <div class="test-symptoms">
+                    <i class="fas fa-head-side-medical"></i> نیشانەکان: ${test.symptoms.substring(0, 60)}...
                 </div>
-                <button class="btn-details">
-                    <i class="fas fa-info-circle"></i> زانیاری زیاتر
-                </button>
+                <div class="normal-range">
+                    <i class="fas fa-chart-line"></i> ڕێژەی نۆرماڵ: ${test.normalRange.substring(0, 50)}...
+                </div>
+                <button class="btn-details">زیاتر بزانە <i class="fas fa-arrow-left"></i></button>
             </div>
         </div>
     `).join('');
 }
 
-function showDiseaseModal(id) {
-    const disease = diseases.find(d => d.id === id);
-    if (!disease) return;
+function createFirstAidGrid() {
+    const grid = document.getElementById('firstaidGrid');
+    grid.innerHTML = firstAid.map(item => `
+        <div class="firstaid-card" onclick="showFirstAidDetails(${item.id})">
+            <div class="firstaid-header">
+                <h3>${item.icon} ${item.name}</h3>
+            </div>
+            <div class="firstaid-body">
+                <div class="firstaid-desc">
+                    ${item.description}
+                </div>
+                <button class="btn-details">زیاتر بزانە <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function createEquipmentGrid() {
+    const grid = document.getElementById('equipmentGrid');
+    grid.innerHTML = equipment.map(item => `
+        <div class="equipment-card" onclick="showEquipmentDetails(${item.id})">
+            <div class="equipment-header">
+                <h3>${item.icon} ${item.name}</h3>
+            </div>
+            <div class="equipment-body">
+                <div class="firstaid-desc">
+                    ${item.description.substring(0, 80)}...
+                </div>
+                <button class="btn-details">زیاتر بزانە <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// نیشاندانی وردەکارییەکان
+function showTestDetails(id) {
+    const test = labTests.find(t => t.id === id);
+    if (!test) return;
     
-    document.getElementById('modalTitle').innerHTML = `${disease.icon} ${disease.name}`;
+    document.getElementById('modalTitle').innerHTML = `${test.icon} ${test.name}`;
     document.getElementById('modalBody').innerHTML = `
         <div class="info-section">
-            <h4><i class="fas fa-stethoscope"></i> نیشانەکان</h4>
-            <ul>${disease.symptoms.map(s => `<li>${s}</li>`).join('')}</ul>
+            <h4><i class="fas fa-head-side-medical"></i> نیشانەکان بۆ پشکنین</h4>
+            <p>${test.symptoms}</p>
         </div>
         <div class="info-section">
-            <h4><i class="fas fa-microscope"></i> هۆکارەکان</h4>
-            <p>${disease.causes}</p>
+            <h4><i class="fas fa-flask"></i> پێکهاتە گرنگەکان</h4>
+            <ul>${test.components.map(c => `<li>${c}</li>`).join('')}</ul>
         </div>
         <div class="info-section">
-            <h4><i class="fas fa-syringe"></i> چارەسەر</h4>
-            <p>${disease.treatment}</p>
+            <h4><i class="fas fa-chart-line"></i> ڕێژەی نۆرماڵ</h4>
+            <p>${test.normalRange}</p>
         </div>
         <div class="info-section">
-            <h4><i class="fas fa-shield-alt"></i> ڕێگری</h4>
-            <p>${disease.prevention}</p>
-        </div>
-        <div class="info-section">
-            <a href="${disease.source}" target="_blank" class="source-link">
-                <i class="fas fa-external-link-alt"></i> سەرچاوە: ${disease.sourceName}
-            </a>
+            <h4><i class="fas fa-exclamation-triangle"></i> نائاسایی</h4>
+            <p>${test.abnormal}</p>
         </div>
         <div class="info-section" style="background: #fef3c7; padding: 15px; border-radius: 12px;">
-            <p style="color: #92400e; font-size: 0.9rem;">
-                <i class="fas fa-exclamation-triangle"></i> ئاگاداری: ئەم زانیارییانە بۆ مەبەستی ئاگاداری و فێربوونە. تکایە بۆ دەستنیشانکردنی نەخۆشی و چارەسەر بە پزیشک سەردان بکە.
-            </p>
+            <p style="color: #92400e;"><i class="fas fa-info-circle"></i> ئاگاداری: ڕێژەکان بەپێی تاقیگە دەگۆڕێن</p>
         </div>
     `;
-    document.getElementById('diseaseModal').classList.add('active');
+    document.getElementById('infoModal').classList.add('active');
+}
+
+function showFirstAidDetails(id) {
+    const item = firstAid.find(f => f.id === id);
+    if (!item) return;
+    
+    document.getElementById('modalTitle').innerHTML = `${item.icon} ${item.name}`;
+    document.getElementById('modalBody').innerHTML = `
+        <div class="info-section">
+            <h4><i class="fas fa-info-circle"></i> پێناسە</h4>
+            <p>${item.description}</p>
+        </div>
+        <div class="info-section">
+            <h4><i class="fas fa-list-ol"></i> هەنگاوەکان</h4>
+            <ul class="steps-list">
+                ${item.steps.map(step => `<li><i class="fas fa-check-circle" style="color: var(--success);"></i> ${step}</li>`).join('')}
+            </ul>
+        </div>
+        <div class="info-section" style="background: #fee2e2; padding: 15px; border-radius: 12px;">
+            <p style="color: #991b1b;"><i class="fas fa-ambulance"></i> کەی پەیوەندی بە پزیشک بکەیت؟</p>
+            <ul>
+                <li>ئەگەر کەسەکە لە هۆش خۆی نەچووەتەوە</li>
+                <li>ئەگەر هەناسەدانی وەستاوە یان زۆر زەحمەتە</li>
+                <li>ئەگەر خوێنبەربوونەکە بە هیچ جۆرێک ناوەستێت</li>
+                <li>ئەگەر ئازاری سنگی هەیە (گومانی جەڵتەی دڵ)</li>
+            </ul>
+        </div>
+    `;
+    document.getElementById('infoModal').classList.add('active');
+}
+
+function showEquipmentDetails(id) {
+    const item = equipment.find(e => e.id === id);
+    if (!item) return;
+    
+    document.getElementById('modalTitle').innerHTML = `${item.icon} ${item.name}`;
+    document.getElementById('modalBody').innerHTML = `
+        <div class="info-section">
+            <h4><i class="fas fa-microscope"></i> باسکردن</h4>
+            <p>${item.description}</p>
+        </div>
+        <div class="info-section">
+            <h4><i class="fas fa-tools"></i> بەکارهێنان</h4>
+            <p>${item.usage}</p>
+        </div>
+        ${item.types ? `<div class="info-section">
+            <h4><i class="fas fa-tags"></i> جۆرەکان</h4>
+            <p>${item.types}</p>
+        </div>` : ''}
+        ${item.parts ? `<div class="info-section">
+            <h4><i class="fas fa-puzzle-piece"></i> پێکهاتەکان</h4>
+            <p>${item.parts}</p>
+        </div>` : ''}
+        ${item.principle ? `<div class="info-section">
+            <h4><i class="fas fa-brain"></i> شێوازی کارکردن</h4>
+            <p>${item.principle}</p>
+        </div>` : ''}
+        ${item.material ? `<div class="info-section">
+            <h4><i class="fas fa-cube"></i> ماددەکان</h4>
+            <p>${item.material}</p>
+        </div>` : ''}
+    `;
+    document.getElementById('infoModal').classList.add('active');
 }
 
 function closeModal() {
-    document.getElementById('diseaseModal').classList.remove('active');
+    document.getElementById('infoModal').classList.remove('active');
 }
 
-function searchDiseases() {
-    currentFilter = document.getElementById('searchInput').value;
-    createDiseasesGrid();
-}
-
-function createTipsGrid() {
-    const grid = document.getElementById('tipsGrid');
-    grid.innerHTML = tips.map(tip => `
-        <div class="tip-card">
-            <i class="fas ${tip.icon}"></i>
-            <h3>${tip.title}</h3>
-            <p>${tip.desc}</p>
-        </div>
-    `).join('');
-}
-
-function createDoctorsGrid() {
-    const grid = document.getElementById('doctorsGrid');
-    grid.innerHTML = doctors.map(doc => `
-        <div class="doctor-card">
-            <div class="doctor-avatar">
-                <i class="fas fa-user-md"></i>
-            </div>
-            <div class="doctor-name">${doc.name}</div>
-            <div class="doctor-specialty">${doc.specialty}</div>
-            <div style="font-size: 0.85rem; color: var(--gray);">${doc.location}</div>
-            <button class="btn-consult" onclick="callDoctor('${doc.phone}')">
-                <i class="fas fa-phone-alt"></i> پەیوەندی: ${doc.phone}
-            </button>
-        </div>
-    `).join('');
-}
-
-function callDoctor(phone) {
-    window.location.href = `tel:${phone}`;
-}
-
-function createResourcesGrid() {
-    const grid = document.getElementById('resourcesGrid');
-    grid.innerHTML = resources.map(res => `
-        <a href="${res.url}" target="_blank" class="resource-card">
-            <div class="resource-icon">
-                <i class="${res.icon}"></i>
-            </div>
-            <div class="resource-info">
-                <h4>${res.name}</h4>
-                <p>${res.description}</p>
-            </div>
-        </a>
-    `).join('');
-}
-
-function submitQuestion(event) {
-    event.preventDefault();
-    const name = document.getElementById('askName').value;
-    const type = document.getElementById('askType').options[document.getElementById('askType').selectedIndex].text;
+function showTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     
-    showNotification(`🙏 سوپاس ${name}، پرسیارەکەت نێردرا. تیمەکەمان لە ماوەی ٢٤ کاتژمێردا پەیوەندیت پێدەکەن`);
-    
-    document.getElementById('askName').value = '';
-    document.getElementById('askContact').value = '';
-    document.getElementById('askQuestion').value = '';
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
 }
 
 function showNotification(msg) {
     const n = document.getElementById('notification');
     n.textContent = msg;
     n.classList.add('show');
-    setTimeout(() => n.classList.remove('show'), 3000);
+    setTimeout(() => n.classList.remove('show'), 2000);
 }
 
-// Click outside modal to close
-document.getElementById('diseaseModal').addEventListener('click', function(e) {
+// Initialize
+createTestsGrid();
+createFirstAidGrid();
+createEquipmentGrid();
+
+// Close modal on outside click
+document.getElementById('infoModal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
 });
-
-// Initialize
-createDiseasesGrid();
-createTipsGrid();
-createDoctorsGrid();
-createResourcesGrid();
 </script>
 
 </body>
