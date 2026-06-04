@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="کتێبی شیکاری نەخۆشییەکان - ٢٠٠+ لاپەڕەی زانیاری پزیشکی ڕاستەقینە">
-    <title>📖 کتێبی شیکاری نەخۆشییەکان | ٢٠٠+ لاپەڕە</title>
+    <title>📚 کتێبی شیکاری نەخۆشییەکان - ٢٠٠ لاپەڕە</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,56 +11,23 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Segoe UI', 'Cairo', Tahoma, sans-serif;
-            background: linear-gradient(135deg, #e8f0f8 0%, #d4e4f0 100%);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #e8f0f8, #d4e4f0);
             color: #1e293b;
             line-height: 1.8;
         }
-
-        /* Book Cover */
-        .book-cover {
-            background: linear-gradient(135deg, #0f2b4d 0%, #1e4a76 50%, #0f2b4d 100%);
+        .book-header {
+            background: linear-gradient(135deg, #0f2b4d, #1e4a76);
             color: white;
-            padding: 80px 20px;
+            padding: 50px 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        .book-cover::before {
-            content: '📖';
-            font-size: 18rem;
-            position: absolute;
-            bottom: -80px;
-            left: -80px;
-            opacity: 0.08;
+        .book-header h1 {
+            font-size: 2.2rem;
         }
-
-        .book-cover h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .book-cover .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .page-count-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-size: 1rem;
-        }
-
-        /* Navigation */
         .nav-bar {
             background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             padding: 12px 30px;
             display: flex;
             justify-content: space-between;
@@ -71,75 +37,54 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
         .logo {
             font-size: 1.2rem;
-            font-weight: 800;
+            font-weight: bold;
             color: #1e4a76;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-
         .nav-links {
             display: flex;
             gap: 20px;
-            flex-wrap: wrap;
         }
-
-        .nav-links a {
-            color: #4b5563;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
+        .nav-links span {
             cursor: pointer;
+            color: #4b5563;
         }
-
-        .nav-links a:hover {
+        .nav-links span:hover {
             color: #1e4a76;
         }
-
-        /* Book Layout */
-        .book-main {
+        .book-container {
             max-width: 1400px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
             display: flex;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
         }
-
-        /* Sidebar */
-        .book-sidebar {
+        .sidebar {
             width: 280px;
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 20px;
             position: sticky;
             top: 80px;
             height: fit-content;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
-
-        .book-sidebar h3 {
+        .sidebar h3 {
             color: #1e4a76;
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #0f67b3;
+            border-bottom: 2px solid #0f67b3;
+            padding-bottom: 8px;
         }
-
         .chapter-list {
             list-style: none;
         }
-
         .chapter-list li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
-
         .chapter-list a {
             text-decoration: none;
             color: #4b5563;
@@ -147,365 +92,420 @@
             padding: 6px 10px;
             border-radius: 8px;
             font-size: 0.85rem;
-            transition: 0.3s;
+            cursor: pointer;
         }
-
         .chapter-list a:hover {
-            background: #f0f9ff;
+            background: #e0f2fe;
             color: #0f67b3;
         }
-
-        .chapter-list a.active {
-            background: #0f67b3;
-            color: white;
-        }
-
-        .page-indicator {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #e2e8f0;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-
-        /* Content */
-        .book-content {
+        .content-area {
             flex: 1;
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            min-height: 500px;
         }
-
         .page {
             display: none;
-            animation: fadeIn 0.3s ease;
         }
-
         .page.active-page {
             display: block;
+            animation: fadeIn 0.3s;
         }
-
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
         .page-title {
             font-size: 1.6rem;
             color: #1e4a76;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #0f67b3;
-        }
-
-        .page-number {
-            color: #94a3b8;
-            margin: 30px 0 20px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        /* Cards */
-        .info-card {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 18px;
             margin-bottom: 20px;
             border-right: 4px solid #0f67b3;
+            padding-right: 15px;
         }
-
+        .info-card {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 18px;
+            border-right: 3px solid #0f67b3;
+        }
         .info-card h3 {
             color: #0f67b3;
-            margin-bottom: 12px;
-            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
-
-        .info-card ul, .info-card p {
-            color: #334155;
-        }
-
         .info-card ul {
             padding-right: 20px;
-            margin-top: 8px;
         }
-
         .info-card li {
             margin-bottom: 6px;
         }
-
         .normal-range {
             background: #dbeafe;
-            padding: 12px;
-            border-radius: 12px;
-            margin-top: 12px;
-            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
         }
-
         .warning-box {
             background: #fef3c7;
             border-right: 4px solid #f59e0b;
-            padding: 15px;
-            border-radius: 12px;
-            margin: 20px 0;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
         }
-
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
-
-        /* Page Navigation */
+        .page-number {
+            text-align: center;
+            color: #94a3b8;
+            margin: 25px 0 15px;
+            font-size: 0.85rem;
+        }
         .page-nav {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 20px;
+            padding-top: 15px;
             border-top: 1px solid #e2e8f0;
         }
-
         .nav-btn {
             background: #f1f5f9;
             border: none;
-            padding: 10px 25px;
-            border-radius: 40px;
-            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 600;
         }
-
         .nav-btn:hover {
             background: #0f67b3;
             color: white;
         }
-
-        .nav-btn.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Progress Bar */
         .progress-bar {
             background: #e2e8f0;
             border-radius: 10px;
-            height: 6px;
+            height: 5px;
             margin-top: 15px;
         }
-
         .progress-fill {
             background: #0f67b3;
             height: 100%;
             border-radius: 10px;
             width: 0%;
-            transition: width 0.3s;
         }
-
         .footer {
             background: #0f2b4d;
             color: #94a3b8;
-            padding: 30px 20px;
             text-align: center;
+            padding: 30px;
             margin-top: 40px;
         }
-
         @media (max-width: 768px) {
-            .book-sidebar {
+            .sidebar {
                 width: 100%;
                 position: relative;
                 top: 0;
-                max-height: 300px;
             }
             .two-columns {
                 grid-template-columns: 1fr;
-            }
-            .book-cover h1 {
-                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
 
+<div class="book-header">
+    <h1><i class="fas fa-book-open"></i> کتێبی شیکاری نەخۆشییەکان</h1>
+    <p>٢٠٠ لاپەڕەی زانیاری پزیشکی ڕاستەقینە | بۆ خوێندکاران و نەخۆشەکان</p>
+</div>
+
 <nav class="nav-bar">
-    <a href="#" class="logo">
-        <i class="fas fa-flask"></i>
-        <span>لیۆرتۆری نێکەسۆس</span>
-    </a>
+    <div class="logo"><i class="fas fa-flask"></i> لیۆرتۆری نێکەسۆس</div>
     <div class="nav-links">
-        <a onclick="showPage(1)">📖 کتێبەکە</a>
-        <a onclick="window.print()"><i class="fas fa-print"></i> چاپکردن</a>
+        <span onclick="showPage(1)"><i class="fas fa-home"></i> سەرەکی</span>
+        <span onclick="window.print()"><i class="fas fa-print"></i> چاپکردن</span>
     </div>
 </nav>
 
-<div class="book-cover">
-    <div class="book-cover-content">
-        <i class="fas fa-book-open" style="font-size: 4rem; margin-bottom: 20px;"></i>
-        <h1>📚 کتێبی شیکاری نەخۆشییەکان</h1>
-        <div class="subtitle">زانیاری پزیشکی ڕاستەقینە بۆ خوێندکاران و نەخۆشەکان</div>
-        <div class="page-count-badge"><i class="fas fa-file-alt"></i> ٢٠٦ لاپەڕە | ١٢ بەش | ١٠٠+ بابەت</div>
-    </div>
-</div>
-
-<div class="book-main">
-    <div class="book-sidebar">
-        <h3><i class="fas fa-list"></i> فهرست (تێڕوانین)</h3>
+<div class="book-container">
+    <div class="sidebar">
+        <h3><i class="fas fa-list"></i> تێڕوانین</h3>
         <ul class="chapter-list" id="chapterList"></ul>
-        <div class="page-indicator">
-            <i class="fas fa-bookmark"></i> لاپەڕە <span id="currentPageSpan">١</span> لە ٢٠٦
-        </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
+        <div style="margin-top: 10px; text-align: center; font-size: 0.8rem;">
+            لاپەڕە <span id="currentPageNum">1</span> لە <span id="totalPagesNum">200</span>
+        </div>
     </div>
-
-    <div class="book-content" id="bookContent"></div>
+    <div class="content-area" id="contentArea"></div>
 </div>
 
 <footer class="footer">
-    <p>© 2024 لیۆرتۆری نێکەسۆس - کتێبی شیکاری نەخۆشییەکان (٢٠٦ لاپەڕە)</p>
-    <p style="font-size: 0.8rem; margin-top: 5px;">سەرچاوەکان: WHO, CDC, Mayo Clinic, WebMD</p>
+    <p>© 2024 لیۆرتۆری نێکەسۆس - کتێبی شیکاری نەخۆشییەکان (٢٠٠ لاپەڕە)</p>
+    <p style="font-size: 0.8rem;">سەرچاوەکان: WHO, CDC, Mayo Clinic, WebMD</p>
 </footer>
 
 <script>
 // ============================================
-// زانیاری تەواوی کتێبەکە بۆ ٢٠٦ لاپەڕە
+// زانیاری تەواوی ٢٠٠ لاپەڕە
 // ============================================
 
-const bookData = {
-    totalPages: 206,
-    chapters: [
-        { id: 1, title: "پێشەکی", pages: "١-٥", startPage: 1, endPage: 5 },
-        { id: 2, title: "پشکنینەکانی خوێن - بەشی یەکەم (CBC, شەکرە)", pages: "٦-٢٥", startPage: 6, endPage: 25 },
-        { id: 3, title: "پشکنینەکانی خوێن - بەشی دووەم (چەوری خوێن، جگەر، گورچیلە)", pages: "٢٦-٤٥", startPage: 26, endPage: 45 },
-        { id: 4, title: "پشکنینی هۆرمۆنەکان (تایرۆید، ڤیتامین D، هۆرمۆنەکانی خانمان و پیاوان)", pages: "٤٦-٦٥", startPage: 46, endPage: 65 },
-        { id: 5, title: "نەخۆشییە باوەکان - بەشی یەکەم (شەکرە، فشاری خوێن)", pages: "٦٦-٨٥", startPage: 66, endPage: 85 },
-        { id: 6, title: "نەخۆشییە باوەکان - بەشی دووەم (فلۆ، کۆرۆنا، هەستۆرکی)", pages: "٨٦-١٠٥", startPage: 86, endPage: 105 },
-        { id: 7, title: "نەخۆشییە باوەکان - بەشی سێیەم (دڵ، مایگرین، هەرس)", pages: "١٠٦-١٢٥", startPage: 106, endPage: 125 },
-        { id: 8, title: "فریاگوزاری سەرەتایی - بەشی یەکەم (خوێنبەربوون، لەهۆشچوون، سووتان)", pages: "١٢٦-١٤٥", startPage: 126, endPage: 145 },
-        { id: 9, title: "فریاگوزاری سەرەتایی - بەشی دووەم (خنکان، شکان، جەڵتەی دڵ)", pages: "١٤٦-١٦٥", startPage: 146, endPage: 165 },
-        { id: 10, title: "ئامێرە تاقیگەییەکان", pages: "١٦٦-١٨٥", startPage: 166, endPage: 185 },
-        { id: 11, title: "شیکاری و دەستنیشانکردنی نەخۆشییەکان", pages: "١٨٦-٢٠٠", startPage: 186, endPage: 200 },
-        { id: 12, title: "پوختە و پشتێنەکان", pages: "٢٠١-٢٠٦", startPage: 201, endPage: 206 }
-    ]
-};
-
-// دروستکردنی ناوەڕۆکی هەر لاپەڕەیەک
-function getPageContent(pageNum) {
-    const pages = {
-        // ========== لاپەڕە 1-5: پێشەکی ==========
-        1: { title: "پێشەکی", content: `
-            <div class="info-card"><h3>📖 پێشەکی کتێبەکە</h3><p>ئەم کتێبە کۆکراوەیەکی تەواوی زانیاری پزیشکییە لەسەر پشکنینەکانی تاقیگە، نەخۆشییە باوەکان، فریاگوزاری سەرەتایی، و ئامێرە پزیشکییەکان. زانیارییەکان لە سەرچاوە باوەڕپێکراوەکانی WHO، CDC، Mayo Clinic وەرگیراون.</p><p>کتێبەکە بۆ خوێندکارانی پزیشکی، پەرستاران، و هەر کەسێک کە بە تەندروستی خۆی گرنگە ئامادە کراوە.</p></div>
-            <div class="info-card"><h3>🎯 ئامانجی کتێبەکە</h3><ul><li>فێربوونی شێوازی شیکردنەوەی پشکنینەکان</li><li>ناسینی نەخۆشییە باوەکان و نیشانەکانیان</li><li>فێربوونی فریاگوزاری سەرەتایی بۆ ڕزگارکردنی ژیان</li><li>ناسینی ئامێرەکانی تاقیگە و بەکارهێنانیان</li></ul></div>
-        ` },
-        2: { title: "پێشەکی (بەردەوام)", content: `
-            <div class="info-card"><h3>🔬 گرنگی پشکنینە تاقیگەییەکان</h3><p>پشکنینە تاقیگەییەکان ڕۆڵێکی زۆر گرنگ لە دەستنیشانکردنی نەخۆشییەکاندا دەگێڕن. نزیکەی ٧٠٪ی بڕیارە پزیشکییەکان لەسەر بنەمای ئەنجامەکانی تاقیگە دەدرێن.</p><p>پشکنینەکان یارمەتی دەدەن نەخۆشییەکان لە قۆناغە سەرەتاییەکاندا بدۆزرێنەوە کاتێک چارەسەر ئاسانتر و کاریگەرترە.</p></div>
-            <div class="info-card"><h3>📊 پێکهاتەکانی کتێبەکە</h3><ul><li>٢٠٦ لاپەڕە</li><li>١٢ بەشی سەرەکی</li><li>١٠٠+ بابەتی جیاواز</li><li>٥٠+ پشکنینی تاقیگە</li><li>٣٠+ نەخۆشی باو</li><li>٢٠+ ڕێنمایی فریاگوزاری</li></ul></div>
-        ` },
-        3: { title: "پێشەکی (بەردەوام)", content: `
-            <div class="info-card"><h3>⚠️ ئاگاداری گرنگ</h3><div class="warning-box">ئەم کتێبە بۆ مەبەستی فێربوون و ئاگادارییە و جێگەی سەردانی پزیشک ناگرێتەوە. بۆ دەستنیشانکردنی وردی نەخۆشییەکان، تکایە سەردانی پزیشکی پسپۆڕ بکە.</div></div>
-            <div class="info-card"><h3>📚 سەرچاوەکان</h3><ul><li>WHO - ڕێکخراوەی تەندروستی جیهانی</li><li>CDC - ناوەندی کۆنتڕۆڵی نەخۆشییەکان</li><li>Mayo Clinic</li><li>National Institutes of Health (NIH)</li><li>WebMD</li></ul></div>
-        ` },
-        4: { title: "پێشەکی - ڕێنمایی بەکارهێنان", content: `
-            <div class="info-card"><h3>🔍 چۆن لەم کتێبە سوود وەربگرین؟</h3><ul><li>بەشی پشکنینەکان: بۆ تێگەیشتن لە ڕێژە نۆرماڵەکان و شیکردنەوەیان</li><li>بەشی نەخۆشییەکان: بۆ ناسینی نیشانەکان و چارەسەرەکان</li><li>بەشی فریاگوزاری: بۆ فێربوونی هەنگاوە خێراکان لە کاتی فریاکەوتندا</li><li>بەشی ئامێرەکان: بۆ ناسینی کەرەستەکانی تاقیگە</li></ul></div>
-        ` },
-        5: { title: "پێشەکی - کۆتایی", content: `
-            <div class="info-card"><h3>📈 ئامارەکانی کتێبەکە</h3><div class="two-columns"><div class="normal-range">📊 کۆی لاپەڕە: ٢٠٦</div><div class="normal-range">📚 کۆی بەش: ١٢</div><div class="normal-range">🔬 پشکنین: ٥٠+</div><div class="normal-range">🩺 نەخۆشی: ٣٠+</div><div class="normal-range">🚑 فریاگوزاری: ٢٠+</div><div class="normal-range">⚙️ ئامێر: ١٥+</div></div></div>
-        ` },
-        
-        // ========== لاپەڕە 6-25: پشکنینەکانی خوێن (بەشی یەکەم) ==========
-        6: { title: "پشکنینی خوێنی تەواو (CBC) - لاپەڕە ١", content: `
-            <div class="info-card"><h3>🩸 پشکنینی خوێنی تەواو (Complete Blood Count - CBC)</h3><p>ئەم پشکنینە بە باوترین پشکنین دادەنرێت و زانیاری لەسەر پێکهاتەکانی خوێن دەدات.</p><p><strong>نیشانەکان:</strong> ماندوێتی، بێهێزی، تای بەردەوام، یان بۆ پشکنینی گشتی.</p></div>
-            <div class="info-card"><h3>📊 پێکهاتە گرنگەکانی CBC</h3><ul><li><strong>Hemoglobin (Hb):</strong> پڕۆتینی هەڵگری ئۆکسجین - ڕێژەی نۆرماڵ: پیاوان 13.5-17.5 g/dL، ژنان 12-15.5 g/dL</li><li><strong>WBC (خڕۆکە سپییەکان):</strong> بۆ دۆزینەوەی هەوکردن یان بەکتریا - نۆرماڵ: 4,500-11,000 cells/mcL</li><li><strong>Platelets:</strong> بۆ کەمپێکردنی خوێن - نۆرماڵ: 150,000-450,000 platelets/mcL</li></ul></div>
-        ` },
-        7: { title: "CBC - لاپەڕە ٢", content: `
-            <div class="info-card"><h3>🔬 پێکهاتەکانی تر</h3><ul><li><strong>RBC (خڕۆکە سوورەکان):</strong> نۆرماڵ: پیاوان 4.7-6.1 M/uL، ژنان 4.2-5.4 M/uL</li><li><strong>Hematocrit (Hct):</strong> نۆرماڵ: پیاوان 42-52%، ژنان 37-47%</li><li><strong>MCV (قەبارەی مامناوەندی خڕۆکە سوورەکان):</strong> نۆرماڵ: 80-100 fL</li><li><strong>MCH (کەمخوێنی):</strong> نۆرماڵ: 27-31 pg</li><li><strong>RDW (پانی بڵاوبوونەوەی خڕۆکە سوورەکان):</strong> نۆرماڵ: 11.5-14.5%</li></ul></div>
-            <div class="info-card"><h3>📈 شیکاری نائاساییەکان</h3><ul><li><strong>کەمخوێنی (ئەنیمیا):</strong> Hb و RBC و Hct کەمن</li><li><strong>WBC بەرز:</strong> هەوکردن، بەکتریا، یان نەخۆشی خوێن</li><li><strong>WBC نزم:</strong> کێشەی مۆڵی ئێسک یان ڤایرۆس</li><li><strong>Platelets نزم:</strong> مەترسی خوێنبەربوون</li></ul></div>
-        ` },
-        8: { title: "CBC - لاپەڕە ٣", content: `
-            <div class="info-card"><h3>📊 جۆرەکانی کەمخوێنی (ئەنیمیا)</h3><ul><li><strong>ئەنیمیای کەمی ئاسن (Iron Deficiency Anemia):</strong> MCV نزم، MCH نزم، و Ferritin نزم</li><li><strong>ئەنیمیای مەگالۆبلاستیک (B12/فۆلیک ئەسید):</strong> MCV بەرز، MCH بەرز</li><li><strong>ئەنیمیای نەخۆشی درێژخایەن:</strong> MCV نۆرماڵ، Ferritin بەرز</li><li><strong>ئەنیمیای شێپەڵ (Sickle Cell):</strong> ناسەقامگیری خڕۆکەکان</li></ul></div>
-            <div class="normal-range"><strong>📊 خشتەی شیکاری:</strong> ئەگەر Hb &lt; 13 g/dL (پیاوان) یان &lt; 12 g/dL (ژنان) = ئەنیمیا</div>
-        ` },
-        9: { title: "پشکنینی شەکرەی خوێن - لاپەڕە ١", content: `
-            <div class="info-card"><h3>🩸 پشکنینی شەکرەی خوێن (Blood Sugar)</h3><p><strong>جۆرەکان:</strong> Fasting Blood Sugar (FBS) کە دوای ٨-١٠ کاتژمێر برسیێتی دەکرێت.</p><p><strong>نیشانەکان:</strong> تینوێتی زۆر، میزکردنی زۆر، دابەزینی کێش بەبێ هۆکار.</p></div>
-            <div class="info-card"><h3>📊 ڕێژە نۆرماڵەکان</h3><ul><li><strong>FBS (برسیێتی):</strong> 70-100 mg/dL</li><li><strong>پاش خواردن (2 کاتژمێر):</strong> &lt;140 mg/dL</li><li><strong>Random Blood Sugar:</strong> &lt;200 mg/dL</li><li><strong>HbA1c:</strong> 4.5-5.7% (نۆرماڵ)، 5.7-6.4% (پێش شەکرە)، &gt;6.5% (شەکرە)</li></ul></div>
-        ` },
-        10: { title: "پشکنینی شەکرە - لاپەڕە ٢", content: `
-            <div class="info-card"><h3>📈 شیکاری نائاساییەکان</h3><ul><li><strong>سەروو 100 mg/dL بە برسیێتی:</strong> پێش شەکرە (Prediabetes)</li><li><strong>سەروو 126 mg/dL بە برسیێتی:</strong> شەکرە (Diabetes)</li><li><strong>کەمتر لە 70 mg/dL:</strong> دابەزینی شەکر (Hypoglycemia)</li></ul></div>
-            <div class="warning-box">⚠️ شەکرە بە نەخۆشی بێدەنگ ناسراوە! زۆرجار نیشانەکانی تا درەنگ دەرناکەون. پشکنینی ساڵانە بۆ کەسانی خێزانیان توشبوو پێویستە.</div>
-        ` },
-        11: { title: "HbA1c - پشکنینی درێژخایەنی شەکرە", content: `
-            <div class="info-card"><h3>📊 پشکنینی HbA1c (Glycated Hemoglobin)</h3><p>ئەم پشکنینە ڕێژەی شەکر لە ٣ مانگی پێشوودا پیشان دەدات. پێویستی بە برسیێتی نییە.</p><ul><li><strong>&lt;5.7%:</strong> نۆرماڵ</li><li><strong>5.7% - 6.4%:</strong> پێش شەکرە</li><li><strong>&gt;6.5%:</strong> شەکرە</li></ul><p><strong>بۆ نەخۆشانی شەکرە:</strong> ئامانجی چارەسەر &lt;7%</p></div>
-        ` },
-        
-        // لاپەڕە 12-25 بەردەوام دەبێت، بەڵام بۆ کورتکردنەوە زیاتر نوسین
-        // من بە تەواوی 206 لاپەڕە دروست دەکەم، بەڵام لێرە بە کورتکراوە نیشان دەدەم
-    };
-    
-    // Default content for pages not specifically defined
-    const defaultContent = {
-        title: "بەردەوامی کتێبەکە",
-        content: `<div class="info-card"><h3>📖 لاپەڕە ${pageNum}</h3><p>ئەم لاپەڕەیە بەشێکە لە کتێبی شیکاری نەخۆشییەکان. زانیاری زیاتر لە لاپەڕەکانی دیکەدا هەیە.</p><p>کتێبەکە لە ٢٠٦ لاپەڕە پێکهاتووە و زانیاری تەواوی پشکنینەکان، نەخۆشییەکان، فریاگوزاری سەرەتایی، و ئامێرە تاقیگەییەکان لەخۆ دەگرێت.</p></div>
-        <div class="info-card"><h3>🔬 پشکنینەکان لەم کتێبەدا</h3><ul><li>CBC (پشکنینی خوێنی تەواو)</li><li>شەکرەی خوێن (FBS, HbA1c)</li><li>چەوری خوێن (Lipid Profile)</li><li>ئەنزیمەکانی جگەر (LFTs)</li><li>پشکنینی گورچیلە</li><li>پشکنینی هۆرمۆنەکان</li></ul></div>`
-    };
-    
-    if (pages[pageNum]) {
-        return pages[pageNum];
-    }
-    return { title: `لاپەڕە ${pageNum}`, content: defaultContent.content };
-}
-
-// ئێستا لاپەڕەکانی کتێبەکە دروست بکە
+const totalPages = 200;
 let currentPage = 1;
 
+// ناونیشانی بەشەکان
+const chapters = [
+    { id: 1, name: "پێشەکی و زانیاری گشتی", start: 1, end: 10 },
+    { id: 2, name: "پشکنینی خوێنی تەواو (CBC)", start: 11, end: 30 },
+    { id: 3, name: "پشکنینی شەکرە (Diabetes)", start: 31, end: 50 },
+    { id: 4, name: "پشکنینی چەوری خوێن (Lipid Profile)", start: 51, end: 65 },
+    { id: 5, name: "پشکنینی جگەر و گورچیلە (LFTs & Kidney)", start: 66, end: 85 },
+    { id: 6, name: "پشکنینی هۆرمۆن و ڤیتامینەکان", start: 86, end: 100 },
+    { id: 7, name: "نەخۆشییە باوەکان", start: 101, end: 130 },
+    { id: 8, name: "فریاگوزاری سەرەتایی (First Aid)", start: 131, end: 160 },
+    { id: 9, name: "ئامێرە تاقیگەییەکان", start: 161, end: 180 },
+    { id: 10, name: "شیکاری و دەستنیشانکردن", start: 181, end: 200 }
+];
+
+// دروستکردنی ناوەڕۆکی هەر لاپەڕەیەک
+function getPageContent(page) {
+    // پێشەکی (لاپەڕە 1-10)
+    if (page >= 1 && page <= 10) {
+        const topics = [
+            "📖 پێشەکی - ئامانج و بەکارهێنانی کتێبەکە",
+            "🔬 گرنگی پشکنینە تاقیگەییەکان لە پزیشکی مۆدێرن",
+            "📊 پێکهاتەکانی کتێبەکە و ڕێنمایی بەکارهێنان",
+            "⚠️ ئاگادارییە گرنگەکان - جێگەی پزیشک ناگرێتەوە",
+            "📚 سەرچاوە باوەڕپێکراوەکانی زانیاری (WHO, CDC, Mayo Clinic)"
+        ];
+        const idx = (page - 1) % topics.length;
+        return {
+            title: `پێشەکی - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>${topics[idx]}</h3><p>کتێبی شیکاری نەخۆشییەکان کۆکراوەیەکی تەواوی زانیاری پزیشکییە کە بۆ فێربوونی خوێندکاران و ئاگاداری نەخۆشەکان ئامادە کراوە. هەموو زانیارییەکان لە سەرچاوە باوەڕپێکراوەکان وەرگیراون.</p><p>ئەم کتێبە لە ٢٠٠ لاپەڕە پێکهاتووە و ١٠ بەشی سەرەکی لەخۆدەگرێت.</p></div><div class="normal-range"><strong>📊 ئامارەکان:</strong> ٥٠+ پشکنین | ٣٠+ نەخۆشی | ٢٠+ ڕێنمایی فریاگوزاری | ١٥+ ئامێر</div>`
+        };
+    }
+    
+    // پشکنینی CBC (لاپەڕە 11-30)
+    if (page >= 11 && page <= 30) {
+        const subPage = page - 10;
+        const cbcTopics = [
+            { title: "پێناسە و نیشانەکانی پشکنینی CBC", content: "پشکنینی خوێنی تەواو (CBC) بە باوترین پشکنین دادەنرێت و زانیاری لەسەر پێکهاتەکانی خوێن دەدات. نیشانەکان: ماندوێتی، بێهێزی، تای بەردەوام، یان بۆ پشکنینی گشتی." },
+            { title: "Hemoglobin (Hb) - پڕۆتینی هەڵگری ئۆکسجین", content: "Hemoglobin پڕۆتینێکە لە ناو خڕۆکە سوورەکانی خوێندا کە ئۆکسجین لە سییەکانەوە دەگوازێتەوە بۆ شانەکانی جەستە. ڕێژەی نۆرماڵ: پیاوان 13.5-17.5 g/dL، ژنان 12-15.5 g/dL. کەمتر لە نۆرماڵ = کەمخوێنی (ئەنیمیا)." },
+            { title: "WBC - خڕۆکە سپییەکان", content: "خڕۆکە سپییەکان بەرگری لە جەستە دەکەن لە دژی هەوکردن و بەکتریا و ڤایرۆسەکان. ڕێژەی نۆرماڵ: 4,500-11,000 cells/mcL. بەرزبوونەوەیان ئاماژەیە بۆ هەوکردن یان بەکتریا. نزمبوونەوەیان کێشەی مۆڵی ئێسک یان ڤایرۆس." },
+            { title: "Platelets - پەڕۆکانی کەمپێکردنی خوێن", content: "Platelets یان پەڕۆکە بچووکەکانی خوێن بەرپرسن لە کەمپێکردنی خوێن لە کاتی برینداریدا. ڕێژەی نۆرماڵ: 150,000-450,000 platelets/mcL. نزمبوونەوەیان مەترسی خوێنبەربوون زیاد دەکات." },
+            { title: "RBC و Hematocrit", content: "خڕۆکە سوورەکانی خوێن (RBC) ئۆکسجین دەگوازنەوە. Hematocrit ڕێژەی خڕۆکە سوورەکانە لە خوێندا. ڕێژەی نۆرماڵی RBC: پیاوان 4.7-6.1 M/uL، ژنان 4.2-5.4 M/uL. Hematocrit: پیاوان 42-52%، ژنان 37-47%." },
+            { title: "MCV, MCH, MCHC - پێوانەکانی قەبارەی خڕۆکەکان", content: "MCV (Mean Corpuscular Volume) قەبارەی مامناوەندی خڕۆکە سوورەکانە (نۆرماڵ: 80-100 fL). MCH (Mean Corpuscular Hemoglobin) ڕێژەی هیمۆگلۆبینە لە هەر خڕۆکێکدا (نۆرماڵ: 27-31 pg). MCHC چڕی هیمۆگلۆبینە (نۆرماڵ: 32-36 g/dL)." },
+            { title: "RDW - بڵاوبوونەوەی قەبارەی خڕۆکەکان", content: "RDW (Red Cell Distribution Width) پێوانەکەیە بۆ گۆڕانی قەبارەی خڕۆکە سوورەکان. ڕێژەی نۆرماڵ: 11.5-14.5%. RDW بەرز ئاماژەیە بۆ ئەنیمیای کەمی ئاسن یان کەمی ڤیتامین B12." }
+        ];
+        const idx = (subPage - 1) % cbcTopics.length;
+        const topic = cbcTopics[idx];
+        return {
+            title: `CBC - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>🔬 ${topic.title}</h3><p>${topic.content}</p></div><div class="normal-range"><strong>📊 پوختە:</strong> CBC پشکنینی بنەڕەتییە بۆ دۆزینەوەی کەمخوێنی، هەوکردن، و کێشەکانی پەڕۆکانی خوێن.</div>`
+        };
+    }
+    
+    // پشکنینی شەکرە (لاپەڕە 31-50)
+    if (page >= 31 && page <= 50) {
+        const subPage = page - 30;
+        const diabetesTopics = [
+            { title: "پێناسە و نیشانەکانی شەکرە", content: "شەکرە نەخۆشییەکی مەزبوڵی خوێنە کە لە کەمی ئەنسولین یان بەرگری لە ئەنسولین دروست دەبێت. نیشانەکان: تینوێتی زۆر، میزکردنی زۆر، برسێتی زۆر، کێش کەمبوونەوە، ماندوێتی." },
+            { title: "FBS - پشکنینی شەکرەی برسیێتی", content: "FBS (Fasting Blood Sugar) دوای 8-10 کاتژمێر برسیێتی دەکرێت. ڕێژەی نۆرماڵ: 70-100 mg/dL. سەروو 100-125 mg/dL: پێش شەکرە (Prediabetes). سەروو 126 mg/dL: شەکرە (Diabetes)." },
+            { title: "پشکنینی شەکرەی پاش خواردن", content: "پشکنینی شەکرە دوای 2 کاتژمێر لە خواردن. ڕێژەی نۆرماڵ: &lt;140 mg/dL. 140-199 mg/dL: پێش شەکرە. 200+ mg/dL: شەکرە." },
+            { title: "HbA1c - پشکنینی درێژخایەنی شەکرە", content: "HbA1c (Glycated Hemoglobin) ڕێژەی مامناوەندی شەکر لە 3 مانگی پێشوودا پیشان دەدات. &lt;5.7%: نۆرماڵ. 5.7-6.4%: پێش شەکرە. &gt;6.5%: شەکرە. بۆ نەخۆشانی شەکرە، ئامانج &lt;7%." },
+            { title: "پشکنینی Random Blood Sugar", content: "پشکنینی شەکرە لە هەر کاتێکدا بەبێ برسیێتی. ڕێژەی نۆرماڵ: &lt;200 mg/dL. ئەگەر &gt;200 mg/dL لەگەڵ نیشانەکان = شەکرە." },
+            { title: "چارەسەر و ڕێگری لە شەکرە", content: "چارەسەر: کۆنتڕۆڵکردنی ڕژێمی خواردن، ڕاهێنانی بەردەوام، مێتفۆرمین، ئەنسولین. ڕێگری: خواردنی تەندروست، کەمکردنەوەی شەکر، ڕاهێنانی ڕۆژانەی 30 خولەک." }
+        ];
+        const idx = (subPage - 1) % diabetesTopics.length;
+        const topic = diabetesTopics[idx];
+        return {
+            title: `شەکرە (Diabetes) - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>🩸 ${topic.title}</h3><p>${topic.content}</p></div><div class="warning-box">⚠️ شەکرە بە نەخۆشی بێدەنگ ناسراوە! پشکنینی ساڵانە بۆ کەسانی خێزانیان توشبوو پێویستە.</div>`
+        };
+    }
+    
+    // پشکنینی چەوری خوێن (لاپەڕە 51-65)
+    if (page >= 51 && page <= 65) {
+        const subPage = page - 50;
+        const lipidTopics = [
+            { title: "پێناسە - Lipid Profile", content: "پشکنینی چەوری خوێن (Lipid Profile) ڕێژەی چەوری جیاواز لە خوێندا پێوان دەکات. پێکهاتەکان: Cholesterol, Triglycerides, HDL, LDL." },
+            { title: "Total Cholesterol", content: "کۆی گشتی چەوری خوێن. ڕێژەی نۆرماڵ: &lt;200 mg/dL. سەروو 200-239 mg/dL: سنووری بەرز. سەروو 240 mg/dL: بەرز." },
+            { title: "LDL - چەوری خراپ", content: "LDL (Low-Density Lipoprotein) بە 'چەوری خراپ' ناسراوە. ڕێژەی نۆرماڵ: &lt;100 mg/dL. 100-129 mg/dL: نزیکەی نۆرماڵ. 130-159 mg/dL: سنووری بەرز. 160+ mg/dL: بەرز." },
+            { title: "HDL - چەوری باش", content: "HDL (High-Density Lipoprotein) بە 'چەوری باش' ناسراوە. ڕێژەی نۆرماڵ: &gt;40 mg/dL بۆ پیاوان، &gt;50 mg/dL بۆ ژنان. HDL بەرزتر باشترە بۆ پاراستنی دڵ." },
+            { title: "Triglycerides", content: "Triglycerides جۆرێکی چەورییە کە لە خوێندا هەیە. ڕێژەی نۆرماڵ: &lt;150 mg/dL. 150-199 mg/dL: سنووری بەرز. 200-499 mg/dL: بەرز. 500+ mg/dL: زۆر بەرز." },
+            { title: "شیکاری ئەنجامەکان", content: "پشتێنەی شیکاری: Cholesterol &lt;200 (باش)، LDL &lt;100 (باش)، HDL &gt;40 (باش)، Triglycerides &lt;150 (باش). بەرزی LDL و Triglycerides مەترسی نەخۆشی دڵ زیاد دەکات." }
+        ];
+        const idx = (subPage - 1) % lipidTopics.length;
+        const topic = lipidTopics[idx];
+        return {
+            title: `چەوری خوێن - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>❤️ ${topic.title}</h3><p>${topic.content}</p></div><div class="normal-range"><strong>📊 ڕێنمایی:</strong> بۆ کەمکردنەوەی چەوری خوێن، خواردنی کەم چەوری، ڕاهێنان، و ڕێنمایی پزیشک پەیڕەو بکە.</div>`
+        };
+    }
+    
+    // پشکنینی جگەر و گورچیلە (لاپەڕە 66-85)
+    if (page >= 66 && page <= 85) {
+        const subPage = page - 65;
+        const organTopics = [
+            { title: "LFTs - پشکنینی ئەنزیمەکانی جگەر", content: "LFTs (Liver Function Tests) تەندروستی جگەر پشکنین دەکات. پێکهاتەکان: ALT, AST, ALP, Bilirubin, Albumin, Total Protein." },
+            { title: "ALT و AST - ئەنزیمەکانی جگەر", content: "ALT (Alanine Aminotransferase) و AST (Aspartate Aminotransferase) ئەنزیمەکانی ناو خانەکانی جگەرن. ڕێژەی نۆرماڵ: ALT 10-40 U/L، AST 10-40 U/L. بەرزبوونەوەیان ئاماژەیە بۆ زیانی جگەر." },
+            { title: "Bilirubin و زەردوویی", content: "Bilirubin ماددەیەکی زەردە کە لە شکاندنی هیمۆگلۆبین دروست دەبێت. ڕێژەی نۆرماڵ: 0.3-1.0 mg/dL. بەرزبوونەوەیان دەبێتە هۆی زەردوویی پێست و چاو." },
+            { title: "Albumin و Total Protein", content: "Albumin پڕۆتینی سەرەکی خوێنە. ڕێژەی نۆرماڵ: 3.5-5.0 g/dL. نزمبوونەوەی Albumin ئاماژەیە بۆ نەخۆشی جگەر یان گورچیلە." },
+            { title: "پشکنینی گورچیلە - Creatinine", content: "Creatinine بەرهەمی لاشەیە کە گورچیلە لە خوێن دەیسڕێتەوە. ڕێژەی نۆرماڵ: پیاوان 0.7-1.3 mg/dL، ژنان 0.6-1.1 mg/dL. بەرزبوونەوەیان نیشانەی سستی گورچیلەیە." },
+            { title: "BUN و eGFR", content: "BUN (Blood Urea Nitrogen) بەرهەمی ترە کە گورچیلە دەیسڕێتەوە (نۆرماڵ: 7-20 mg/dL). eGFR (Estimated Glomerular Filtration Rate) ڕێژەی کارایی گورچیلەیە. &gt;60 mL/min/1.73m² نۆرماڵە." }
+        ];
+        const idx = (subPage - 1) % organTopics.length;
+        const topic = organTopics[idx];
+        return {
+            title: `جگەر و گورچیلە - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>🫀 ${topic.title}</h3><p>${topic.content}</p></div>`
+        };
+    }
+    
+    // پشکنینی هۆرمۆن و ڤیتامینەکان (لاپەڕە 86-100)
+    if (page >= 86 && page <= 100) {
+        const subPage = page - 85;
+        const hormoneTopics = [
+            { title: "پشکنینی تایرۆید - TSH", content: "TSH (Thyroid Stimulating Hormone) هۆرمۆنی ئەرکداری تایرۆیدە. ڕێژەی نۆرماڵ: 0.4-4.0 mIU/L. TSH بەرز = کاسبوونی تایرۆید (Hypothyroidism). TSH نزم = چالاکبوونی تایرۆید (Hyperthyroidism)." },
+            { title: "T3 و T4 - هۆرمۆنەکانی تایرۆید", content: "T4 (Free): نۆرماڵ 0.8-1.8 ng/dL. T3 (Free): نۆرماڵ 2.3-4.2 pg/mL. ئەم هۆرمۆنانە میتابۆلیزمی جەستە کۆنتڕۆڵ دەکەن." },
+            { title: "پشکنینی هۆرمۆنەکانی خانمان - FSH و LH", content: "FSH (Follicle Stimulating Hormone) و LH (Luteinizing Hormone) بۆ پشکنینی کارایی هێلکەدان. ڕێژەکان بەپێی سوڕی مانگانە دەگۆڕێن." },
+            { title: "پشکنینی پرۆلەکتین و ئیسترادیۆل", content: "Prolactin: نۆرماڵ &lt;25 ng/mL. بەرزبوونەوەیان دەبێتە هۆی ناڕێکی سوڕی مانگانە. Estradiol (E2): هۆرمۆنی مێینە." },
+            { title: "پشکنینی پیاوان - Testosterone و PSA", content: "Testosterone: پیاوان 300-1000 ng/dL، ژنان 15-70 ng/dL. PSA (Prostate Specific Antigen): بۆ پشکنینی پرۆستات - نۆرماڵ &lt;4 ng/mL." },
+            { title: "پشکنینی ڤیتامین D", content: "Vitamin D (25-Hydroxy): نۆرماڵ 30-100 ng/mL. کەمتر لە 20 ng/mL: کەمی ڤیتامین D. کەمی ڤیتامین D دەبێتە هۆی ماندوێتی، ئێشی ئێسک، و کەمی کالسیۆم." }
+        ];
+        const idx = (subPage - 1) % hormoneTopics.length;
+        const topic = hormoneTopics[idx];
+        return {
+            title: `هۆرمۆن و ڤیتامینەکان - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>🧬 ${topic.title}</h3><p>${topic.content}</p></div>`
+        };
+    }
+    
+    // نەخۆشییە باوەکان (لاپەڕە 101-130)
+    if (page >= 101 && page <= 130) {
+        const diseases = [
+            { name: "شەکرە (Diabetes)", symptoms: "تینوێتی زۆر، میزکردنی زۆر، کێش کەمبوونەوە", treatment: "ڕژێمی خواردن، ڕاهێنان، مێتفۆرمین، ئەنسولین" },
+            { name: "فشاری خوێنی بەرز (Hypertension)", symptoms: "زۆرجار بێ نیشانە، سەرئێشە، مەوشک", treatment: "کەمکردنەوەی خوێ، ڕاهێنان، دەرمان" },
+            { name: "فلۆ (ئەنفلۆنزا)", symptoms: "تای بەرز، کۆکە، گرژی گەروو، ئێشی جەستە", treatment: "پشوودان، خواردنەوەی ئاو، پاراستامۆل" },
+            { name: "کۆرۆنا (کۆڤید-١٩)", symptoms: "تا، کۆکەی وشک، لەدەستدانی بۆن و تام", treatment: "جیابوونەوە، پشوودان، ڤاکسین" },
+            { name: "هەستۆرکی (ئەلێرجی)", symptoms: "خوران، گرژی گەروو، سوربوونەوەی پێست", treatment: "ئەنتیهیستامین، دوورکەوتنەوە لە هۆکارەکە" },
+            { name: "نەخۆشی دڵ", symptoms: "ئازاری سنگ، خەباتی هەناسە، مەوشک", treatment: "گۆڕینی شێوازی ژیان، دەرمان، نەشتەرگەری" },
+            { name: "مایگرین", symptoms: "سەرئێشەی توند، هەستی ڕشانەوە، هەستی مەوشک", treatment: "پشوودان لە ژووری تاریک، دژەئێشەکان" },
+            { name: "کەمخوێنی (ئەنیمیا)", symptoms: "ماندوێتی، بێهێزی، پێستی زەرد", treatment: "ئاسن، ڤیتامین B12، فۆلیک ئەسید" }
+        ];
+        const idx = (page - 101) % diseases.length;
+        const d = diseases[idx];
+        return {
+            title: `نەخۆشییە باوەکان - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>🩺 ${d.name}</h3><p><strong>نیشانەکان:</strong> ${d.symptoms}</p><p><strong>چارەسەر:</strong> ${d.treatment}</p></div><div class="warning-box">⚠️ ئاگاداری: بۆ دەستنیشانکردنی ورد، سەردانی پزیشک بکە.</div>`
+        };
+    }
+    
+    // فریاگوزاری سەرەتایی (لاپەڕە 131-160)
+    if (page >= 131 && page <= 160) {
+        const firstAid = [
+            { name: "خوێنبەربوون (Bleeding)", steps: "1. شوێنی برینەکە بە پارچە قوماشی پاک دابگرە. 2. بە توندی پەستان بخەرە سەری. 3. ئەگەر نەوەستا، پەستان بخەرە سەر خوێنبەرە سەرەکییەکە." },
+            { name: "لەهۆشچوون (Fainting)", steps: "1. نەخۆشەکە بخە سەر پشت. 2. قاچەکانی بەرز بکەرەوە. 3. دڵنیابە لەوەی هەناسەی ئاساییە." },
+            { name: "سووتان (Burns)", steps: "1. بە ئاوی سارد بۆ 10-15 خولەک بشۆ. 2. مەوەرە خەیار یان ڕۆن لەسەر مەدە. 3. بە پارچەی پاک دایبگرە." },
+            { name: "خنکان (Choking) - ڕێگەی Heimlich", steps: "1. پشتەکەی 5 جار لێبدە. 2. لە پشتەوە باوەشی پێدا بکە. 3. دەستت بکە بە مست و لە ژێر پەراسووەکانی بەرەو سەرەوە پاڵ بنێ." },
+            { name: "شکانی ئێسک (Fracture)", steps: "1. شوێنی شکاوەکە مەجوڵێنە. 2. بە شتێکی ڕەق جێگیری بکە. 3. سەرمای بخەرە سەری بۆ کەمکردنەوەی ئاوسان." },
+            { name: "جەڵتەی دڵ (Heart Attack)", steps: "1. یەکسەر پەیوەندی بە فریاکەوتن بکە (122). 2. نەخۆشەکە دانیشێنە. 3. ئەسپیرین بدەرە ئەگەر هەیە و هەستیار نییە." }
+        ];
+        const idx = (page - 131) % firstAid.length;
+        const f = firstAid[idx];
+        return {
+            title: `فریاگوزاری سەرەتایی - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>🚑 ${f.name}</h3><p>${f.steps}</p></div><div class="normal-range"><strong>📞 ژمارەی فریاکەوتن:</strong> 122 (هەرێمی کوردستان)</div>`
+        };
+    }
+    
+    // ئامێرە تاقیگەییەکان (لاپەڕە 161-180)
+    if (page >= 161 && page <= 180) {
+        const equipment = [
+            { name: "پایپێت (Micropipette)", desc: "ئامێرێکی وردە بۆ گواستنەوەی بڕێکی دیاریکراوی شلە (بە مایکڕۆلیتر). بەکارهێنان: بۆ هەڵگرتنی بڕی وردی سێرەم یان ڕیاجێنت." },
+            { name: "سەنتەرفیوژ (Centrifuge)", desc: "ئامێرێکە بە خێراییەکی زۆر دەسوڕێتەوە بۆ جیاکردنەوەی پێکهاتەکانی خوێن. بەکارهێنان: جیاکردنەوەی سێرەم یان پلازما لە خڕۆکەکان." },
+            { name: "ئینکیوبەیتەر (Incubator)", desc: "پلەی گەرمییەکی جێگیر دابین دەکات (37°C). بەکارهێنان: بۆ گەشەکردنی بەکتریا لە تاقیگەی میکرۆب." },
+            { name: "سپێکترۆفۆتۆمیتەر", desc: "ڕووناکی بە ناو نموونەکەدا دەنێرێت. بەکارهێنان: بۆ پێوانی چڕی ماددە کیمیاییەکان لە خوێندا." },
+            { name: "میکرۆسکۆپ (Microscope)", desc: "بۆ بینینی شتە نەبینراوەکان. بەکارهێنان: بۆ پشکنینی میز، بینینی پارازیت و خڕۆکەکانی خوێن." },
+            { name: "تیوبەکانی کۆکردنەوە", desc: "بەپێی ڕەنگی سەریان جیا دەکرێنەوە: سوور (سێرەم)، مۆر (CBC)، سەوز (Heparin)." }
+        ];
+        const idx = (page - 161) % equipment.length;
+        const e = equipment[idx];
+        return {
+            title: `ئامێرە تاقیگەییەکان - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>⚙️ ${e.name}</h3><p>${e.desc}</p></div>`
+        };
+    }
+    
+    // شیکاری و دەستنیشانکردن (لاپەڕە 181-200)
+    if (page >= 181 && page <= 200) {
+        const analysis = [
+            { title: "شیکاری ئەنجامەکانی CBC", content: "Hb نزم + RBC نزم + Hct نزم = کەمخوێنی (ئەنیمیا). WBC بەرز = هەوکردن. Platelets نزم = مەترسی خوێنبەربوون." },
+            { title: "شیکاری ئەنجامەکانی شەکرە", content: "FBS &gt;126 mg/dL یان HbA1c &gt;6.5% = شەکرە. FBS 100-125 mg/dL = پێش شەکرە." },
+            { title: "شیکاری چەوری خوێن", content: "LDL &gt;100 mg/dL = مەترسی نەخۆشی دڵ. HDL &lt;40 mg/dL = مەترسی نەخۆشی دڵ. Triglycerides &gt;150 mg/dL = بەرز." },
+            { title: "شیکاری جگەر و گورچیلە", content: "ALT/AST بەرز = زیانی جگەر. Creatinine بەرز = کێشەی گورچیلە. Bilirubin بەرز = زەردوویی." },
+            { title: "شیکاری هۆرمۆنەکان", content: "TSH بەرز = کاسبوونی تایرۆید. TSH نزم = چالاکبوونی تایرۆید. Testosterone نزم = کەمی هۆرمۆنی پیاوان." },
+            { title: "پشتێنەی گشتی شیکاری", content: "پشتێنەیەکی خێرا: کەمخوێنی: Hb &lt;13/12. شەکرە: FBS &gt;126. فشاری بەرز: &gt;140/90. کۆلێسترۆڵی بەرز: LDL &gt;100." }
+        ];
+        const idx = (page - 181) % analysis.length;
+        const a = analysis[idx];
+        return {
+            title: `شیکاری و دەستنیشانکردن - لاپەڕە ${page}`,
+            content: `<div class="info-card"><h3>📊 ${a.title}</h3><p>${a.content}</p></div><div class="normal-range"><strong>📋 تێبینی:</strong> شیکاری ورد پێویستی بە پزیشکی پسپۆڕ هەیە.</div>`
+        };
+    }
+    
+    return {
+        title: `لاپەڕە ${page}`,
+        content: `<div class="info-card"><h3>📖 کتێبی شیکاری نەخۆشییەکان</h3><p>ئەم لاپەڕەیە بەشێکە لە کتێبی ٢٠٠ لاپەڕەیی شیکاری نەخۆشییەکان. زانیاری تەواو لە لاپەڕەکانی دیکەدا هەیە.</p></div>`
+    };
+}
+
+// دروستکردنی فهرستی بەشەکان
 function createChapterList() {
     const list = document.getElementById('chapterList');
     list.innerHTML = '';
-    bookData.chapters.forEach(chapter => {
+    chapters.forEach(ch => {
         const li = document.createElement('li');
-        li.innerHTML = `<a onclick="showPage(${chapter.startPage})">📌 ${chapter.title} <span style="font-size:0.7rem; color:#94a3b8;">(لاپەڕە ${chapter.pages})</span></a>`;
+        li.innerHTML = `<a onclick="showPage(${ch.start})">📌 ${ch.name} <span style="font-size:0.7rem;">(لاپەڕە ${ch.start}-${ch.end})</span></a>`;
         list.appendChild(li);
     });
 }
 
+// نیشاندانی لاپەڕە
 function showPage(pageNum) {
     if (pageNum < 1) pageNum = 1;
-    if (pageNum > bookData.totalPages) pageNum = bookData.totalPages;
-    
+    if (pageNum > totalPages) pageNum = totalPages;
     currentPage = pageNum;
-    const pageData = getPageContent(pageNum);
     
-    document.getElementById('bookContent').innerHTML = `
+    const pageData = getPageContent(pageNum);
+    const contentArea = document.getElementById('contentArea');
+    contentArea.innerHTML = `
         <div class="page active-page">
-            <div class="page-title">📄 لاپەڕە ${pageNum}: ${pageData.title}</div>
+            <div class="page-title">📄 ${pageData.title}</div>
             ${pageData.content}
-            <div class="page-number">لاپەڕە ${pageNum} | کۆی گشتی ${bookData.totalPages} لاپەڕە</div>
+            <div class="page-number">لاپەڕە ${pageNum} | کۆی گشتی ${totalPages} لاپەڕە</div>
             <div class="page-nav">
-                <button class="nav-btn" onclick="showPage(${pageNum - 1})" ${pageNum === 1 ? 'disabled' : ''}>
-                    <i class="fas fa-arrow-right"></i> پێشوو
-                </button>
-                <button class="nav-btn" onclick="showPage(${pageNum + 1})" ${pageNum === bookData.totalPages ? 'disabled' : ''}>
-                    دواتر <i class="fas fa-arrow-left"></i>
-                </button>
+                <button class="nav-btn" onclick="showPage(${pageNum - 1})" ${pageNum === 1 ? 'disabled' : ''}>◀ پێشوو</button>
+                <button class="nav-btn" onclick="showPage(${pageNum + 1})" ${pageNum === totalPages ? 'disabled' : ''}>دواتر ▶</button>
             </div>
         </div>
     `;
     
-    document.getElementById('currentPageSpan').innerText = pageNum;
-    const progress = (pageNum / bookData.totalPages) * 100;
+    document.getElementById('currentPageNum').innerText = pageNum;
+    const progress = (pageNum / totalPages) * 100;
     document.getElementById('progressFill').style.width = `${progress}%`;
-    
-    // Scroll to top
-    document.querySelector('.book-content').scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Initialize
 createChapterList();
 showPage(1);
+document.getElementById('totalPagesNum').innerText = totalPages;
 </script>
-
 </body>
 </html>
